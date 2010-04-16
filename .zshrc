@@ -12,7 +12,7 @@ esac
 ## export
 # PATH
 #
-export PATH=/opt/local/bin:/opt/local/sbin/:$PATH
+export PATH=/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:$PATH
 export MANPATH=/opt/local/man:$MANPATH
 
 ## Default shell configuration

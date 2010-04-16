@@ -23,7 +23,7 @@ autoload colors
 colors
 case ${UID} in
 0)
-    PROMPT="%{${}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') %B%{${}%}%/#%{${}%}%b "
+    PROMPT="%{${}%}$(echo @${HOST%%.*}) %B%{${}%}%/#%{${}%}%b "
     PROMPT2="%B%{${}%}%_#%{${}%}%b "
     SPROMPT="%B%{${}%}%r is correct? [n,y,a,e]:%{${}%}%b "
     ;;
@@ -32,7 +32,7 @@ case ${UID} in
     PROMPT2="%{${}%}%_%%%{${}%} "
     SPROMPT="%{${}%}%r is correct? [n,y,a,e]:%{${}%} "
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-        PROMPT="%{${}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+        PROMPT="%{${}%}$(echo @${HOST%%.*}) ${PROMPT}"
     ;;
 esac
 

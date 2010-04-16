@@ -113,6 +113,7 @@ alias df="df -h"
 
 alias su="su -l"
 
+alias vi="vim"
 
 ## terminal configuration
 #

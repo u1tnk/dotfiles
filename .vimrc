@@ -29,4 +29,16 @@ noremap <Space>k <C-b>
 nnoremap [ %
 nnoremap ] %
 
+"行数表示
+set number
+"インデント
+set autoindent
+set shiftwidth=4
+set tabstop=4
+"set expandtab
 
+"空白表示
+"set list
+
+"インクリメントサーチ
+set incsearch

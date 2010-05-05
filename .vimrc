@@ -42,3 +42,12 @@ set tabstop=4
 
 "インクリメントサーチ
 set incsearch
+
+let php_sql_query=1
+let php_htmlInStrings=1
+let php_noShortTags=1
+let php_folding=1
+au Syntax php set fdm=syntax
+
+"ファイルタイプの判別を有効化
+filetype on

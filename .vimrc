@@ -1,3 +1,4 @@
+"大文字小文字
 :set ignorecase
 :set smartcase
 
@@ -51,3 +52,11 @@ au Syntax php set fdm=syntax
 
 "ファイルタイプの判別を有効化
 filetype on
+
+"
+filetype plugin indent on
+syntax enable
+
+"vimrc編集関連
+nnoremap <Space>.	:<C-u>edit $HOME/dotfiles/.vimrc<Return>
+nnoremap <Space>s	:<C-u>source $MYVIMRC<Return>

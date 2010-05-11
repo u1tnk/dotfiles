@@ -1,7 +1,7 @@
 "set系
 "大文字小文字
-:set ignorecase
-:set smartcase
+set ignorecase
+set smartcase
 
 "行数表示
 set number
@@ -19,6 +19,9 @@ set incsearch
 
 "バックアップを作らない
 set nobackup
+
+"backspaceキー
+set backspace=eol,indent,start
 
 "map系
 "スクロール
@@ -53,12 +56,18 @@ nnoremap ] %
 nnoremap <Space>.	:<C-u>edit $HOME/dotfiles/.vimrc<Return>
 nnoremap <Space>s	:<C-u>source $MYVIMRC<Return>
 
+"論理行移動と表示行移動を入れ替え
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
 "php関連
 let php_sql_query=1
 let php_htmlInStrings=1
 let php_noShortTags=1
 let php_folding=1
-au Syntax php set fdm=syntax
+autocmd Syntax php set fdm=syntax
 
 "ファイルタイプの判別を有効化
 filetype on
@@ -67,3 +76,7 @@ filetype on
 filetype plugin indent on
 syntax enable
 
+"カレントウィンドウのカーソル行をハイライトする
+set cursorline
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline

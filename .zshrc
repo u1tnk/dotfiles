@@ -114,6 +114,7 @@ alias df="df -h"
 alias su="su -l"
 
 alias vi="vim"
+alias view="vim -R"
 
 ## terminal configuration
 #

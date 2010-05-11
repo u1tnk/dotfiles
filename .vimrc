@@ -60,3 +60,7 @@ syntax enable
 "vimrc編集関連
 nnoremap <Space>.	:<C-u>edit $HOME/dotfiles/.vimrc<Return>
 nnoremap <Space>s	:<C-u>source $MYVIMRC<Return>
+
+"バックアップを作らない
+set nobackup
+

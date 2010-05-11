@@ -1,7 +1,26 @@
+"set系
 "大文字小文字
 :set ignorecase
 :set smartcase
 
+"行数表示
+set number
+"インデント
+set autoindent
+set shiftwidth=4
+set tabstop=4
+"set expandtab
+
+"空白表示
+"set list
+
+"インクリメントサーチ
+set incsearch
+
+"バックアップを作らない
+set nobackup
+
+"map系
 "スクロール
 noremap <Space>j <C-f>
 noremap <Space>k <C-b>
@@ -30,20 +49,11 @@ noremap <Space>k <C-b>
 nnoremap [ %
 nnoremap ] %
 
-"行数表示
-set number
-"インデント
-set autoindent
-set shiftwidth=4
-set tabstop=4
-"set expandtab
+"vimrc編集関連
+nnoremap <Space>.	:<C-u>edit $HOME/dotfiles/.vimrc<Return>
+nnoremap <Space>s	:<C-u>source $MYVIMRC<Return>
 
-"空白表示
-"set list
-
-"インクリメントサーチ
-set incsearch
-
+"php関連
 let php_sql_query=1
 let php_htmlInStrings=1
 let php_noShortTags=1
@@ -53,14 +63,7 @@ au Syntax php set fdm=syntax
 "ファイルタイプの判別を有効化
 filetype on
 
-"
+"基本設定
 filetype plugin indent on
 syntax enable
-
-"vimrc編集関連
-nnoremap <Space>.	:<C-u>edit $HOME/dotfiles/.vimrc<Return>
-nnoremap <Space>s	:<C-u>source $MYVIMRC<Return>
-
-"バックアップを作らない
-set nobackup
 

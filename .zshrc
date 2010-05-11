@@ -14,6 +14,7 @@ esac
 #
 export PATH=/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:$PATH
 export MANPATH=/opt/local/man:$MANPATH
+export EDITOR=vim
 
 ## Default shell configuration
 #

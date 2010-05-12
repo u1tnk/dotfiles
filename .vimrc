@@ -23,6 +23,9 @@ set nobackup
 "backspaceキー
 set backspace=eol,indent,start
 
+"statusLIne
+set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
+
 "map系
 "スクロール
 noremap <Space>j <C-f>

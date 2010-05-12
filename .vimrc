@@ -25,6 +25,7 @@ set backspace=eol,indent,start
 
 "statusLIne
 set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
+set laststatus=2
 
 "map系
 "スクロール

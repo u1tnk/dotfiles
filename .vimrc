@@ -27,6 +27,8 @@ set backspace=eol,indent,start
 set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
 set laststatus=2
 
+"runtimepath
+set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 "map系
 "スクロール
 noremap <Space>j <C-f>
@@ -66,6 +68,12 @@ noremap k gk
 noremap gj j
 noremap gk k
 
+"yanktmp設定
+map <silent> sy :call YanktmpYank()<CR> 
+map <silent> sp :call YanktmpPaste_p()<CR> 
+map <silent> sP :call YanktmpPaste_P()<CR> 
+let g:yanktmp_file = '~/yanktmp'
+
 "php関連
 let php_sql_query=1
 let php_htmlInStrings=1
@@ -84,3 +92,8 @@ syntax enable
 set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
+
+augroup filetypedetect
+autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
+augroup END
+

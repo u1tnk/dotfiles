@@ -27,8 +27,9 @@ set backspace=eol,indent,start
 set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
 set laststatus=2
 
-"runtimepath
+"dotfiles以下にプラグインをインストール
 set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
+
 "map系
 "スクロール
 noremap <Space>j <C-f>

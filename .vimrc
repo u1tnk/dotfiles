@@ -1,3 +1,10 @@
+"ファイルタイプの判別を有効化
+filetype on
+
+"基本設定
+filetype plugin indent on
+syntax enable
+
 "set系
 "大文字小文字
 set ignorecase
@@ -27,8 +34,11 @@ set backspace=eol,indent,start
 set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
 set laststatus=2
 
-"dotfiles以下にプラグインをインストール
+""dotfiles以下にプラグインをインストール
 set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
+
+"Kコマンドをmanからhelpに変更
+set keywordprg=:help
 
 "map系
 "スクロール
@@ -48,8 +58,8 @@ inoremap <C-u>  <C-g>u<C-u>
 inoremap <C-w>  <C-g>u<C-w>
 
 " ;でExコマンド入力( ;と:を入れ替)
-noremap ; :
-noremap : ;
+nnoremap ; :
+nnoremap : ;
 
 "<space>j, <space>kで画面送り
 noremap <Space>j <C-f>
@@ -69,11 +79,27 @@ noremap k gk
 noremap gj j
 noremap gk k
 
+"Omni補完をtabで実行
+function InsertTabWrapper()
+    if pumvisible()
+        return "\<c-n>"
+    endif
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+        return "\<tab>"
+    elseif exists('&omnifunc') && &omnifunc == ''
+        return "\<c-n>"
+    else
+        return "\<c-x>\<c-o>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
 "yanktmp設定
-map <silent> sy :call YanktmpYank()<CR> 
-map <silent> sp :call YanktmpPaste_p()<CR> 
-map <silent> sP :call YanktmpPaste_P()<CR> 
-let g:yanktmp_file = '~/yanktmp'
+noremap <silent> sy :call YanktmpYank()<CR> 
+noremap <silent> sp :call YanktmpPaste_p()<CR> 
+noremap <silent> sP :call YanktmpPaste_P()<CR> 
+let g:yanktmp_file = '/tmp/yanktmp'
 
 "php関連
 let php_sql_query=1
@@ -82,19 +108,25 @@ let php_noShortTags=1
 let php_folding=1
 autocmd Syntax php set fdm=syntax
 
-"ファイルタイプの判別を有効化
-filetype on
-
-"基本設定
-filetype plugin indent on
-syntax enable
-
 "カレントウィンドウのカーソル行をハイライトする
 set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
+"filetype拡張子追加
 augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 augroup END
+
+"開いているファイルを実行（ファイルタイプと実行コマンドが一致する場合汎用）
+function! ScriptExecute()
+	let m = matchlist(getline(1), '#!\(.*\)')
+	if(len(m) > 2)
+		execute '!' . m[1] . ' %'
+	else
+		execute '!' . &ft . ' %'
+	endif
+endfunction
+nnoremap <Space>x :call ScriptExecute()<CR>
+
 

@@ -52,6 +52,9 @@ noremap <Space>tn :tabnew<CR>
 "補完候補の表示
 set wildmenu
 
+"yankとclipboardを共用（gvimのみ）
+set clipboard=unnamed
+
 "map系
 "スクロール
 noremap <Space>j <C-f>

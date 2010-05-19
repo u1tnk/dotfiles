@@ -95,7 +95,7 @@ function! InsertTabWrapper()
     endif
     let col = col('.') - 1
     if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<tab>"
+        return "\<c-k>"
     elseif exists('&omnifunc') && &omnifunc == ''
         return "\<c-n>"
     else
@@ -103,7 +103,7 @@ function! InsertTabWrapper()
     endif
 endfunction
 
-inoremap <tab> <c-r>=InsertTabWrapper()<CR>
+inoremap <c-k> <c-r>=InsertTabWrapper()<CR>
 
 "yanktmp設定
 noremap <silent> sy :call YanktmpYank()<CR> 

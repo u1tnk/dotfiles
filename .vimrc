@@ -40,6 +40,15 @@ set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 "Kコマンドをmanからhelpに変更
 set keywordprg=:help
 
+"文字コード判定
+set encoding=utf-8
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
+
+"tab表示
+set showtabline=2
+set tabpagemax=20
+noremap <Space>tn :tabnew<CR>
+
 "map系
 "スクロール
 noremap <Space>j <C-f>
@@ -80,7 +89,7 @@ noremap gj j
 noremap gk k
 
 "Omni補完をtabで実行
-function InsertTabWrapper()
+function! InsertTabWrapper()
     if pumvisible()
         return "\<c-n>"
     endif
@@ -93,7 +102,8 @@ function InsertTabWrapper()
         return "\<c-x>\<c-o>"
     endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
+inoremap <tab> <c-r>=InsertTabWrapper()<CR>
 
 "yanktmp設定
 noremap <silent> sy :call YanktmpYank()<CR> 

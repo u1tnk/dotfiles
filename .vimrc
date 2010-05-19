@@ -49,6 +49,9 @@ set showtabline=2
 set tabpagemax=20
 noremap <Space>tn :tabnew<CR>
 
+"補完候補の表示
+set wildmenu
+
 "map系
 "スクロール
 noremap <Space>j <C-f>

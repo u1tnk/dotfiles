@@ -55,6 +55,9 @@ set wildmenu
 "yankとclipboardを共用（gvimのみ）
 set clipboard=unnamed
 
+"ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
+set browsedir=buffer 
+
 "map系
 "スクロール
 noremap <Space>j <C-f>
@@ -75,6 +78,8 @@ inoremap <C-w>  <C-g>u<C-w>
 " ;でExコマンド入力( ;と:を入れ替)
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 "<space>j, <space>kで画面送り
 noremap <Space>j <C-f>

@@ -145,4 +145,5 @@ function! ScriptExecute()
 endfunction
 nnoremap <Space>x :call ScriptExecute()<CR>
 
-
+"vimball設定
+let g:vimball_home = "~/dotfiles/.vim/vimball"

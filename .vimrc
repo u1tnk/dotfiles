@@ -42,12 +42,21 @@ set keywordprg=:help
 
 "文字コード判定
 set encoding=utf-8
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
+set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
 
 "tab表示
 set showtabline=2
 set tabpagemax=20
 noremap <Space>tn :tabnew<CR>
+
+"補完候補の表示
+set wildmenu
+
+"yankとclipboardを共用（gvimのみ）
+set clipboard=unnamed
+
+"ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
+set browsedir=buffer 
 
 "map系
 "スクロール
@@ -69,6 +78,8 @@ inoremap <C-w>  <C-g>u<C-w>
 " ;でExコマンド入力( ;と:を入れ替)
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 "<space>j, <space>kで画面送り
 noremap <Space>j <C-f>
@@ -139,4 +150,5 @@ function! ScriptExecute()
 endfunction
 nnoremap <Space>x :call ScriptExecute()<CR>
 
-
+"vimball設定
+let g:vimball_home = "~/dotfiles/.vim/vimball"

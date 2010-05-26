@@ -126,6 +126,8 @@ alias su="su -l"
 alias vi="vim"
 alias view="vim -R"
 
+alias srr="screen -D -R"
+
 ## terminal configuration
 #
 case "${TERM}" in

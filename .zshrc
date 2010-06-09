@@ -174,3 +174,6 @@ xterm|xterm-color|kterm|kterm-color)
     ;;
 esac
 
+#補完数が多い時に許可を聞く閾値
+LISTMAX=100
+

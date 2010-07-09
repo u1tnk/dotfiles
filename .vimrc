@@ -161,3 +161,7 @@ let g:vimball_home = "~/dotfiles/.vim/vimball"
 if has('path_extra')
     set tags+=tags;
 endif
+
+"外部grep設定
+set grepprg=grep\ -nH
+

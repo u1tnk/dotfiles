@@ -138,6 +138,7 @@ alias co="git checkout"
 alias add="git add"
 alias status="git status"
 alias gdiff="git diff"
+alias branch="git branch"
 
 ## terminal configuration
 #

@@ -8,7 +8,10 @@ defkanji utf-8
 encoding utf-8 utf-8
 
 #基本キー設定
-escape ^t^t
+escape ^tT
+
+# windowslist表示
+bind w windowlist -b
 
 #ベル設定オフ
 vbell off

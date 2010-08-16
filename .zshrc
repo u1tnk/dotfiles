@@ -128,6 +128,18 @@ alias view="vim -R"
 
 alias srr="screen -D -R"
 
+#git shortcuts 
+alias ci="git commit --interactive"
+alias commit="git commit"
+alias pull="git pull"
+alias push="git push"
+alias glog="git log"
+alias co="git checkout"
+alias add="git add"
+alias status="git status"
+alias gdiff="git diff"
+alias branch="git branch"
+
 ## terminal configuration
 #
 case "${TERM}" in

@@ -27,6 +27,9 @@ set incsearch
 "バックアップを作らない
 set nobackup
 
+"swpファイルの作成先変更
+set directory=~/temp/vim/swap
+
 "backspaceキー
 set backspace=eol,indent,start
 
@@ -48,6 +51,7 @@ set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,
 set showtabline=2
 set tabpagemax=20
 noremap <Space>tn :tabnew<CR>
+noremap GT :tabprevious<CR>
 
 "補完候補の表示
 set wildmenu
@@ -64,7 +68,7 @@ noremap <Space>j <C-f>
 noremap <Space>k <C-b>
 
 "カーソル位置の単語をyankする
-nnoremap vv vawy
+nnoremap vv viwy
 
 "最後に変更されたテキストを選択する
 nnoremap gc  `[v`]
@@ -152,3 +156,12 @@ nnoremap <Space>x :call ScriptExecute()<CR>
 
 "vimball設定
 let g:vimball_home = "~/dotfiles/.vim/vimball"
+
+"先祖tagsファイルを参照
+if has('path_extra')
+    set tags+=tags;
+endif
+
+"外部grep設定
+set grepprg=grep\ -nH
+

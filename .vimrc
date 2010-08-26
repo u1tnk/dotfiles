@@ -165,3 +165,17 @@ endif
 "外部grep設定
 set grepprg=grep\ -nH
 
+" NeoComplCache設定
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:NeoComplCache_SmartCase = 1
+" Use camel case completion.
+let g:NeoComplCache_EnableCamelCaseCompletion = 1
+" Use underbar completion.
+let g:NeoComplCache_EnableUnderbarCompletion = 1
+" Set minimum syntax keyword length.
+let g:NeoComplCache_MinSyntaxLength = 3
+" Set manual completion length.
+let g:NeoComplCache_ManualCompletionStartLength = 0
+" Print caching percent in statusline.
+let g:NeoComplCache_CachingPercentInStatusline = 1

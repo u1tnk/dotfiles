@@ -16,7 +16,11 @@ set number
 set autoindent
 set shiftwidth=4
 set tabstop=4
-"set expandtab
+set expandtab
+
+"split時右、下に開く
+set splitright
+set splitbelow
 
 "空白表示
 "set list
@@ -143,16 +147,9 @@ augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 augroup END
 
-"開いているファイルを実行（ファイルタイプと実行コマンドが一致する場合汎用）
-function! ScriptExecute()
-	let m = matchlist(getline(1), '#!\(.*\)')
-	if(len(m) > 2)
-		execute '!' . m[1] . ' %'
-	else
-		execute '!' . &ft . ' %'
-	endif
-endfunction
-nnoremap <Space>x :call ScriptExecute()<CR>
+"QuickRunを実行
+nnoremap <Space>x :QuickRun -into 0 <CR>
+vnoremap <Space>x :QuickRun -into 0 <CR>
 
 "vimball設定
 let g:vimball_home = "~/dotfiles/.vim/vimball"

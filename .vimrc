@@ -107,23 +107,6 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-"Omni補完をtabで実行
-function! InsertTabWrapper()
-    if pumvisible()
-        return "\<c-n>"
-    endif
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<c-k>"
-    elseif exists('&omnifunc') && &omnifunc == ''
-        return "\<c-n>"
-    else
-        return "\<c-x>\<c-o>"
-    endif
-endfunction
-
-inoremap <c-k> <c-r>=InsertTabWrapper()<CR>
-
 "yanktmp設定
 noremap <silent> sy :call YanktmpYank()<CR> 
 noremap <silent> sp :call YanktmpPaste_p()<CR> 

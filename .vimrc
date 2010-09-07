@@ -16,7 +16,11 @@ set number
 set autoindent
 set shiftwidth=4
 set tabstop=4
-"set expandtab
+set expandtab
+
+"split時右、下に開く
+set splitright
+set splitbelow
 
 "空白表示
 "set list
@@ -103,23 +107,6 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-"Omni補完をtabで実行
-function! InsertTabWrapper()
-    if pumvisible()
-        return "\<c-n>"
-    endif
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<c-k>"
-    elseif exists('&omnifunc') && &omnifunc == ''
-        return "\<c-n>"
-    else
-        return "\<c-x>\<c-o>"
-    endif
-endfunction
-
-inoremap <c-k> <c-r>=InsertTabWrapper()<CR>
-
 "yanktmp設定
 noremap <silent> sy :call YanktmpYank()<CR> 
 noremap <silent> sp :call YanktmpPaste_p()<CR> 
@@ -143,16 +130,9 @@ augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 augroup END
 
-"開いているファイルを実行（ファイルタイプと実行コマンドが一致する場合汎用）
-function! ScriptExecute()
-	let m = matchlist(getline(1), '#!\(.*\)')
-	if(len(m) > 2)
-		execute '!' . m[1] . ' %'
-	else
-		execute '!' . &ft . ' %'
-	endif
-endfunction
-nnoremap <Space>x :call ScriptExecute()<CR>
+"QuickRunを実行
+nnoremap <Space>x :QuickRun -into 0 <CR>
+vnoremap <Space>x :QuickRun -into 0 <CR>
 
 "vimball設定
 let g:vimball_home = "~/dotfiles/.vim/vimball"
@@ -165,3 +145,17 @@ endif
 "外部grep設定
 set grepprg=grep\ -nH
 
+" NeoComplCache設定
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:NeoComplCache_SmartCase = 1
+" Use camel case completion.
+let g:NeoComplCache_EnableCamelCaseCompletion = 1
+" Use underbar completion.
+let g:NeoComplCache_EnableUnderbarCompletion = 1
+" Set minimum syntax keyword length.
+let g:NeoComplCache_MinSyntaxLength = 3
+" Set manual completion length.
+let g:NeoComplCache_ManualCompletionStartLength = 0
+" Print caching percent in statusline.
+let g:NeoComplCache_CachingPercentInStatusline = 1

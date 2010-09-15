@@ -35,3 +35,6 @@ defbce "on"
 
 #シェルタイトル
 shelltitle '% |zsh'
+
+#TERM名設定
+term xterm-color

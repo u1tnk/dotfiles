@@ -142,11 +142,6 @@ alias branch="git branch"
 
 ## terminal configuration
 #
-case "${TERM}" in
-screen)
-    TERM=xterm
-    ;;
-esac
 
 case "${TERM}" in
 xterm|xterm-color)

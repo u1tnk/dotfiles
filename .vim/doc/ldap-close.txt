@@ -1,5 +1,0 @@
-ldap_close -- のエイリアス ldap_unbind
-
-この関数は次の関数のエイリアスです。 |ldap_unbind|.
-
-vim:ft=help:

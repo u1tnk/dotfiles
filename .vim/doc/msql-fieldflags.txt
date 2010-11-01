@@ -1,5 +1,0 @@
-msql_fieldflags -- msql_field_flags のエイリアス
-
-この関数は次の関数のエイリアスです。 |msql_field_flags|
-
-vim:ft=help:

@@ -1,5 +1,0 @@
-fputs -- fwrite のエイリアス
-
-この関数は次の関数のエイリアスです。 |fwrite|.
-
-vim:ft=help:

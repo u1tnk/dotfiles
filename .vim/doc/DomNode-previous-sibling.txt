@@ -1,5 +1,0 @@
-DomNode->previous_sibling -- 前の兄弟ノードを返す
-
-  domelement DomNode->previous_sibling()~
-
-vim:ft=help:

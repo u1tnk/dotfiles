@@ -107,6 +107,8 @@ noremap k gk
 noremap gj j
 noremap gk k
 
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 "yanktmp設定
 noremap <silent> sy :call YanktmpYank()<CR> 
 noremap <silent> sp :call YanktmpPaste_p()<CR> 

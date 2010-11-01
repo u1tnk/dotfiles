@@ -1,5 +1,0 @@
-dns_check_record -- checkdnsrr のエイリアス
-
-この関数は次の関数のエイリアスです。 |checkdnsrr|.
-
-vim:ft=help:

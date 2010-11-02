@@ -162,3 +162,8 @@ let g:NeoComplCache_MinSyntaxLength = 3
 let g:NeoComplCache_ManualCompletionStartLength = 0
 " Print caching percent in statusline.
 let g:NeoComplCache_CachingPercentInStatusline = 1
+
+" phpmanual path for vim-ref
+let g:ref_phpmanual_path = $HOME. '/dotfiles/.vim/bundle/vim-ref/doc/php-chunked-xhtml/'
+
+

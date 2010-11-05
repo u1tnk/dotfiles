@@ -5,6 +5,8 @@ filetype on
 filetype plugin indent on
 syntax enable
 
+let mapleader = ","              " キーマップリーダー
+
 "set系
 "大文字小文字
 set ignorecase

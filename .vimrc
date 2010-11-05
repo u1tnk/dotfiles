@@ -182,4 +182,6 @@ let g:NeoComplCache_CachingPercentInStatusline = 1
 " phpmanual path for vim-ref
 let g:ref_phpmanual_path = $HOME. '/dotfiles/.vim/bundle/vim-ref/doc/php-chunked-xhtml/'
 
+" git-vim setting
+nnoremap <Leader>gP :GitPush<Enter>
 

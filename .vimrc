@@ -32,7 +32,7 @@ set incsearch
 set nobackup
 
 "swpファイルの作成先変更
-set directory=~/temp/vim/swap
+set noswapfile
 
 "backspaceキー
 set backspace=eol,indent,start
@@ -59,18 +59,17 @@ noremap GT :tabprevious<CR>
 
 "補完候補の表示
 set wildmenu
+"
+"Escの2回押しでハイライト消去
+nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
 "yankとclipboardを共用（gvimのみ）
 set clipboard=unnamed
 
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
-set browsedir=buffer 
+set browsedir=buffer
 
 "map系
-"スクロール
-noremap <Space>j <C-f>
-noremap <Space>k <C-b>
-
 "カーソル位置の単語をyankする
 nnoremap vv viwy
 
@@ -107,13 +106,25 @@ noremap k gk
 noremap gj j
 noremap gk k
 
+" Ctrl-iでヘルプ
+nnoremap <C-i>  :<C-u>help<Space>
+" " カーソル下のキーワードをヘルプでひく
+nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
+
+" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
+filetype off
 call pathogen#runtime_append_all_bundles()
-"毎回やるのも無駄なので
-"call pathogen#helptags()
+call pathogen#helptags()
+" ファイルタイプ判定をon
+filetype plugin on
+
 "yanktmp設定
-noremap <silent> sy :call YanktmpYank()<CR> 
-noremap <silent> sp :call YanktmpPaste_p()<CR> 
-noremap <silent> sP :call YanktmpPaste_P()<CR> 
+set helpfile=$VIMRUNTIME/doc/help.txt
+" ファイルタイプ判定をon
+filetype plugin on
+noremap <silent> sy :call YanktmpYank()<CR>
+noremap <silent> sp :call YanktmpPaste_p()<CR>
+noremap <silent> sP :call YanktmpPaste_P()<CR>
 let g:yanktmp_file = '/tmp/yanktmp'
 
 "php関連
@@ -132,6 +143,9 @@ autocmd WinLeave * setlocal nocursorline
 augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 augroup END
+
+" 保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
 
 "QuickRunを実行
 nnoremap <Space>x :QuickRun -into 0 <CR>

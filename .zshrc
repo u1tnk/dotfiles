@@ -17,7 +17,6 @@ bindkey -v
 #
 export PATH=/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:$PATH
 export MANPATH=/opt/local/man:$MANPATH
-export EDITOR=vim
 
 ## Default shell configuration
 #
@@ -111,10 +110,13 @@ alias where="command -v"
 alias j="jobs -l"
 
 case "${OSTYPE}" in
-freebsd*|darwin*)
+darwin*)
+    export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias ls="ls -G -w"
     ;;
 linux*)
+    export EDITOR=vim
     alias ls="ls --color"
     ;;
 esac

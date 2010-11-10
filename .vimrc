@@ -113,6 +113,14 @@ nnoremap <C-i>  :<C-u>help<Space>
 " " カーソル下のキーワードをヘルプでひく
 nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
+" 勝手に戻る
+imap {} {}<Left>
+imap [] []<Left>
+imap () ()<Left>
+imap "" ""<Left>
+imap '' ''<Left>
+imap <> <><Left>
+
 " pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
 filetype off
 call pathogen#runtime_append_all_bundles()

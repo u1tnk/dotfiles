@@ -128,20 +128,13 @@ call pathogen#helptags()
 " ファイルタイプ判定をon
 filetype plugin on
 
-"yanktmp設定
-set helpfile=$VIMRUNTIME/doc/help.txt
 " ファイルタイプ判定をon
 filetype plugin on
-noremap <silent> sy :call YanktmpYank()<CR>
-noremap <silent> sp :call YanktmpPaste_p()<CR>
-noremap <silent> sP :call YanktmpPaste_P()<CR>
-let g:yanktmp_file = '/tmp/yanktmp'
 
 "php関連
 let php_sql_query=1
 let php_htmlInStrings=1
 let php_noShortTags=1
-let php_folding=1
 autocmd Syntax php set fdm=syntax
 
 "カレントウィンドウのカーソル行をハイライトする
@@ -161,9 +154,6 @@ autocmd BufWritePre * :%s/\s\+$//ge
 nnoremap <Space>x :QuickRun -into 0 <CR>
 vnoremap <Space>x :QuickRun -into 0 <CR>
 
-"vimball設定
-let g:vimball_home = "~/dotfiles/.vim/vimball"
-
 "先祖tagsファイルを参照
 if has('path_extra')
     set tags+=tags;
@@ -180,16 +170,15 @@ let g:NeoComplCache_SmartCase = 1
 let g:NeoComplCache_EnableCamelCaseCompletion = 1
 " Use underbar completion.
 let g:NeoComplCache_EnableUnderbarCompletion = 1
-" Set minimum syntax keyword length.
-let g:NeoComplCache_MinSyntaxLength = 3
-" Set manual completion length.
-let g:NeoComplCache_ManualCompletionStartLength = 0
 " Print caching percent in statusline.
 let g:NeoComplCache_CachingPercentInStatusline = 1
+" smart case
+let g:neocomplcache_enable_smart_case = 1
 
 " phpmanual path for vim-ref
 let g:ref_phpmanual_path = $HOME. '/dotfiles/.vim/bundle/vim-ref/doc/php-chunked-xhtml/'
 
 " git-vim setting
 nnoremap <Leader>gP :GitPush<Enter>
+
 

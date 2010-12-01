@@ -5,6 +5,8 @@ filetype on
 filetype plugin indent on
 syntax enable
 
+let mapleader = ","              " キーマップリーダー
+
 "set系
 "大文字小文字
 set ignorecase
@@ -32,7 +34,7 @@ set incsearch
 set nobackup
 
 "swpファイルの作成先変更
-set directory=~/temp/vim/swap
+set noswapfile
 
 "backspaceキー
 set backspace=eol,indent,start
@@ -59,18 +61,17 @@ noremap GT :tabprevious<CR>
 
 "補完候補の表示
 set wildmenu
+"
+"Escの2回押しでハイライト消去
+nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
 "yankとclipboardを共用（gvimのみ）
 set clipboard=unnamed
 
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
-set browsedir=buffer 
+set browsedir=buffer
 
 "map系
-"スクロール
-noremap <Space>j <C-f>
-noremap <Space>k <C-b>
-
 "カーソル位置の単語をyankする
 nnoremap vv viwy
 
@@ -107,17 +108,33 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-"yanktmp設定
-noremap <silent> sy :call YanktmpYank()<CR> 
-noremap <silent> sp :call YanktmpPaste_p()<CR> 
-noremap <silent> sP :call YanktmpPaste_P()<CR> 
-let g:yanktmp_file = '/tmp/yanktmp'
+" Ctrl-iでヘルプ
+nnoremap <C-i>  :<C-u>help<Space>
+" " カーソル下のキーワードをヘルプでひく
+nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
+
+" 勝手に戻る
+imap {} {}<Left>
+imap [] []<Left>
+imap () ()<Left>
+imap "" ""<Left>
+imap '' ''<Left>
+imap <> <><Left>
+
+" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+" ファイルタイプ判定をon
+filetype plugin on
+
+" ファイルタイプ判定をon
+filetype plugin on
 
 "php関連
 let php_sql_query=1
 let php_htmlInStrings=1
 let php_noShortTags=1
-let php_folding=1
 autocmd Syntax php set fdm=syntax
 
 "カレントウィンドウのカーソル行をハイライトする
@@ -130,12 +147,12 @@ augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 augroup END
 
+" 保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
+
 "QuickRunを実行
 nnoremap <Space>x :QuickRun -into 0 <CR>
 vnoremap <Space>x :QuickRun -into 0 <CR>
-
-"vimball設定
-let g:vimball_home = "~/dotfiles/.vim/vimball"
 
 "先祖tagsファイルを参照
 if has('path_extra')
@@ -147,15 +164,39 @@ set grepprg=grep\ -nH
 
 " NeoComplCache設定
 let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:NeoComplCache_SmartCase = 1
+" smart case
+let g:neocomplcache_enable_smart_case = 1
 " Use camel case completion.
-let g:NeoComplCache_EnableCamelCaseCompletion = 1
+" 若干重いとのことで一旦コメントアウト
+" let g:NeoComplCache_EnableCamelCaseCompletion = 1
 " Use underbar completion.
 let g:NeoComplCache_EnableUnderbarCompletion = 1
-" Set minimum syntax keyword length.
-let g:NeoComplCache_MinSyntaxLength = 3
-" Set manual completion length.
-let g:NeoComplCache_ManualCompletionStartLength = 0
 " Print caching percent in statusline.
 let g:NeoComplCache_CachingPercentInStatusline = 1
+
+" phpmanual path for vim-ref
+let g:ref_phpmanual_path = $HOME. '/dotfiles/.vim/bundle/vim-ref/doc/php-chunked-xhtml/'
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+" git-vim setting
+nnoremap <Leader>gP :GitPush<Enter>
+
+

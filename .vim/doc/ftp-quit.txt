@@ -1,5 +1,0 @@
-ftp_quit -- ftp_close のエイリアス
-
-この関数は次の関数のエイリアスです。 |ftp_close|.
-
-vim:ft=help:

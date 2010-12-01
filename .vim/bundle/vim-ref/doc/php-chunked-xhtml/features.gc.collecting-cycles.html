@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>収集サイクル</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="features.gc.refcounting-basics.html">参照カウント法の原理</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="features.gc.performance-considerations.html">パフォーマンスの考慮点</a></div>
+ <div class="up"><a href="features.gc.html">ガベージコレクション</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="features.gc.collecting-cycles" class="sect1">
+   <h2 class="title">収集サイクル</h2>
+   <p class="para">
+    伝統的に、PHP で以前使われていたような参照カウント法記憶機構では、
+    循環参照メモリ・リークに対処できません。
+    しかしながら、5.3.0 現在、PHP ではその問題に焦点を当てた
+    <a href="http://www.research.ibm.com/people/d/dfb/papers/Bacon01Concurrent.pdf" class="link external">&raquo; Concurrent Cycle Collection in Reference Counted Systems</a>
+    レポートに由来する同期アルゴリズムを実装しています。
+   </p>
+   <p class="para">
+    アルゴリズムの動作方法の詳しい説明がこのセクションの範囲の少し向こうにあります、
+    しかし、基本はここで説明されます。
+    まず第一に、いくつかの基本原則を確立しなければなりません。
+    refcount が増やされたら、それはまだ使用中で、従ってゴミではありません。
+    refcount が減少して、ゼロに達したら、zvalは解放可能です。
+    refcount 引数がゼロ以外の値に減少する場合、これは、ガベージサイクルを作成できる
+    だけであることを意味します。
+    第２に、ガベージサイクルで、それらの refcount を減少させられるかどうかチェック
+    することによって、どの部分がゴミか発見できます。
+    可能です、そして、zval のうちいずれがゼロの refcountを持つか調べます。
+   </p>
+   <p class="para">
+     <div class="mediaobject">
+      
+      <div class="imageobject">
+       <img src="images/12f37b1c6963c1c5c18f30495416a197-gc-algorithm.png" alt="ガベージコレクションのアルゴリズム" width="614" height="814" />
+      </div>
+     </div>
+   </p>
+   <p class="para">
+    To avoid having to call the checking of garbage cycles with every possible
+    decrease of a refcount, the algorithm instead puts all possible roots
+    (zvals) in the &quot;root buffer&quot; (marking them &quot;purple&quot;). It also makes sure
+    that each possible garbage root ends up in the buffer only once. Only when
+    the root buffer is full does the collection mechanism start for all the
+    different zvals inside. See step A in the figure above.
+   </p>
+   <p class="para">
+    In step B, the algorithm runs a depth-first search on all possible roots
+    to decrease by one the refcounts of each zval it finds, making sure not to
+    decrease a refcount on the same zval twice (by marking them as &quot;grey&quot;). In
+    step C, the algorithm again runs a depth-first search from each root node,
+    to check the refcount of each zval again. If it finds that the refcount is
+    zero, the zval is marked &quot;white&quot; (blue in the figure). If it&#039;s larger than
+    zero, it reverts the decreasing of the refcount by one with a depth-first
+    search from that point on, and they are marked &quot;black&quot; again. In the last
+    step (D), the algorithm walks over the root buffer removing the zval roots
+    from there, and meanwhile, checks which zvals have been marked &quot;white&quot; in
+    the previous step. Every zval marked as &quot;white&quot; will be freed.
+   </p>
+   <p class="para">
+    Now that you have a basic understanding of how the algorithm works, we
+    will look back at how this integrates with PHP. By default, PHP&#039;s garbage
+    collector is turned on. There is, however, a <var class="filename">php.ini</var>
+    setting that allows you to change this: <strong class="option unknown">zend.enable_gc</strong>
+.
+   </p>
+   <p class="para">
+    When the garbage collector is turned on, the cycle-finding algorithm as
+    described above is executed whenever the root buffer runs full. The root
+    buffer has a fixed size of 10,000 possible roots (although you can alter
+    this by changing the <i>GC_ROOT_BUFFER_MAX_ENTRIES</i> constant in
+    <i>Zend/zend_gc.c</i> in the PHP source code, and re-compiling
+    PHP). When the garbage collector is turned off, the cycle-finding
+    algorithm will never run. However, possible roots will always be recorded
+    in the root buffer, no matter whether the garbage collection mechanism has
+    been activated with this configuration setting.
+   </p>
+   <p class="para">
+    If the root buffer becomes full with possible roots while the garbage
+    collection mechanism is turned off, further possible roots will simply not
+    be recorded. Those possible roots that are not recorded will never be
+    analyzed by the algorithm. If they were part of a circular reference
+    cycle, they would never be cleaned up and would create a memory leak. 
+   </p>
+   <p class="para">
+    The reason why possible roots are recorded even if the mechanism has been
+    disabled is because it&#039;s faster to record possible roots than to have to
+    check whether the mechanism is turned on every time a possible root could
+    be found. The garbage collection and analysis mechanism itself, however,
+    can take a considerable amount of time.
+   </p>
+   <p class="para">
+    Besides changing the <strong class="option unknown">zend.enable_gc</strong>
+ configuration
+    setting, it is also possible to turn the garbage collecting mechanism on
+    and off by calling <span class="function"><a href="function.gc-enable.html" class="function">gc_enable()</a></span> or
+    <span class="function"><a href="function.gc-disable.html" class="function">gc_disable()</a></span> respectively.  Calling those functions has
+    the same effect as turning on or off the mechanism with the configuration
+    setting. It is also possible to force the collection of cycles even if the
+    possible root buffer is not full yet. For this, you can use the
+    <span class="function"><a href="function.gc-collect-cycles.html" class="function">gc_collect_cycles()</a></span> function. This function will return
+    how many cycles were collected by the algorithm. 
+   </p>
+   <p class="para">
+    The rationale behind the ability to turn the mechanism on and off, and to
+    initiate cycle collection yourself, is that some parts of your application
+    could be highly time-sensitive. In those cases, you might not want the
+    garbage collection mechanism to kick in. Of course, by turning off the
+    garbage collection for certain parts of your application, you do risk
+    creating memory leaks because some possible roots might not fit into the
+    limited root buffer. Therefore, it is probably wise to call
+    <span class="function"><a href="function.gc-collect-cycles.html" class="function">gc_collect_cycles()</a></span> just before you call
+    <span class="function"><a href="function.gc-disable.html" class="function">gc_disable()</a></span> to free up the memory that could be lost
+    through possible roots that are already recorded in the root buffer. This
+    then leaves an empty buffer so that there is more space for storing
+    possible roots while the cycle collecting mechanism is turned off.
+   </p>
+  </div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="features.gc.refcounting-basics.html">参照カウント法の原理</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="features.gc.performance-considerations.html">パフォーマンスの考慮点</a></div>
+ <div class="up"><a href="features.gc.html">ガベージコレクション</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

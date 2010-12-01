@@ -1,9 +1,0 @@
-iterator_count -- イテレータにある要素をカウントする
-
-  int iterator_count(IteratorAggregate iterator)~
-
-この関数は、
-現在のところ詳細な情報はありません。引数のリストのみが
-記述されています。
-
-vim:ft=help:

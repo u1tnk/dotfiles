@@ -17,7 +17,6 @@ bindkey -v
 #
 export PATH=/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:$PATH
 export MANPATH=/opt/local/man:$MANPATH
-export EDITOR=vim
 
 ## Default shell configuration
 #
@@ -47,6 +46,7 @@ setopt auto_cd
 # auto directory pushd that you can get dirs list by cd -[tab]
 #
 setopt auto_pushd
+setopt pushd_ignore_dups          # 同ディレクトリを履歴に追加しない
 
 # command correct edition before each completion attempt
 #
@@ -55,6 +55,7 @@ setopt correct
 # compacked complete list display
 #
 setopt list_packed
+setopt list_types                 # 補完一覧ファイル種別表示
 
 # no remove postfix slash of command line
 #
@@ -71,6 +72,9 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
+setopt hist_reduce_blanks         # スペース排除
+setopt EXTENDED_HISTORY           # zshの開始終了を記録
+
 
 #履歴検索
 autoload history-search-end
@@ -83,7 +87,7 @@ bindkey "^N" history-beginning-search-forward-end
 #
 fpath=(${HOME}/.zsh/functions/Completion ${fpath})
 autoload -U compinit
-compinit
+compinit -u
 
 ## zsh editor
 #
@@ -106,10 +110,13 @@ alias where="command -v"
 alias j="jobs -l"
 
 case "${OSTYPE}" in
-freebsd*|darwin*)
+darwin*)
+    export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias ls="ls -G -w"
     ;;
 linux*)
+    export EDITOR=vim
     alias ls="ls --color"
     ;;
 esac

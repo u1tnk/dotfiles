@@ -1,5 +1,0 @@
-strchr -- strstr のエイリアス
-
-この関数は次の関数のエイリアスです。 |strstr|.
-
-vim:ft=help:

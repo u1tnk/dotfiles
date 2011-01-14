@@ -1,0 +1,24 @@
+[user]
+    name = yuichi tanaka
+    email = u1tnk1123@gmail.com
+[core]
+	safecrlf = false
+	quotepath = false
+	autocrlf = input
+[diff]
+    color = auto
+    rename = copy
+[color]
+	ui = auto
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[pager]
+    color = true
+[status]
+    color = auto

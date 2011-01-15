@@ -192,4 +192,7 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " git-vim setting
 nnoremap <Leader>gP :GitPush<Enter>
 
+nnoremap <Space>ut :Unite tab<Enter>
+nnoremap <Space>uf :Unite file<Enter>
+nnoremap <Space>ur :Unite file_mru<Enter>
 

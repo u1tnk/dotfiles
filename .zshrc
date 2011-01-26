@@ -34,7 +34,7 @@ case ${UID} in
     PROMPT="%{${}%}%/%%%{${}%} "
     PROMPT2="%{${}%}%_%%%{${}%} "
     SPROMPT="%{${}%}%r is correct? [n,y,a,e]:%{${}%} "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
+    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
         PROMPT="%{${}%}$(echo @${HOST%%.*}) ${PROMPT}"
     ;;
 esac
@@ -135,17 +135,17 @@ alias view="vim -R"
 
 alias srr="screen -D -R"
 
-#git shortcuts 
+#git shortcuts
 alias ci="git commit --interactive"
-alias commit="git commit"
+alias cm="git commit"
 alias pull="git pull"
 alias push="git push"
-alias glog="git log"
+alias gl="git hist"
 alias co="git checkout"
 alias add="git add"
-alias status="git status"
-alias gdiff="git diff"
-alias branch="git branch"
+alias gs="git status"
+alias gd="git diff"
+alias gb="git branch"
 
 ## terminal configuration
 #
@@ -154,14 +154,14 @@ case "${TERM}" in
 xterm|xterm-color)
     export LSCOLORS=exfxcxdxbxegedabagacad
     export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 
+    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
     zstyle list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
     ;;
 kterm-color)
     stty erase '^H'
     export LSCOLORS=exfxcxdxbxegedabagacad
     export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 
+    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
     zstyle list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
     ;;
 kterm)
@@ -171,13 +171,13 @@ cons25)
     unset LANG
     export LSCOLORS=ExFxCxdxBxegedabagacad
     export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 
+    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
     zstyle list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
     ;;
 jfbterm-color)
     export LSCOLORS=gxFxCxdxBxegedabagacad
     export LS_COLORS='di=01;36:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 
+    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
     zstyle list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
     ;;
 esac

@@ -1,14 +1,16 @@
 snippet function
 abbr func
-	${1:public }function ${2:FunctionName}(${3})
-	{
+	${1:public}function ${2:FunctionName}(${3}){
 		${4:// code...}
-	}
+}
 
 snippet php
 	<?php
 	${1}
 	?>
+
+snippet pe
+	<?= ${1} ?>${0}
 
 snippet pecho
 	<?php echo ${1} ?>${0}
@@ -87,7 +89,7 @@ snippet doch
 	 * @copyright ${4}
 	 * @package ${5:default}
 	 **/
-	
+
 	/**
 	 * Define DocBlock
 	 **/
@@ -131,7 +133,7 @@ snippet do
 		${0:# code...}
 	} while (${1});
 
-snippet if? 
+snippet if?
 	$${1:retVal} = (${2:condition}) ? ${3:a} : ${4:b} ;
 
 snippet ifelse
@@ -161,7 +163,7 @@ snippet elseif
 	}
 
 snippet for
-	for ($${1:i}=${2:0}; $${1:i} < ${3}; $${1:i}++) { 
+	for ($${1:i}=${2:0}; $${1:i} < ${3}; $${1:i}++) {
 		${0:# code...}
 	}
 
@@ -171,10 +173,9 @@ snippet fore
 	}
 
 snippet func
-    ${1:public }function ${2:FunctionName}(${3}})
- {
-  ${0:# code...}
- }
+    ${1:public }function ${2:FunctionName}(${3}) {
+      ${0:# code...}
+}
 
 snippet con
 	function __construct(${1})
@@ -242,25 +243,38 @@ snippet gloabals
 	\$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${0}
 
 snippet cookie
-	\$_COOKIE['${1:variable}']
+	$_COOKIE['${1:variable}']
 
 snippet env
-	\$_ENV['${1:variable}']
+	$_ENV['${1:variable}']
 
 snippet files
-	\$_FILES['${1:variable}']
+	$_FILES['${1:variable}']
 
 snippet get
-	\$_GET['${1:variable}']
+	$_GET['${1:variable}']
 
 snippet post
-	\$_POST['${1:variable}']
+	$_POST['${1:variable}']
 
 snippet request
-	\$_REQUEST['${1:variable}']
+	$_REQUEST['${1:variable}']
 
 snippet server
-	\$_SERVER['${1:variable}']
+	$_SERVER['${1:variable}']
 
 snippet session
-	\$_SESSION['${1:variable}']
+	$_SESSION['${1:variable}']
+
+snippet aa
+	['${1}']${0}
+
+snippet ff
+	('${1}')${0}
+
+snippet exarr
+    foreach ($${1} as $key => $value) {
+        $$key = $value;
+    }${0}
+snippet dump
+    var_dump(${1});

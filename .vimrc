@@ -194,6 +194,7 @@ command! -nargs=* NecoEditSnippets NeoComplCacheEditSnippets
 nnoremap <Leader>gP :GitPush<Enter>
 
 nnoremap <Space>ut :Unite tab<Enter>
+nnoremap <Space>ub :Unite buffer<Enter>
 nnoremap <Space>uf :Unite file<Enter>
 nnoremap <Space>ur :Unite file_mru<Enter>
 
@@ -204,4 +205,15 @@ let g:user_zen_settings = {
 " toggle taglist view
 nnoremap <Space>tl :TlistToggle<Enter>
 
-
+" http://vim-users.jp/2011/02/hack202/
+" 警告しつつ、保存時にディレクトリを作成する
+augroup vimrc-auto-mkdir  " {{{
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+  function! s:auto_mkdir(dir, force)  " {{{
+    if !isdirectory(a:dir) && (a:force ||
+    \    input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+  endfunction  " }}}
+augroup END  " }}}

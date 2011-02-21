@@ -160,8 +160,7 @@ let g:neocomplcache_enable_at_startup = 1
 " smart case
 let g:neocomplcache_enable_smart_case = 1
 " Use camel case completion.
-" 若干重いとのことで一旦コメントアウト
-" let g:NeoComplCache_EnableCamelCaseCompletion = 1
+let g:NeoComplCache_EnableCamelCaseCompletio = 1
 " Use underbar completion.
 let g:NeoComplCache_EnableUnderbarCompletion = 1
 " Print caching percent in statusline.
@@ -181,18 +180,40 @@ imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <TAB>: completion.スニペット展開とバッティングしてたのでコメントアウト
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" add edit snippets command a little short
+command! -nargs=* NecoEditSnippets NeoComplCacheEditSnippets
 
 " git-vim setting
 nnoremap <Leader>gP :GitPush<Enter>
 
 nnoremap <Space>ut :Unite tab<Enter>
+nnoremap <Space>ub :Unite buffer<Enter>
 nnoremap <Space>uf :Unite file<Enter>
 nnoremap <Space>ur :Unite file_mru<Enter>
 
+" zen-coding
+let g:user_zen_settings = {
+            \'indentation' : '    ',
+            \}
+" toggle taglist view
+nnoremap <Space>tl :TlistToggle<Enter>
+
+" http://vim-users.jp/2011/02/hack202/
+" 警告しつつ、保存時にディレクトリを作成する
+augroup vimrc-auto-mkdir  " {{{
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+  function! s:auto_mkdir(dir, force)  " {{{
+    if !isdirectory(a:dir) && (a:force ||
+    \    input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+  endfunction  " }}}
+augroup END  " }}}

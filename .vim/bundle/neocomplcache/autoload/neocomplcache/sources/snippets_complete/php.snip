@@ -276,5 +276,14 @@ snippet exarr
     foreach ($${1} as $key => $value) {
         $$key = $value;
     }${0}
+
 snippet dump
     var_dump(${1});
+
+snippet trace
+    echo __FILE__. " ". __LINE__. "<br/>";
+
+snippet eall
+    error_reporting(E_ALL);
+    ini_set('display_errors', true);
+

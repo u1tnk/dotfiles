@@ -195,3 +195,6 @@ esac
 #補完数が多い時に許可を聞く閾値
 LISTMAX=100
 
+# bashmarks(directry bookmark)を有効化
+source ~/dotfiles/bashmarks/bashmarks.sh
+

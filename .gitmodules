@@ -3,4 +3,4 @@
 	url = git://github.com/Shougo/unite.vim.git
 [submodule "bashmarks"]
 	path = bashmarks
-	url = ./bashmarks
+	url = git://github.com/huyng/bashmarks.git

@@ -134,6 +134,20 @@ alias vi="vim"
 alias view="vim -R"
 
 alias srr="screen -D -R"
+#tmux
+alias ta="tmux attach"
+function atmux() {
+    if tmux ls >/dev/null 2>&1; then
+        tmux attach
+    else
+        tmux
+    fi
+}
+
+type -p tmux >/dev/null
+if [ $? -eq 0 -a -z "${TMUX}" -a -n "${SSH_CONNECTION}" ]; then
+    atmux
+fi
 
 #git shortcuts
 alias ci="git commit --interactive"
@@ -194,4 +208,7 @@ esac
 
 #補完数が多い時に許可を聞く閾値
 LISTMAX=100
+
+# bashmarks(directry bookmark)を有効化
+source ~/dotfiles/bashmarks/bashmarks.sh
 

@@ -145,7 +145,7 @@ function atmux() {
 }
 
 type -p tmux >/dev/null
-if [ $? -eq 0 -a -z "${TMUX}" -a -n "${SSH_CONNECTION}" ]; then
+if [ $? -eq 0 -a -z "${TMUX}" -a -n "${SSH_CONNECTION}" -a ${TERM} != "screen" ]; then
     atmux
 fi
 

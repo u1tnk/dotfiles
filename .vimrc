@@ -71,6 +71,8 @@ set clipboard=unnamed
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
 set browsedir=buffer
 
+" 常にdiffをverticalに
+set diffopt=vertical
 "map系
 "カーソル位置の単語をyankする
 nnoremap vv viwy

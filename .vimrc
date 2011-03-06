@@ -71,6 +71,8 @@ set clipboard=unnamed
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
 set browsedir=buffer
 
+" 常にdiffをverticalに
+set diffopt=vertical
 "map系
 "カーソル位置の単語をyankする
 nnoremap vv viwy
@@ -209,3 +211,29 @@ augroup vimrc-auto-mkdir  " {{{
     endif
   endfunction  " }}}
 augroup END  " }}}
+
+" from http://vim-users.jp/2011/02/hack203/
+" 今のキーマッピングを表示 ex:AllMaps
+command!
+\   -nargs=* -complete=mapping
+\   AllMaps
+\   map <args> | map! <args> | lmap <args>
+
+" 出力をバッファにキャプチャする  ex:Capture AllMaps
+command!
+\   -nargs=+ -complete=command
+\   Capture
+\   call s:cmd_capture(<q-args>)
+
+function! s:cmd_capture(q_args) "{{{
+    redir => output
+    silent execute a:q_args
+    redir END
+    let output = substitute(output, '^\n\+', '', '')
+
+    belowright new
+
+    silent file `=printf('[Capture: %s]', a:q_args)`
+    setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
+    call setline(1, split(output, '\n'))
+endfunction

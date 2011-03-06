@@ -7,6 +7,11 @@ function! PHPLint()
 	echo result
 endfunction
 
+"php関連
+let php_sql_query=1
+let php_htmlInStrings=1
+let php_noShortTags=1
+autocmd Syntax php set fdm=syntax
 
 "inoremap ar<Tab> ['']<Left><Left>
 "inoremap br<Tab> <br />

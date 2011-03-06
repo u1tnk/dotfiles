@@ -121,14 +121,6 @@ call pathogen#helptags()
 " ファイルタイプ判定をon
 filetype plugin on
 
-" ファイルタイプ判定をon
-filetype plugin on
-
-"php関連
-let php_sql_query=1
-let php_htmlInStrings=1
-let php_noShortTags=1
-autocmd Syntax php set fdm=syntax
 
 "カレントウィンドウのカーソル行をハイライトする
 set cursorline

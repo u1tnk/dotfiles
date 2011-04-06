@@ -15,8 +15,8 @@ bindkey -v
 ## export
 # PATH
 #
-export PATH=/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:~/scripts:$PATH
-export MANPATH=/opt/local/man:$MANPATH
+export PATH=~/install/bin:/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:~/scripts:$PATH
+export MANPATH=/install/man:/opt/local/man:$MANPATH
 
 ## Default shell configuration
 #

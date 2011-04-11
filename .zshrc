@@ -200,3 +200,5 @@ LISTMAX=100
 # bashmarks(directry bookmark)を有効化
 source ~/dotfiles/bashmarks/bashmarks.sh
 
+#ruby rvm有効化
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"

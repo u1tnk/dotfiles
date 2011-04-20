@@ -135,7 +135,8 @@ autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 augroup END
 
 " 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\s\+$//ge
+" diff見るのに嫌われるため、現状削除
+"autocmd BufWritePre * :%s/\s\+$//ge
 
 "QuickRunを実行
 nnoremap <Space>x :QuickRun -into 0 <CR>

@@ -148,6 +148,7 @@ alias add="git add"
 alias gs="git status"
 alias gd="git diff"
 alias gb="git branch"
+alias gsub="git submodule"
 
 ## terminal configuration
 #

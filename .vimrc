@@ -185,13 +185,17 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " add edit snippets command a little short
 command! -nargs=* NecoEditSnippets NeoComplCacheEditSnippets
 
+" ターミナル上でコピペするとき全てのindent機能をオフにする
+" 戻すのはindentexprを保存しておくのがめんどくさいので非対応
+command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent indentexpr=
+
 " git-vim setting
 nnoremap <Leader>gP :GitPush<Enter>
 
 nnoremap <Space>ut :Unite tab<Enter>
 nnoremap <Space>ub :Unite buffer<Enter>
 nnoremap <Space>uf :Unite file<Enter>
-nnoremap <Space>ur :Unite file_mru<Enter>
+nnoremap <Space>ur :Unite file_rec<Enter>
 
 " zen-coding
 let g:user_zen_settings = {

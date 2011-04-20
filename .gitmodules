@@ -4,3 +4,6 @@
 [submodule "bashmarks"]
 	path = bashmarks
 	url = git://github.com/huyng/bashmarks.git
+[submodule ".vim/bundle/neocomplcache"]
+	path = .vim/bundle/neocomplcache
+	url = git@github.com:u1tnk/neocomplcache.git

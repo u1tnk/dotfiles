@@ -132,6 +132,7 @@ autocmd WinLeave * setlocal nocursorline
 "filetype拡張子追加
 augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
+autocmd! BufRead,BufNewFile *.twig	 setfiletype html
 augroup END
 
 " 保存時に行末の空白を除去する
@@ -192,6 +193,8 @@ command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent inde
 " git-vim setting
 nnoremap <Leader>gP :GitPush<Enter>
 
+"unite
+let g:unite_enable_start_insert=1
 nnoremap <Space>ut :Unite tab<Enter>
 nnoremap <Space>ub :Unite buffer<Enter>
 nnoremap <Space>uf :Unite file<Enter>

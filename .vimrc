@@ -132,6 +132,7 @@ autocmd WinLeave * setlocal nocursorline
 "filetype拡張子追加
 augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
+autocmd! BufRead,BufNewFile *.twig	 setfiletype html
 augroup END
 
 " 保存時に行末の空白を除去する

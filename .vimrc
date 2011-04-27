@@ -1,3 +1,17 @@
+"vundler
+set rtp+=~/dotfiles/.vim/vundle/ 
+call vundle#rc()
+
+Bundle 'neocomplcache'
+Bundle 'neco-look'
+Bundle 'surround.vim'
+Bundle 'unite.vim'
+Bundle 'taglist.vim'
+Bundle 'quickrun.vim'
+Bundle 'ref.vim'
+Bundle 'git://github.com/Shougo/vimproc.git'
+Bundle 'ZenCoding.vim'
+
 "ファイルタイプの判別を有効化
 filetype on
 
@@ -118,7 +132,7 @@ nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
 " pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
 filetype off
-call pathogen#runtime_append_all_bundles("pathogen_bundle")
+call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 " ファイルタイプ判定をon
 filetype plugin on
@@ -189,9 +203,6 @@ command! -nargs=* NecoEditSnippets NeoComplCacheEditSnippets
 " ターミナル上でコピペするとき全てのindent機能をオフにする
 " 戻すのはindentexprを保存しておくのがめんどくさいので非対応
 command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent indentexpr=
-
-" git-vim setting
-nnoremap <Leader>gP :GitPush<Enter>
 
 "unite
 let g:unite_enable_start_insert=1

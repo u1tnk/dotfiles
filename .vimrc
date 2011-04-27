@@ -118,7 +118,7 @@ nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
 " pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#runtime_append_all_bundles("pathogen_bundle")
 call pathogen#helptags()
 " ファイルタイプ判定をon
 filetype plugin on

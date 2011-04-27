@@ -193,6 +193,8 @@ command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent inde
 " git-vim setting
 nnoremap <Leader>gP :GitPush<Enter>
 
+"unite
+let g:unite_enable_start_insert=1
 nnoremap <Space>ut :Unite tab<Enter>
 nnoremap <Space>ub :Unite buffer<Enter>
 nnoremap <Space>uf :Unite file<Enter>

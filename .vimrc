@@ -1,7 +1,12 @@
-"vundler
-set rtp+=~/dotfiles/.vim/vundle/ 
-call vundle#rc()
+"dotfiles以下にプラグインをインストール
+set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 
+"pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+"vundler
+call vundle#rc()
 Bundle 'neocomplcache'
 Bundle 'neco-look'
 Bundle 'surround.vim'
@@ -11,6 +16,7 @@ Bundle 'quickrun.vim'
 Bundle 'ref.vim'
 Bundle 'git://github.com/Shougo/vimproc.git'
 Bundle 'ZenCoding.vim'
+Bundle 'YankRing.vim'
 
 "ファイルタイプの判別を有効化
 filetype on
@@ -57,8 +63,6 @@ set backspace=eol,indent,start
 set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
 set laststatus=2
 
-""dotfiles以下にプラグインをインストール
-set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 
 "Kコマンドをmanからhelpに変更
 set keywordprg=:help
@@ -128,15 +132,6 @@ noremap gk k
 nnoremap <C-i>  :<C-u>help<Space>
 " " カーソル下のキーワードをヘルプでひく
 nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
-
-
-" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-" ファイルタイプ判定をon
-filetype plugin on
-
 
 "カレントウィンドウのカーソル行をハイライトする
 set cursorline

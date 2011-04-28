@@ -5,7 +5,7 @@ call vundle#rc()
 Bundle 'neocomplcache'
 Bundle 'neco-look'
 Bundle 'surround.vim'
-Bundle 'unite.vim'
+Bundle 'git://github.com/Shougo/unite.vim.git'
 Bundle 'taglist.vim'
 Bundle 'quickrun.vim'
 Bundle 'ref.vim'
@@ -177,7 +177,7 @@ let g:NeoComplCache_EnableUnderbarCompletion = 1
 let g:NeoComplCache_CachingPercentInStatusline = 1
 
 " phpmanual path for vim-ref
-let g:ref_phpmanual_path = $HOME. '/dotfiles/.vim/bundle/vim-ref/doc/php-chunked-xhtml/'
+let g:ref_phpmanual_path = $HOME. '/dotfiles/doc/php-chunked-xhtml/'
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
 smap <C-k>     <Plug>(neocomplcache_snippets_expand)

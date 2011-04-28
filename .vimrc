@@ -11,6 +11,7 @@ Bundle 'quickrun.vim'
 Bundle 'ref.vim'
 Bundle 'git://github.com/Shougo/vimproc.git'
 Bundle 'ZenCoding.vim'
+Bundle 'YankRing.vim'
 
 "ファイルタイプの判別を有効化
 filetype on

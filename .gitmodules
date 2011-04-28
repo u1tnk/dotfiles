@@ -4,6 +4,6 @@
 [submodule ".vim/bundle/neocomplcache"]
 	path = .vim/bundle/neocomplcache
 	url = git@github.com:u1tnk/neocomplcache.git
-[submodule ".vim/vundle"]
-	path = .vim/vundle
+[submodule ".vim/bundle/vundle"]
+	path = .vim/bundle/vundle
 	url = git://github.com/gmarik/vundle.git

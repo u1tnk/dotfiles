@@ -139,7 +139,7 @@ alias ta="tmux attach"
 
 #git shortcuts
 alias ci="git commit --interactive"
-alias cm="git commit"
+alias cm="git commit -v"
 alias pull="git pull"
 alias push="git push"
 alias gl="git hist"

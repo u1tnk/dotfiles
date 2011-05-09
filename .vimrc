@@ -170,6 +170,10 @@ let g:NeoComplCache_EnableCamelCaseCompletio = 1
 let g:NeoComplCache_EnableUnderbarCompletion = 1
 " Print caching percent in statusline.
 let g:NeoComplCache_CachingPercentInStatusline = 1
+" シンタックスをキャッシュするときの最小文字長を3
+let g:neocomplcache_min_syntax_length = 3
+" snippetsファイルのディレクトリパス
+let g:neocomplcache_snippets_dir = '~/dotfiles/.vim/snippets'
 
 " phpmanual path for vim-ref
 let g:ref_phpmanual_path = $HOME. '/dotfiles/doc/php-chunked-xhtml/'

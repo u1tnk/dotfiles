@@ -1,0 +1,25 @@
+snippet spacer
+    {{ app.component( 'OpenSocial' ).spacer( 1, 2 ) | raw }}<br />
+snippet var
+    {{ ${1} }}
+
+snippet com
+    {# ${1} #}
+
+snippet if
+    {% if ${1} %}
+    {% else %}
+    {% endif %}
+
+snippet else
+    {% else %}
+
+snippet endif
+    {% endif %}
+
+snippet for
+    {% for ${1} in ${2}%}
+    {% endfor %}
+
+snippet endfor
+    {% endfor %}

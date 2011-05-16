@@ -18,6 +18,10 @@ Bundle 'git://github.com/Shougo/vimproc.git'
 Bundle 'ZenCoding.vim'
 Bundle 'YankRing.vim'
 
+ 
+"machit
+source $VIMRUNTIME/macros/matchit.vim
+
 "ファイルタイプの判別を有効化
 filetype on
 

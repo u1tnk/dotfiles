@@ -203,6 +203,8 @@ command! -nargs=* NecoEditSnippets NeoComplCacheEditSnippets
 " 戻すのはindentexprを保存しておくのがめんどくさいので非対応
 command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent indentexpr=
 
+
+command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix  bomb
 "unite
 let g:unite_enable_start_insert=1
 nnoremap <Space>ut :Unite tab<Enter>

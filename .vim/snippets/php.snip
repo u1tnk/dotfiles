@@ -291,5 +291,12 @@ snippet eall
 
 snippet tracem
     $this->app->log->debug(__FILE__. " ". __LINE__);
+
 snippet tracec
-    $this->app->log->debug(__FILE__. " ". __LINE__);
+    $app->log->debug(__FILE__. " ". __LINE__);
+
+snippet modelc
+    $app->model( '${1}' )->${2}( ${3} )
+
+snippet modelm
+    $this->app->model( '${1}' )->${2}( ${3} )

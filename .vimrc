@@ -17,6 +17,8 @@ Bundle 'ref.vim'
 Bundle 'git://github.com/Shougo/vimproc.git'
 Bundle 'ZenCoding.vim'
 Bundle 'YankRing.vim'
+Bundle 'git://github.com/Shougo/vimfiler.git'
+Bundle 'git://github.com/Shougo/unite-grep.git'
 
  
 "machit
@@ -266,4 +268,3 @@ function! s:cmd_capture(q_args) "{{{
     setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
     call setline(1, split(output, '\n'))
 endfunction
-Bundle 'git://github.com/Shougo/vimfiler.git'

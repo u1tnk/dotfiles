@@ -1,23 +1,29 @@
 snippet     ruby_print
 abbr        <%= %>
+alias       var
     <%= ${1:Ruby print code} %>${2}
 
 snippet     ruby_code
 abbr        <% %>
+alias       code
     <% ${1:Ruby code} %>${2}
 
 snippet     ruby_print_nonl
 abbr        <%= -%>
+alias       varno
     <%= ${1:Ruby print code} -%>${2}
 
 snippet     ruby_code_nonl
 abbr        <% -%>
+alias       codeno
     <% ${1:Ruby code} -%>${2}
 
 snippet     comment
 abbr        <%# %>
+alias       com
     <%# ${1:Comment} %>${2}
 
-snippet     rp
-    <% ${1} %>
-    ${0}
+snippet     br
+abbr        <br />
+    <br />
+

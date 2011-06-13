@@ -21,15 +21,14 @@ Bundle 'git://github.com/Shougo/vimfiler.git'
 Bundle 'git://github.com/Shougo/unite-grep.git'
 
  
-"machit
-source $VIMRUNTIME/macros/matchit.vim
-
-"ファイルタイプの判別を有効化
-filetype on
 
 "基本設定
 filetype plugin indent on
 syntax enable
+set nocompatible
+
+"machit
+source $VIMRUNTIME/macros/matchit.vim
 
 let mapleader = ","              " キーマップリーダー
 
@@ -100,6 +99,7 @@ set diffopt=vertical
 "map系
 "カーソル位置の単語をyankする
 nnoremap vv viwy
+nnoremap <Space>p viwp
 
 "最後に変更されたテキストを選択する
 nnoremap gc  `[v`]
@@ -168,6 +168,7 @@ let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 command! -nargs=* EE VimFiler %:h 
 command! -nargs=* E VimFiler 
+
 "外部grep設定
 set grepprg=grep\ -nH
 

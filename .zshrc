@@ -85,7 +85,7 @@ bindkey "^N" history-beginning-search-forward-end
 
 ## Completion configuration
 #
-fpath=(${HOME}/.zsh/functions/Completion ${fpath})
+fpath=(${HOME}/dotfiles/.zsh/functions/Completion ${fpath})
 autoload -U compinit
 compinit -u
 

@@ -19,7 +19,7 @@ Bundle 'ZenCoding.vim'
 Bundle 'YankRing.vim'
 Bundle 'git://github.com/Shougo/vimfiler.git'
 Bundle 'git://github.com/Shougo/unite-grep.git'
-
+Bundle 'tpope/vim-fugitive'
  
 
 "基本設定

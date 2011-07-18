@@ -18,6 +18,42 @@ bindkey -v
 export PATH=~/install/bin:/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:~/scripts:$PATH
 export MANPATH=/install/man:/opt/local/man:$MANPATH
 
+# gitのブランチ名と変更状況をプロンプトに表示する 
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+    # バージョン管理システムとの連携を有効にする 
+    autoload -Uz vcs_info
+    autoload -Uz add-zsh-hook
+
+    zstyle ':vcs_info:*' enable git
+    zstyle ':vcs_info:git:*' check-for-changes true
+    zstyle ':vcs_info:git:*' stagedstr "+"
+    zstyle ':vcs_info:git:*' unstagedstr "-"
+    zstyle ':vcs_info:git:*' formats '@%b%u%c'
+    zstyle ':vcs_info:git:*' actionformats '@%b|%a%u%c'
+
+    # VCSの更新時にPROMPTを自動更新する
+    function _update_vcs_info_msg() {
+        psvar=()
+        LANG=en_US.UTF-8 vcs_info
+        [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+        psvar[2]=$(_git_not_pushed)
+    }
+    function _git_not_pushed() {
+        if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
+            head="$(git rev-parse HEAD)"
+            for x in $(git rev-parse --remotes)
+                do
+                if [ "$head" = "$x" ]; then
+                    return 0
+                fi
+            done
+            echo "?"
+        fi
+        return 0
+    }
+    add-zsh-hook precmd _update_vcs_info_msg
+fi
 ## Default shell configuration
 #
 # set prompt
@@ -29,11 +65,13 @@ case ${UID} in
     PROMPT="%{${}%}$(echo @${HOST%%.*}) %B%{${}%}%/#%{${}%}%b "
     PROMPT2="%B%{${}%}%_#%{${}%}%b "
     SPROMPT="%B%{${}%}%r is correct? [n,y,a,e]:%{${}%}%b "
+    RPROMPT="%{${fg[green]}%}%1v%2v [%~]%{${reset_color}%}"
     ;;
 *)
     PROMPT="%{${}%}%/%%%{${}%} "
     PROMPT2="%{${}%}%_%%%{${}%} "
     SPROMPT="%{${}%}%r is correct? [n,y,a,e]:%{${}%} "
+    RPROMPT="%{${fg[green]}%}%1v%2v [%~]%{${reset_color}%}"
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
         PROMPT="%{${}%}$(echo @${HOST%%.*}) ${PROMPT}"
     ;;

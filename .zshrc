@@ -65,13 +65,13 @@ case ${UID} in
     PROMPT="%{${}%}$(echo @${HOST%%.*}) %B%{${}%}%/#%{${}%}%b "
     PROMPT2="%B%{${}%}%_#%{${}%}%b "
     SPROMPT="%B%{${}%}%r is correct? [n,y,a,e]:%{${}%}%b "
-    RPROMPT="%{${fg[green]}%}%1v%2v [%~]%{${reset_color}%}"
+    RPROMPT="%{${fg[green]}%}%1v%2v%{${reset_color}%}"
     ;;
 *)
     PROMPT="%{${}%}%/%%%{${}%} "
     PROMPT2="%{${}%}%_%%%{${}%} "
     SPROMPT="%{${}%}%r is correct? [n,y,a,e]:%{${}%} "
-    RPROMPT="%{${fg[green]}%}%1v%2v [%~]%{${reset_color}%}"
+    RPROMPT="%{${fg[green]}%}%1v%2v%{${reset_color}%}"
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
         PROMPT="%{${}%}$(echo @${HOST%%.*}) ${PROMPT}"
     ;;

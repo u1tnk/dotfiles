@@ -20,6 +20,7 @@ Bundle 'YankRing.vim'
 Bundle 'Shougo/vimfiler.git'
 Bundle 'Shougo/unite-grep.git'
 Bundle 'tpope/vim-fugitive'
+Bundle 't9md/vim-textmanip'
  
 
 "基本設定
@@ -269,3 +270,15 @@ function! s:cmd_capture(q_args) "{{{
     setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
     call setline(1, split(output, '\n'))
 endfunction
+
+"vim-textmanip
+"http://vim-users.jp/2011/07/hack223/
+" 選択したテキストの移動
+vmap <C-j> <Plug>(Textmanip.move_selection_down)
+vmap <C-k> <Plug>(Textmanip.move_selection_up)
+vmap <C-h> <Plug>(Textmanip.move_selection_left)
+vmap <C-l> <Plug>(Textmanip.move_selection_right)
+
+" 行の複製
+vmap <C-y> <Plug>(Textmanip.duplicate_selection_v)
+nmap <C-y> <Plug>(Textmanip.duplicate_selection_n)

@@ -21,6 +21,7 @@ Bundle 'Shougo/vimfiler.git'
 Bundle 'Shougo/unite-grep.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 't9md/vim-textmanip'
+Bundle 'git://github.com/kana/vim-altr.git'
  
 
 "基本設定
@@ -282,3 +283,10 @@ vmap <C-l> <Plug>(Textmanip.move_selection_right)
 " 行の複製
 vmap <C-y> <Plug>(Textmanip.duplicate_selection_v)
 nmap <C-y> <Plug>(Textmanip.duplicate_selection_n)
+
+" vim-altr
+
+nmap <Space>ta  <Plug>(altr-forward)
+" rails
+call altr#define('controllers/%_controller.rb', 'views/%/*.erb', 'views/%/*.haml')
+

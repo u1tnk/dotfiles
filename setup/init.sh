@@ -4,6 +4,7 @@ cd ~
 ln -s dotfiles/.gemrc
 ln -s dotfiles/.gitconfig
 ln -s dotfiles/.tmux.conf
+ln -s dotfiles/.gvimrc
 
 cp dotfiles/setup/template/.zshrc .zshrc
 cp dotfiles/setup/template/.vimrc .vimrc

@@ -15,7 +15,7 @@ bindkey -v
 ## export
 # PATH
 #
-export PATH=~/install/bin:/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin/:~/scripts:$PATH
+export PATH=~/install/bin:/sbin:/usr/sbin:/usr/local/bin:~/scripts:$PATH
 export MANPATH=/install/man:/opt/local/man:$MANPATH
 
 # gitのブランチ名と変更状況をプロンプトに表示する 

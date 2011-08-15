@@ -15,3 +15,6 @@ autocmd Syntax php set fdm=syntax
 
 "inoremap ar<Tab> ['']<Left><Left>
 "inoremap br<Tab> <br />
+
+setlocal shiftwidth=4
+setlocal tabstop=4

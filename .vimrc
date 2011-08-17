@@ -1,4 +1,4 @@
-"dotfiles以下にプラグインをインストール
+"dotfiles以下にプラグインをインストール 
 set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 
 "pathogen

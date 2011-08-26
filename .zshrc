@@ -15,7 +15,7 @@ bindkey -v
 ## export
 # PATH
 #
-export PATH=~/install/bin:/sbin:/usr/sbin:/usr/local/bin:~/scripts:$PATH
+export PATH=~/install/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin/:~/scripts:$PATH
 export MANPATH=/install/man:/opt/local/man:$MANPATH
 
 # gitのブランチ名と変更状況をプロンプトに表示する 
@@ -149,7 +149,10 @@ alias j="jobs -l"
 
 case "${OSTYPE}" in
 darwin*)
-    export EDITOR=/usr/bin/vim
+    #export EDITOR=/usr/bin/vim
+    export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+    export LD_LIBRARY_PATH=/usr/local/lib
+    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias ls="ls -G -w"
     ;;
 linux*)

@@ -21,7 +21,11 @@ Bundle 'Shougo/vimfiler.git'
 Bundle 'Shougo/unite-grep.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 't9md/vim-textmanip'
-Bundle 'git://github.com/kana/vim-altr.git'
+Bundle 'kana/vim-altr.git'
+Bundle 'tyru/open-browser.vim.git'
+Bundle 'tyru/savemap.vim.git'
+Bundle 'tyru/vice.vim.git'
+
  
 
 "基本設定
@@ -287,6 +291,11 @@ nmap <C-y> <Plug>(Textmanip.duplicate_selection_n)
 " vim-altr
 
 nmap <Space>ta  <Plug>(altr-forward)
-" rails
+" rails for altr
 call altr#define('controllers/%_controller.rb', 'views/%/*.erb', 'views/%/*.haml')
 
+
+" open-browser
+"let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap <Space>ob <Plug>(openbrowser-smart-search)
+vmap <Space>ob <Plug>(openbrowser-smart-search)

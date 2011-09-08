@@ -1,5 +1,6 @@
 ## Environment variable configuration
 #
+#
 # LANG
 #
 export LANG=ja_JP.UTF-8
@@ -16,7 +17,7 @@ bindkey -v
 # PATH
 #
 export PATH=~/install/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin/:~/scripts:$PATH
-export MANPATH=/install/man:/opt/local/man:$MANPATH
+export MANPATH=/install/man:$MANPATH
 
 # gitのブランチ名と変更状況をプロンプトに表示する 
 autoload -Uz is-at-least
@@ -114,6 +115,7 @@ setopt hist_reduce_blanks         # スペース排除
 setopt EXTENDED_HISTORY           # zshの開始終了を記録
 
 
+
 #履歴検索
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -198,11 +200,60 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
-# 大文字、小文字無視
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+## 補完候補がなければより曖昧に候補を探す。
+### m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する。
+### r:|[._-]=*: 「.」「_」「-」の前にワイルドカード「*」があるものとして補完する。
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
 
+## 補完方法毎にグループ化する。
+### 補完方法の表示方法
+###   %B...%b: 「...」を太字にする。
+###   %d: 補完方法のラベル
+zstyle ':completion:*' format '%B%d%b'
+zstyle ':completion:*' group-name ''
+
+## 補完侯補をメニューから選択する。
+### select=2: 補完候補を一覧から選択する。
+###           ただし、補完候補が2つ以上なければすぐに補完する。
+zstyle ':completion:*:default' menu select=2
+
+## 補完候補に色を付ける。
+### "": 空文字列はデフォルト値を使うという意味。
+zstyle ':completion:*:default' list-colors ""
+
+## 補完方法の設定。指定した順番に実行する。
+### _oldlist 前回の補完結果を再利用する。
+### _complete: 補完する。
+### _match: globを展開しないで候補の一覧から補完する。
+### _history: ヒストリのコマンドも補完候補とする。(なぜかzshが落ちるので削除)
+### _ignored: 補完候補にださないと指定したものも補完候補とする。
+### _approximate: 似ている補完候補も補完候補とする。
+### _prefix: カーソル以降を無視してカーソル位置までで補完する。
+zstyle ':completion:*' completer _oldlist _complete _match _ignored _approximate _prefix
+
+## 補完候補をキャッシュする。
+zstyle ':completion:*' use-cache yes
+## 詳細な情報を使う。
+zstyle ':completion:*' verbose yes
+## sudo時にはsudo用のパスも使う。
+zstyle ':completion:sudo:*' environ PATH="$SUDO_PATH:$PATH"
+
+## カーソル位置で補完する。
+setopt complete_in_word
+## globを展開しないで候補の一覧から補完する。
+setopt glob_complete
+## 補完時にヒストリを自動的に展開する。
+setopt hist_expand
+## 補完候補がないときなどにビープ音を鳴らさない。
+setopt no_beep
+## 辞書順ではなく数字順に並べる。
+setopt numeric_glob_sort
 # set terminal title including current directory
-#
+
+# --prefix=~/localというように「=」の後でも
+# 「~」や「=コマンド」などのファイル名展開を行う。
+setopt magic_equal_subst
+
 case "${TERM}" in
 xterm|xterm-color|kterm|kterm-color)
     precmd() {
@@ -217,5 +268,62 @@ LISTMAX=100
 # bashmarks(directry bookmark)を有効化
 source ~/dotfiles/bashmarks/bashmarks.sh
 
+
+# grep 
+#
+## GNU grepがあったら優先して使う。
+if type ggrep > /dev/null 2>&1; then
+    alias grep=ggrep
+fi
+## デフォルトオプションの設定
+export GREP_OPTIONS
+### バイナリファイルにはマッチさせない。
+GREP_OPTIONS="--binary-files=without-match"
+### 拡張子が.tmpのファイルは無視する。
+GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
+## 管理用ディレクトリを無視する。
+if grep --help | grep -q -- --exclude-dir; then
+    GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
+    GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
+    GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
+    GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
+fi
+### 可能なら色を付ける。
+if grep --help | grep -q -- --color; then
+    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
+fi
+### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
+GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+
 #ruby rvm有効化
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+#lv 
+## -c: ANSIエスケープシーケンスの色付けなどを有効にする。
+## -l: 1行が長くと折り返されていても1行として扱う。
+##     （コピーしたときに余計な改行を入れない。）
+export PAGER="lv"
+export LV="-c -l"
+
+## ディレクトリが変わったらディレクトリスタックを表示。
+chpwd_functions=($chpwd_functions dirs)
+
+## 実行したプロセスの消費時間が3秒以上かかったら
+## 自動的に消費時間の統計情報を表示する。
+REPORTTIME=3
+
+## 全てのユーザのログイン・ログアウトを監視する。
+watch="all"
+## ログイン時にはすぐに表示する。
+log
+
+## ^Dでログアウトしないようにする。
+setopt ignore_eof
+
+## 完全に削除。
+alias rr="command rm -rf"
+## ファイル操作を確認する。
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+alias po="popd"

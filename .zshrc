@@ -1,24 +1,5 @@
 ## Environment variable configuration
 #
-#
-# LANG
-#
-export LANG=ja_JP.UTF-8
-case ${UID} in
-0)
-    LANG=C
-    ;;
-esac
-
-#viキーバインド
-bindkey -v
-
-## export
-# PATH
-#
-export PATH=~/install/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin/:~/scripts:$PATH
-export MANPATH=/install/man:$MANPATH
-
 # gitのブランチ名と変更状況をプロンプトに表示する 
 autoload -Uz is-at-least
 if is-at-least 4.3.10; then
@@ -151,15 +132,12 @@ alias j="jobs -l"
 
 case "${OSTYPE}" in
 darwin*)
-    #export EDITOR=/usr/bin/vim
-    export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-    export LD_LIBRARY_PATH=/usr/local/lib
     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias ls="ls -G -w"
     ;;
 linux*)
-    export EDITOR=vim
     alias ls="ls --color"
+    umask 002
     ;;
 esac
 
@@ -192,6 +170,9 @@ alias gs="git status"
 alias gd="git diff"
 alias gb="git branch"
 alias gsub="git submodule"
+
+#rails 
+alias r=rails
 
 ## terminal configuration
 #
@@ -298,12 +279,6 @@ GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 #ruby rvm有効化
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-#lv 
-## -c: ANSIエスケープシーケンスの色付けなどを有効にする。
-## -l: 1行が長くと折り返されていても1行として扱う。
-##     （コピーしたときに余計な改行を入れない。）
-export PAGER="lv"
-export LV="-c -l"
 
 ## ディレクトリが変わったらディレクトリスタックを表示。
 chpwd_functions=($chpwd_functions dirs)

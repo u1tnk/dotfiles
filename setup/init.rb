@@ -10,8 +10,9 @@ File.symlink "dotfiles/.tmux.conf", ".tmux.conf" unless FileTest.exist? ".tmux.c
 File.symlink "dotfiles/.gvimrc", ".gvimrc" unless FileTest.exist? ".gvimrc"
 File.symlink "dotfiles/.vrapperrc", ".vrapperrc" unless FileTest.exist? ".vrapperrc"
 
-File.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
-File.copy "dotfiles/setup/template/.vimrc", ".vimrc" unless FileTest.exist? ".vimrc"
+FileUtils.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
+FileUtils.copy "dotfiles/setup/template/.zshenv", ".zshenv" unless FileTest.exist? ".zshenv"
+FileUtils.copy "dotfiles/setup/template/.vimrc", ".vimrc" unless FileTest.exist? ".vimrc"
 
 `sh dotfiles/setup/git_submodule.sh`
 

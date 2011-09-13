@@ -1,3 +1,4 @@
 
 *~
 *.swap
+.vim/bundle/vimdoc_ja

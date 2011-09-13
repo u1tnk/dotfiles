@@ -19,4 +19,4 @@ FileUtils.copy "dotfiles/setup/template/.vimrc", ".vimrc" unless FileTest.exist?
 #BundleInstallした後vimproc.shを実行
 `sh dotfiles/setup/vimproc.sh` if FileTest.exist? ".vim/bundle"
 
-
+`svn checkout http://vimdoc-ja.googlecode.com/svn/trunk/runtime dotfiles/.vim/bundle/vimdoc_ja` unless FileTest.exist? ".vim/bundle/vimdoc_ja"

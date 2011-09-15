@@ -21,7 +21,7 @@ typeset -U path
 path=(# システム用
       /bin(N-/)
       # 自分用
-      $HOME/install/bin(N-/)
+      $HOME/local/bin(N-/)
       # システム用
       /usr/local/bin(N-/)
       /usr/bin(N-/))
@@ -36,7 +36,7 @@ typeset -U manpath
 ##            -: シンボリックリンク先のパスを評価。
 ##            /: ディレクトリのみ残す。
 manpath=(# 自分用
-         $HOME/install/share/man(N-/)
+         $HOME/local/share/man(N-/)
          # システム用
          /usr/local/share/man(N-/)
          /usr/share/man(N-/))

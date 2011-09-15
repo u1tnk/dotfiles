@@ -6,6 +6,8 @@ home = ENV['HOME']
 FileUtils.cd home
 
 Dir.mkdir "local" unless FileTest.exist? "local"
+Dir.mkdir "temp" unless FileTest.exist? "temp"
+Dir.mkdir "apps" unless FileTest.exist? "apps"
 
 File.symlink "dotfiles/.gemrc", ".gemrc" unless FileTest.exist? ".gemrc"
 File.symlink "dotfiles/.gitconfig", ".gitconfig" unless FileTest.exist? ".gitconfig"
@@ -17,17 +19,19 @@ FileUtils.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist?
 FileUtils.copy "dotfiles/setup/template/.zshenv", ".zshenv" unless FileTest.exist? ".zshenv"
 FileUtils.copy "dotfiles/setup/template/.vimrc", ".vimrc" unless FileTest.exist? ".vimrc"
 
-`sh dotfiles/setup/git_submodule.sh`
+print `sh dotfiles/setup/git_submodule.sh`
 
 #BundleInstallした後vimproc.shを実行
-`sh dotfiles/setup/vimproc.sh` if FileTest.exist? ".vim/bundle"
+print `sh dotfiles/setup/vimproc.sh` if FileTest.exist? ".vim/bundle"
 
 #vimdoc_ja
-`svn checkout http://vimdoc-ja.googlecode.com/svn/trunk/runtime dotfiles/.vim/bundle/vimdoc_ja` unless FileTest.exist? ".vim/bundle/vimdoc_ja"
+unless  FileTest.exist? "dotfiles/.vim/bundle/vimdoc_ja"
+  print `svn checkout http://vimdoc-ja.googlecode.com/svn/trunk/runtime dotfiles/.vim/bundle/vimdoc_ja` unless FileTest.exist? ".vim/bundle/vimdoc_ja"
+end
 
 #rsense
 unless  FileTest.exist? "local/rsense"
-  `git clone http://cx4a.org/repo/rsense.git/ local/rsense`
-  `ruby local/rsense/etc/config.rb > ~/.rsense`
+  print `git clone http://cx4a.org/repo/rsense.git/ local/rsense`
+  print `ruby local/rsense/etc/config.rb > ~/.rsense`
 end
 

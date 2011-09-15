@@ -22,6 +22,7 @@ path=(# システム用
       /bin(N-/)
       # 自分用
       $HOME/local/bin(N-/)
+      $HOME/local/rsense/bin(N-/)
       # システム用
       /usr/local/bin(N-/)
       /usr/bin(N-/))

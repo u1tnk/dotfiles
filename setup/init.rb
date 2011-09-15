@@ -4,6 +4,9 @@ require "fileutils"
 
 home = ENV['HOME']
 FileUtils.cd home
+
+Dir.mkdir "local" unless FileTest.exist? "local"
+
 File.symlink "dotfiles/.gemrc", ".gemrc" unless FileTest.exist? ".gemrc"
 File.symlink "dotfiles/.gitconfig", ".gitconfig" unless FileTest.exist? ".gitconfig"
 File.symlink "dotfiles/.tmux.conf", ".tmux.conf" unless FileTest.exist? ".tmux.conf"
@@ -19,4 +22,12 @@ FileUtils.copy "dotfiles/setup/template/.vimrc", ".vimrc" unless FileTest.exist?
 #BundleInstallした後vimproc.shを実行
 `sh dotfiles/setup/vimproc.sh` if FileTest.exist? ".vim/bundle"
 
+#vimdoc_ja
 `svn checkout http://vimdoc-ja.googlecode.com/svn/trunk/runtime dotfiles/.vim/bundle/vimdoc_ja` unless FileTest.exist? ".vim/bundle/vimdoc_ja"
+
+#rsense
+unless  FileTest.exist? "local/rsense"
+  `git clone http://cx4a.org/repo/rsense.git/ local/rsense`
+  `ruby local/rsense/etc/config.rb > ~/.rsense`
+end
+

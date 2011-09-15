@@ -299,3 +299,15 @@ call altr#define('controllers/%_controller.rb', 'views/%/*.erb', 'views/%/*.haml
 "let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap <Space>ob <Plug>(openbrowser-smart-search)
 vmap <Space>ob <Plug>(openbrowser-smart-search)
+
+" rsense
+let g:rsenseHome = "$HOME/local/rsense"
+
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:rsenseUseOmniFunc = 1
+if filereadable(expand('$HOME/local/rsense/bin/rsense'))
+  let g:rsenseHome = expand('$HOME/local/rsense')
+  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+endif

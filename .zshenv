@@ -25,6 +25,7 @@ path=(# システム用
       $HOME/local/rsense/bin(N-/)
       # システム用
       /usr/local/bin(N-/)
+      /usr/sbin(N-/)
       /usr/bin(N-/))
 
 
@@ -79,7 +80,7 @@ fi
 
 case "${OSTYPE}" in
 darwin*)
-    export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+    export EDITOR=/usr/bin/vim
     export LD_LIBRARY_PATH=/usr/local/lib
     ;;
 linux*)

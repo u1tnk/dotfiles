@@ -25,6 +25,7 @@ path=(# システム用
       $HOME/local/rsense/bin(N-/)
       # システム用
       /usr/local/bin(N-/)
+      /sbin(N-/)
       /usr/sbin(N-/)
       /usr/bin(N-/))
 

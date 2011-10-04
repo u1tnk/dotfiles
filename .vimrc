@@ -154,7 +154,12 @@ autocmd WinLeave * setlocal nocursorline
 augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 autocmd! BufRead,BufNewFile *.twig	 setfiletype html
+autocmd! BufRead,BufNewFile *.ftl	 setfiletype ftl
 augroup END
+
+inoremap <C-e> <Esc>
+vnoremap <C-e> <Esc>
+cnoremap <C-e> <C-c>
 
 " 保存時に行末の空白を除去する
 " diff見るのに嫌われるため、現状削除

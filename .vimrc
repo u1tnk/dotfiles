@@ -47,8 +47,8 @@ set smartcase
 set number
 "インデント
 set autoindent
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set expandtab
 
 "split時右、下に開く
@@ -236,9 +236,10 @@ nnoremap <Space>uf :Unite file<Enter>
 nnoremap <Space>ur :Unite file_rec<Enter>
 
 " zen-coding
-let g:user_zen_settings = {
-            \'indentation' : '  ',
-            \}
+" zen-coding時のindentがtabstop,shiftwidthで変わらないので、4から変えたいときは定義
+"let g:user_zen_settings = {
+"            \'indentation' : '  ',
+"            \}
 " toggle taglist view
 nnoremap <Space>tl :TlistToggle<Enter>
 

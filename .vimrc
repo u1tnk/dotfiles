@@ -1,3 +1,5 @@
+set nocompatible
+filetype off
 "dotfiles以下にプラグインをインストール 
 set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 
@@ -5,33 +7,35 @@ set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-"vundler
-call vundle#rc()
-Bundle 'neocomplcache'
-Bundle 'neco-look'
-Bundle 'surround.vim'
-Bundle 'Shougo/unite.vim.git'
-Bundle 'taglist.vim'
-Bundle 'quickrun.vim'
-Bundle 'ref.vim'
-Bundle 'Shougo/vimproc.git'
-Bundle 'ZenCoding.vim'
-Bundle 'YankRing.vim'
-Bundle 'Shougo/vimfiler.git'
-Bundle 'Shougo/unite-grep.git'
-Bundle 'tpope/vim-fugitive'
-Bundle 't9md/vim-textmanip'
-Bundle 'kana/vim-altr.git'
-Bundle 'tyru/open-browser.vim.git'
-Bundle 'tyru/savemap.vim.git'
-Bundle 'tyru/vice.vim.git'
+"NeoBundle
+if has('vim_starting')
+    call neobundle#rc(expand('~/.bundle'))
+endif
+NeoBundle 'neocomplcache'
+NeoBundle 'neco-look'
+NeoBundle 'surround.vim'
+NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'taglist.vim'
+NeoBundle 'quickrun.vim'
+NeoBundle 'ref.vim'
+NeoBundle 'Shougo/vimproc.git'
+NeoBundle 'ZenCoding.vim'
+NeoBundle 'YankRing.vim'
+NeoBundle 'Shougo/vimfiler.git', 'ver.1.50'
+NeoBundle 'Shougo/unite-grep.git'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 't9md/vim-textmanip'
+NeoBundle 'kana/vim-altr.git'
+NeoBundle 'tyru/open-browser.vim.git'
+NeoBundle 'tyru/savemap.vim.git'
+NeoBundle 'tyru/vice.vim.git'
+
 
  
 
 "基本設定
 filetype plugin indent on
 syntax enable
-set nocompatible
 
 "machit
 source $VIMRUNTIME/macros/matchit.vim

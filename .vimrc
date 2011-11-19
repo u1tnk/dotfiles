@@ -31,6 +31,7 @@ NeoBundle 'tyru/open-browser.vim.git'
 NeoBundle 'tyru/savemap.vim.git'
 NeoBundle 'tyru/vice.vim.git'
 NeoBundle 'h1mesuke/unite-outline.git'
+NeoBundle 'chaquotay/ftl-vim-syntax.git'
 
  
 

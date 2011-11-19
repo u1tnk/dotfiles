@@ -5,6 +5,7 @@
 	safecrlf = false
 	quotepath = false
 	autocrlf = input
+	excludesfile = /Users/yuichi/.gitignore_global
 [diff]
     color = auto
     rename = copy
@@ -26,3 +27,9 @@
     color = auto
 [http]
     sslVerify = false
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

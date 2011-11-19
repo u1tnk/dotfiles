@@ -1,6 +1,6 @@
 #/bin/sh
-rm ~/.vim/bundle/vimproc/autoload/proc.so
-cd ~/.vim/bundle/vimproc
+rm ~/.bundle/vimproc/autoload/proc.so
+cd ~/.bundle/vimproc
 
 case $OSTYPE in
 darwin*)

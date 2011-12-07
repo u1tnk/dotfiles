@@ -14,6 +14,7 @@ File.symlink "dotfiles/.gitconfig", ".gitconfig" unless FileTest.exist? ".gitcon
 File.symlink "dotfiles/.tmux.conf", ".tmux.conf" unless FileTest.exist? ".tmux.conf"
 File.symlink "dotfiles/.gvimrc", ".gvimrc" unless FileTest.exist? ".gvimrc"
 File.symlink "dotfiles/.vrapperrc", ".vrapperrc" unless FileTest.exist? ".vrapperrc"
+File.symlink "dotfiles/.my.cnf", ".my.cnf" unless FileTest.exist? ".my.cnf"
 
 FileUtils.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
 FileUtils.copy "dotfiles/setup/template/.zshenv", ".zshenv" unless FileTest.exist? ".zshenv"

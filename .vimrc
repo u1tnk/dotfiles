@@ -32,7 +32,9 @@ NeoBundle 'tyru/savemap.vim.git'
 NeoBundle 'tyru/vice.vim.git'
 NeoBundle 'h1mesuke/unite-outline.git'
 NeoBundle 'chaquotay/ftl-vim-syntax.git'
-
+NeoBundle 'kana/vim-textobj-user.git'
+NeoBundle 'h1mesuke/textobj-wiw.git'
+NeoBundle 'kana/vim-fakeclip.git'
  
 
 "基本設定

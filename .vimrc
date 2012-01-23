@@ -35,6 +35,7 @@ NeoBundle 'chaquotay/ftl-vim-syntax.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'h1mesuke/textobj-wiw.git'
 NeoBundle 'kana/vim-fakeclip.git'
+NeoBundle "tyru/caw.vim.git"
  
 
 "基本設定
@@ -326,3 +327,9 @@ if filereadable(expand('$HOME/local/rsense/bin/rsense'))
   let g:rsenseHome = expand('$HOME/local/rsense')
   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 endif
+
+autocmd FileType html setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=;/
+
+" コメントアウトを切り替えるマッピング例
+nmap <Leader>c <Plug>(caw:I:toggle)
+vmap <Leader>c <Plug>(caw:I:toggle)

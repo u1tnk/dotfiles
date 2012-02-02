@@ -151,6 +151,7 @@ alias su="su -l"
 
 alias vi="vim"
 alias view="vim -R"
+alias macvim="/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-tab-silent"
 
 alias srr="screen -D -R"
 #tmux

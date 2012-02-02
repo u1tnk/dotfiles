@@ -36,6 +36,7 @@ NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'h1mesuke/textobj-wiw.git'
 NeoBundle 'kana/vim-fakeclip.git'
 NeoBundle "tyru/caw.vim.git"
+NeoBundle "thinca/vim-singleton"
  
 
 "基本設定

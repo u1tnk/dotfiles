@@ -9,3 +9,5 @@ augroup hack234
       autocmd FocusLost * set transparency=90
   endif
 augroup END
+
+call singleton#enable()

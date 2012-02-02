@@ -29,6 +29,10 @@ path=(# システム用
       /usr/sbin(N-/)
       /usr/bin(N-/))
 
+fpath=(
+      $fpath
+      $HOME/dotfiles/fpath(N-))
+
 
 ## 重複したパスを登録しない。
 typeset -U manpath
@@ -102,3 +106,5 @@ for email_file in ${email_files}; do
     export EMAIL=$(cat "$email_file")
     break
 done
+
+export GISTY_DIR=$HOME/Dropbox/snippets/gists

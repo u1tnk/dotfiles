@@ -23,6 +23,8 @@ path=(# システム用
       # 自分用
       $HOME/local/bin(N-/)
       $HOME/local/rsense/bin(N-/)
+      $HOME/scripts(N-/)
+      /Applications/Day\ One.app/Contents/MacOS/(N-/)
       # システム用
       /usr/local/bin(N-/)
       /sbin(N-/)

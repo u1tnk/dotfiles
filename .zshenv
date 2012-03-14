@@ -24,10 +24,17 @@ path=(# システム用
       # 自分用
       $HOME/local/bin(N-/)
       $HOME/local/rsense/bin(N-/)
+      $HOME/scripts(N-/)
+      /Applications/Day\ One.app/Contents/MacOS/(N-/)
       # システム用
       /usr/local/bin(N-/)
+      /sbin(N-/)
       /usr/sbin(N-/)
       /usr/bin(N-/))
+
+fpath=(
+      $fpath
+      $HOME/dotfiles/fpath(N-))
 
 
 ## 重複したパスを登録しない。
@@ -102,3 +109,5 @@ for email_file in ${email_files}; do
     export EMAIL=$(cat "$email_file")
     break
 done
+
+export GISTY_DIR=$HOME/Dropbox/snippets/gists

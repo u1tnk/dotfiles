@@ -1,3 +1,5 @@
+set nocompatible
+filetype off
 "dotfiles以下にプラグインをインストール 
 set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 
@@ -5,33 +7,41 @@ set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-"vundler
-call vundle#rc()
-Bundle 'neocomplcache'
-Bundle 'neco-look'
-Bundle 'surround.vim'
-Bundle 'Shougo/unite.vim.git'
-Bundle 'taglist.vim'
-Bundle 'quickrun.vim'
-Bundle 'ref.vim'
-Bundle 'Shougo/vimproc.git'
-Bundle 'ZenCoding.vim'
-Bundle 'YankRing.vim'
-Bundle 'Shougo/vimfiler.git'
-Bundle 'Shougo/unite-grep.git'
-Bundle 'tpope/vim-fugitive'
-Bundle 't9md/vim-textmanip'
-Bundle 'kana/vim-altr.git'
-Bundle 'tyru/open-browser.vim.git'
-Bundle 'tyru/savemap.vim.git'
-Bundle 'tyru/vice.vim.git'
-
+"NeoBundle
+if has('vim_starting')
+    call neobundle#rc(expand('~/.bundle'))
+endif
+NeoBundle 'neocomplcache'
+NeoBundle 'neco-look'
+NeoBundle 'surround.vim'
+NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'taglist.vim'
+NeoBundle 'quickrun.vim'
+NeoBundle 'ref.vim'
+NeoBundle 'Shougo/vimproc.git'
+NeoBundle 'ZenCoding.vim'
+NeoBundle 'YankRing.vim'
+"NeoBundle 'Shougo/vimfiler.git', 'ver.1.50'
+NeoBundle 'Shougo/vimfiler.git'
+NeoBundle 'Shougo/unite-grep.git'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 't9md/vim-textmanip'
+NeoBundle 'kana/vim-altr.git'
+NeoBundle 'tyru/open-browser.vim.git'
+NeoBundle 'tyru/savemap.vim.git'
+NeoBundle 'tyru/vice.vim.git'
+NeoBundle 'h1mesuke/unite-outline.git'
+NeoBundle 'chaquotay/ftl-vim-syntax.git'
+NeoBundle 'kana/vim-textobj-user.git'
+NeoBundle 'h1mesuke/textobj-wiw.git'
+NeoBundle 'kana/vim-fakeclip.git'
+NeoBundle "tyru/caw.vim.git"
+NeoBundle "thinca/vim-singleton"
  
 
 "基本設定
 filetype plugin indent on
 syntax enable
-set nocompatible
 
 "machit
 source $VIMRUNTIME/macros/matchit.vim
@@ -47,8 +57,8 @@ set smartcase
 set number
 "インデント
 set autoindent
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set expandtab
 
 "split時右、下に開く
@@ -154,7 +164,12 @@ autocmd WinLeave * setlocal nocursorline
 augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
 autocmd! BufRead,BufNewFile *.twig	 setfiletype html
+autocmd! BufRead,BufNewFile *.ftl	 setfiletype ftl
 augroup END
+
+inoremap <C-e> <Esc>
+vnoremap <C-e> <Esc>
+cnoremap <C-e> <C-c>
 
 " 保存時に行末の空白を除去する
 " diff見るのに嫌われるため、現状削除
@@ -222,7 +237,8 @@ command! -nargs=* NecoEditSnippets NeoComplCacheEditSnippets
 command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent indentexpr=
 
 
-command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix  bomb
+"command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix  bomb
+command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix
 "unite
 let g:unite_enable_start_insert=1
 nnoremap <Space>ut :Unite tab<Enter>
@@ -231,9 +247,10 @@ nnoremap <Space>uf :Unite file<Enter>
 nnoremap <Space>ur :Unite file_rec<Enter>
 
 " zen-coding
-let g:user_zen_settings = {
-            \'indentation' : '  ',
-            \}
+" zen-coding時のindentがtabstop,shiftwidthで変わらないので、4から変えたいときは定義
+"let g:user_zen_settings = {
+"            \'indentation' : '  ',
+"            \}
 " toggle taglist view
 nnoremap <Space>tl :TlistToggle<Enter>
 
@@ -311,3 +328,9 @@ if filereadable(expand('$HOME/local/rsense/bin/rsense'))
   let g:rsenseHome = expand('$HOME/local/rsense')
   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 endif
+
+autocmd FileType html setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=;/
+
+" コメントアウトを切り替えるマッピング例
+nmap <Leader>c <Plug>(caw:I:toggle)
+vmap <Leader>c <Plug>(caw:I:toggle)

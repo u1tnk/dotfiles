@@ -13,8 +13,3 @@ let php_htmlInStrings=1
 let php_noShortTags=1
 autocmd Syntax php set fdm=syntax
 
-"inoremap ar<Tab> ['']<Left><Left>
-"inoremap br<Tab> <br />
-
-setlocal shiftwidth=4
-setlocal tabstop=4

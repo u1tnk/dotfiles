@@ -170,6 +170,8 @@ alias gs="git status"
 alias gd="git diff"
 alias gb="git branch"
 alias gsub="git submodule"
+alias gt="git tag"
+alias gtl="git tag -l -n1"
 
 #rails 
 alias r=rails

@@ -334,3 +334,6 @@ autocmd FileType html setlocal includeexpr=substitute(v:fname,'^\\/','','') | se
 " コメントアウトを切り替えるマッピング例
 nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
+
+" snippet
+command! -nargs=* EditSnippet cd $HOME/Dropbox/snippets | edit $HOME/Dropbox/snippets/

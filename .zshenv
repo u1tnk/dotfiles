@@ -89,6 +89,7 @@ case "${OSTYPE}" in
 darwin*)
     export EDITOR=/usr/bin/vim
     export LD_LIBRARY_PATH=/usr/local/lib
+    export CC=gcc-4.2
     ;;
 linux*)
     export EDITOR=vim

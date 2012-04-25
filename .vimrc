@@ -335,4 +335,4 @@ nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
 
 " snippet
-command! -nargs=* EditSnippet cd $HOME/Dropbox/snippets | edit $HOME/Dropbox/snippets/
+command! -nargs=* Snippet cd $HOME/Dropbox/snippets | edit $HOME/Dropbox/snippets/

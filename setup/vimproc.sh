@@ -7,7 +7,7 @@ darwin*)
     make -f make_mac.mak
     ;;
 *)
-    make -f make_gcc.mak
+    make -f make_unix.mak
     ;;
 esac
 

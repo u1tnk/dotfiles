@@ -186,8 +186,8 @@ endif
 "vimfiler
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
-command! -nargs=* EE VimFiler %:h 
-command! -nargs=* E VimFiler 
+command! -nargs=* E VimFilerBufferDir
+command! -nargs=* EE VimFiler 
 
 "外部grep設定
 set grepprg=grep\ -nH

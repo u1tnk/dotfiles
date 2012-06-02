@@ -112,3 +112,7 @@ for email_file in ${email_files}; do
 done
 
 export GISTY_DIR=$HOME/Dropbox/snippets/gists
+
+#ruby rvm有効化
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+

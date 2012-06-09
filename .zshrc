@@ -305,3 +305,5 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias -g G='| grep -i'
 
+source ${HOME}/dotfiles/zaw/zaw.zsh
+

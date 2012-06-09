@@ -281,10 +281,6 @@ fi
 ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
 GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 
-#ruby rvm有効化
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-
 ## ディレクトリが変わったらディレクトリスタックを表示。
 chpwd_functions=($chpwd_functions dirs)
 

@@ -1,0 +1,24 @@
+snippet     if
+abbr        if end
+    if ${1:condition} then
+    ${2}
+    end
+
+snippet     for
+abbr        for in
+    for key, value in pairs(${1:obj}) do
+    ${2}
+    end
+
+snippet     fori
+abbr        for increment
+    for 1,${1:max} do
+    ${2}
+    end
+
+snippet     func
+abbr        function 
+    function ${1:name}(${2:args})
+    ${3}
+    end
+

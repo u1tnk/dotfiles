@@ -8,8 +8,8 @@ case ${UID} in
     ;;
 esac
 
-#viキーバインド
-bindkey -v
+#emacsキーバインド
+bindkey -e
 
 ## 重複したパスを登録しない。
 typeset -U path

@@ -70,6 +70,9 @@ set splitbelow
 "インクリメントサーチ
 set incsearch
 
+"ハイライト
+set hlsearch
+
 "バックアップを作らない
 set nobackup
 

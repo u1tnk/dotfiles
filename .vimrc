@@ -342,3 +342,17 @@ command! -nargs=* Snippet cd $HOME/Dropbox/snippets | edit $HOME/Dropbox/snippet
 
 " for gitv
 autocmd FileType git :setlocal foldlevel=99
+
+" Center words for search
+nmap n nzz
+nmap N Nzz
+nmap * *zz
+nmap # #zz
+nmap g* g*zz
+nmap g# g#zz
+
+" After insert, automatically set nopaste
+autocmd InsertLeave * set nopaste
+
+" After these command, list shown, type an item, then jump to there
+autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin

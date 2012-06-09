@@ -36,7 +36,7 @@ NeoBundle 'kana/vim-fakeclip.git'
 NeoBundle "tyru/caw.vim.git"
 NeoBundle "thinca/vim-singleton"
 NeoBundle "thinca/vim-qfreplace"
- 
+NeoBundle "gregsexton/gitv"
 
 "基本設定
 filetype plugin indent on
@@ -336,3 +336,6 @@ vmap <Leader>c <Plug>(caw:I:toggle)
 
 " snippet
 command! -nargs=* Snippet cd $HOME/Dropbox/snippets | edit $HOME/Dropbox/snippets/
+
+" for gitv
+autocmd FileType git :setlocal foldlevel=99

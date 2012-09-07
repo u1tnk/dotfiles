@@ -37,6 +37,9 @@ NeoBundle "tyru/caw.vim.git"
 NeoBundle "thinca/vim-singleton"
 NeoBundle "thinca/vim-qfreplace"
 NeoBundle "gregsexton/gitv"
+NeoBundle "jpo/vim-railscasts-theme"
+
+
 
 "基本設定
 filetype plugin indent on

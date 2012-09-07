@@ -174,7 +174,8 @@ alias gt="git tag"
 alias gtl="git tag -l -n1"
 
 #rails 
-alias r=rails
+alias r="bundle exec rails"
+alias rake="bundle exec rake"
 alias be="bundle exec"
 
 ## terminal configuration

@@ -32,7 +32,7 @@ end
 
 #rsense
 unless  FileTest.exist? "local/rsense"
-  print `git clone http://cx4a.org/repo/rsense.git/ local/rsense`
+  print `git clone git://github.com/m2ym/rsense.git local/rsense`
   print `ruby local/rsense/etc/config.rb > ~/.rsense`
 end
 

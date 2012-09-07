@@ -256,14 +256,14 @@ GREP_OPTIONS="--binary-files=without-match"
 ### 拡張子が.tmpのファイルは無視する。
 GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
 ## 管理用ディレクトリを無視する。
-if grep --help | grep -q -- --exclude-dir; then
+if grep --help 2>&1 | grep -q -- --exclude-dir; then
     GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
     GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
     GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
     GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
 fi
 ### 可能なら色を付ける。
-if grep --help | grep -q -- --color; then
+if grep --help 2>&1 | grep -q -- --color; then
     GREP_OPTIONS="--color=auto $GREP_OPTIONS"
 fi
 ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。

@@ -7,3 +7,6 @@
 [submodule "zaw"]
 	path = zaw
 	url = git@github.com:u1tnk/zaw.git
+[submodule "z"]
+	path = z
+	url = git://github.com/rupa/z.git

@@ -307,3 +307,46 @@ alias -g G='| grep -i'
 
 source ${HOME}/dotfiles/zaw/zaw.zsh
 
+zmodload zsh/parameter
+_Z_CMD="j"
+source $HOME/dotfiles/z/z.sh
+
+function zaw-src-z() {
+    # see http://stackoverflow.com/questions/452290/ for IFS trick
+    IFS=$(echo -n -e "\0")
+    : ${(A)candidates::=$(z \
+        | sed -e 's/^[0-9\\. ]*//' -e 's/ /\\ /g' -e "s#^$HOME#~#" \
+        | tac | tr '\n' '\0')}
+    unset IFS
+    actions=("zaw-callback-execute" "zaw-callback-replace-buffer" "zaw-callback-append-to-buffer")
+    act_descriptions=("execute" "replace edit buffer" "append to edit buffer")
+}
+
+zaw-register-src -n z zaw-src-z
+
+zsh-history() {
+  zaw zaw-src-history
+}
+zle -N zsh-history
+bindkey '^h' zsh-history
+
+zsh-z() {
+  zaw zaw-src-z
+}
+zle -N zsh-z
+bindkey '^z' zsh-z
+
+case "${TERM}" in
+xterm|xterm-color|kterm|kterm-color)
+    function precmd() {
+        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
+       _z --add "$(pwd -P)"
+    }
+    ;;
+*)
+    function precmd() {
+       _z --add "$(pwd -P)"
+    }
+    ;;
+esac
+alias tac="tail -r"

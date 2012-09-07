@@ -11,7 +11,10 @@ call pathogen#helptags()
 if has('vim_starting')
     call neobundle#rc(expand('~/.bundle'))
 endif
+NeoBundle "tpope/vim-rails"
+NeoBundle "tsaleh/vim-align"
 NeoBundle 'neocomplcache'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'neco-look'
 NeoBundle 'surround.vim'
 NeoBundle 'Shougo/unite.vim.git'
@@ -37,6 +40,7 @@ NeoBundle "tyru/caw.vim.git"
 NeoBundle "thinca/vim-singleton"
 NeoBundle "thinca/vim-qfreplace"
 NeoBundle "gregsexton/gitv"
+NeoBundle "tanabe/ToggleCase-vim"
 NeoBundle "jpo/vim-railscasts-theme"
 
 
@@ -316,9 +320,15 @@ nmap <C-y> <Plug>(Textmanip.duplicate_selection_n)
 
 " vim-altr
 
-nmap <Space>ta  <Plug>(altr-forward)
-" rails for altr
-call altr#define('controllers/%_controller.rb', 'views/%/*.erb', 'views/%/*.haml')
+nmap <Space>a  <Plug>(altr-forward)
+
+" For ruby tdd
+call altr#define('%.rb', 'spec/%_spec.rb')
+
+" For rails tdd
+call altr#define('app/models/%.rb', 'spec/models/%_spec.rb', 'spec/factories/%s.rb')
+call altr#define('app/controllers/%.rb', 'spec/controllers/%_spec.rb')
+call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
 
 
 " open-browser
@@ -363,3 +373,14 @@ autocmd InsertLeave * set nopaste
 
 " After these command, list shown, type an item, then jump to there
 autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
+
+" toggle case.vim http://blog.kaihatsubu.com/?p=2049
+nnoremap <silent> <C-c> :<C-u>call ToggleCase()<CR>
+
+" align.vim http://vim-users.jp/2009/09/hack77/
+let g:Align_xstrlen=3
+
+" cd current directory
+command! -nargs=* CD cd %:p:h
+ 
+ 

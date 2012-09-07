@@ -239,20 +239,9 @@ setopt numeric_glob_sort
 # 「~」や「=コマンド」などのファイル名展開を行う。
 setopt magic_equal_subst
 
-case "${TERM}" in
-xterm|xterm-color|kterm|kterm-color)
-    precmd() {
-        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
-    }
-    ;;
-esac
 
 #補完数が多い時に許可を聞く閾値
 LISTMAX=100
-
-# bashmarks(directry bookmark)を有効化
-source ~/dotfiles/bashmarks/bashmarks.sh
-
 
 # grep 
 #

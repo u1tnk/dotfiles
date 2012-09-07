@@ -117,6 +117,10 @@ set browsedir=buffer
 
 " 常にdiffをverticalに
 set diffopt=vertical
+	
+" 空白文字表示
+set listchars=eol:$,tab:>- 
+
 "map系
 "カーソル位置の単語をyankする
 nnoremap vv viwy

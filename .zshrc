@@ -140,9 +140,7 @@ linux*)
     ;;
 esac
 
-alias la="ls -a"
-alias lf="ls -F"
-alias ll="ls -la"
+alias ll="ls -lah"
 
 alias du="du -h"
 alias df="df -h"
@@ -153,7 +151,6 @@ alias vi="vim"
 alias view="vim -R"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-tab-silent"
 
-alias srr="screen -D -R"
 #tmux
 alias ta="tmux attach"
 
@@ -162,12 +159,13 @@ alias ci="git commit --interactive"
 alias cm="git commit -v"
 alias pull="git pull"
 alias push="git push"
-alias mg="git merge"
+alias gm="git merge"
 alias gl="git hist"
 alias gll="git hist --date=iso"
 alias gg="git hist --grep"
 alias co="git checkout"
 alias add="git add"
+alias addp="git add -p"
 alias gs="git status"
 alias gd="git diff"
 alias gb="git branch"
@@ -215,7 +213,7 @@ zstyle ':completion:*:default' list-colors ""
 ### _ignored: 補完候補にださないと指定したものも補完候補とする。
 ### _approximate: 似ている補完候補も補完候補とする。
 ### _prefix: カーソル以降を無視してカーソル位置までで補完する。
-zstyle ':completion:*' completer _oldlist _complete _match _ignored _approximate _prefix
+zstyle ':completion:*' completer _oldlist _complete _match _ignored _approximate _prefix _history
 
 ## 補完候補をキャッシュする。
 zstyle ':completion:*' use-cache yes

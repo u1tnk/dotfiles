@@ -152,7 +152,7 @@ alias view="vim -R"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-tab-silent"
 
 #tmux
-alias ta="tmux attach"
+alias ta="tmux attach || tmux new-session \; source-file ~/dotfiles/.tmux.session"
 
 #git shortcuts
 alias ci="git commit --interactive"
@@ -338,3 +338,11 @@ xterm|xterm-color|kterm|kterm-color)
     ;;
 esac
 alias tac="tail -r"
+function git(){ hub "$@" }
+
+alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p194 -f=~/rtags'
+
+alias z="be zeus"
+
+# mosh
+compdef mosh=ssh

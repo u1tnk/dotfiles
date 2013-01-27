@@ -11,20 +11,19 @@ call pathogen#helptags()
 if has('vim_starting')
     call neobundle#rc(expand('~/.bundle'))
 endif
-NeoBundle "tpope/vim-rails"
-NeoBundle "tsaleh/vim-align"
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tsaleh/vim-align'
 NeoBundle 'neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'neco-look'
 NeoBundle 'surround.vim'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'taglist.vim'
 NeoBundle 'quickrun.vim'
 NeoBundle 'ref.vim'
-NeoBundle 'Shougo/vimproc.git'
+NeoBundle 'Shougo/vimproc', { 'build' : {'mac' : 'make -f make_mac.mak', 'unix' : 'make -f make_unix.mak'}, }
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'Shougo/vimfiler.git'
-NeoBundle 'Shougo/unite-grep.git'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle 'kana/vim-altr.git'
@@ -36,14 +35,14 @@ NeoBundle 'chaquotay/ftl-vim-syntax.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'h1mesuke/textobj-wiw.git'
 NeoBundle 'kana/vim-fakeclip.git'
-NeoBundle "tyru/caw.vim.git"
-NeoBundle "thinca/vim-singleton"
-NeoBundle "thinca/vim-qfreplace"
-NeoBundle "gregsexton/gitv"
-NeoBundle "tanabe/ToggleCase-vim"
-NeoBundle "jpo/vim-railscasts-theme"
-
-
+NeoBundle 'tyru/caw.vim.git'
+NeoBundle 'thinca/vim-singleton'
+NeoBundle 'thinca/vim-qfreplace'
+NeoBundle 'gregsexton/gitv'
+NeoBundle 'tanabe/ToggleCase-vim'
+NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'koron/minimap-vim'
 
 "基本設定
 filetype plugin indent on
@@ -139,12 +138,6 @@ onoremap gc ;<C-u>normal gc<Enter>
 inoremap <C-u>  <C-g>u<C-u>
 inoremap <C-w>  <C-g>u<C-w>
 
-" ;でExコマンド入力( ;と:を入れ替)
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
-
 "<space>j, <space>kで画面送り
 noremap <Space>j <C-f>
 noremap <Space>k <C-b>
@@ -194,8 +187,13 @@ vnoremap <Space>x :QuickRun -into 0 <CR>
 
 "先祖tagsファイルを参照
 if has('path_extra')
-    set tags+=tags;
-endif
+    set tags+=tags
+    set tags+=gems.tags
+end
+
+if filereadable(expand('~/rtags'))
+    au FileType ruby,eruby setl tags+=~/rtags
+end
 
 "vimfiler
 let g:vimfiler_as_default_explorer = 1
@@ -337,15 +335,16 @@ nmap <Space>ob <Plug>(openbrowser-smart-search)
 vmap <Space>ob <Plug>(openbrowser-smart-search)
 
 " rsense
-let g:rsenseHome = "$HOME/local/rsense"
+" let g:rsenseHome = "$HOME/local/rsense"
 
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:rsenseUseOmniFunc = 1
+" let g:rsenseUseOmniFunc = 1
 if filereadable(expand('$HOME/local/rsense/bin/rsense'))
   let g:rsenseHome = expand('$HOME/local/rsense')
-  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  " 暫定対処 Updateしたらcompleteで落ちるようになった…
+"   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 endif
 
 autocmd FileType html setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=;/
@@ -383,4 +382,29 @@ let g:Align_xstrlen=3
 " cd current directory
 command! -nargs=* CD cd %:p:h
  
- 
+
+" 連続コピペ時にバッファを上書きしない
+" http://qiita.com/items/bd97a9b963dae40b63f5
+vnoremap <silent> <C-p> "0p<CR>
+
+" コマンドウィンドウで開くかつ;と:の入れ替え
+nnoremap / q/a
+vnoremap / q/a
+
+nnoremap ; q:a
+vnoremap ; q:a
+nnoremap q; :
+vnoremap q; :
+nnoremap : ;
+vnoremap : ;
+
+let g:quickrun_config = {}
+let g:quickrun_config.markdown = {
+      \ 'outputter/buffer/close_on_empty' : 1,
+      \ 'command' : 'open',
+      \ 'cmdopt'  : '-a',
+      \ 'args'    : 'Marked',
+      \ 'exec'    : '%c %o %a %s',
+      \ }
+
+let howm_dir = '~/Dropbox/howm'

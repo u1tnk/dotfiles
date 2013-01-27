@@ -133,6 +133,7 @@ alias j="jobs -l"
 case "${OSTYPE}" in
 darwin*)
     alias ls="ls -G -w"
+    function git(){ hub "$@" }
     ;;
 linux*)
     alias ls="ls --color"
@@ -338,7 +339,6 @@ xterm|xterm-color|kterm|kterm-color)
     ;;
 esac
 alias tac="tail -r"
-function git(){ hub "$@" }
 
 alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p194 -f=~/rtags'
 

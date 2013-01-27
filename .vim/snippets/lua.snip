@@ -12,7 +12,7 @@ abbr        for in
 
 snippet     fori
 abbr        for increment
-    for 1,${1:max} do
+    for i, v in ipairs(${1:obj}) do
     ${2}
     end
 
@@ -24,11 +24,35 @@ abbr        function
 
 snippet     tl
 abbr        timeline
-    _u.newTl()
-    .${1}
+    _tl()
+      .${1}
 
-snippet     tlcall
+snippet     call
 abbr        timeline call
-  .call(function(next)
+  .call(function()
     ${1}
   end)
+
+snippet     async
+abbr        timeline call
+  .async(function(next)
+    ${1}
+  end)
+snippet     default
+abbr        setDefault
+  local o = _u.setDefault(options, {
+    ${1}
+  })
+
+snippet     to
+abbr        timeline to
+  .to(${1}, {${2}})
+
+snippet     from
+abbr        timeline from 
+  .from(${1}, {${2}})
+
+snippet     goquest
+abbr        go to quest for loading
+  redirect = "quest.quest",
+  redirectParams = {quest = masterModel:getMaster('quest', 1), deckNo = 1}

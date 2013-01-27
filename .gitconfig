@@ -36,3 +36,12 @@
 [github]
     token = $GITHUB_TOKEN
 	user = u1tnk
+[push]
+    #push only the current branch
+    default = tracking
+[branch]
+    autosetuprebase = always
+[merge]
+    ff = false
+[pull]
+    rebase = true

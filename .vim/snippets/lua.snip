@@ -17,7 +17,7 @@ abbr        for increment
     end
 
 snippet     func
-abbr        function 
+abbr        function
     function ${1:name}(${2:args})
     ${3}
     end
@@ -49,10 +49,14 @@ abbr        timeline to
   .to(${1}, {${2}})
 
 snippet     from
-abbr        timeline from 
+abbr        timeline from
   .from(${1}, {${2}})
 
 snippet     goquest
 abbr        go to quest for loading
   redirect = "quest.quest",
   redirectParams = {quest = masterModel:getMaster('quest', 1), deckNo = 1}
+
+snippet     ts
+abbr        translator for scene
+  _t('scene.${0}')

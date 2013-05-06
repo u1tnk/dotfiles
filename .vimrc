@@ -1,6 +1,6 @@
 set nocompatible
 filetype off
-"dotfiles以下にプラグインをインストール 
+"dotfiles以下にプラグインをインストール
 set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 
 "pathogen
@@ -11,7 +11,6 @@ call pathogen#helptags()
 if has('vim_starting')
     call neobundle#rc(expand('~/.bundle'))
 endif
-NeoBundle 'tpope/vim-rails'
 NeoBundle 'tsaleh/vim-align'
 NeoBundle 'neocomplcache'
 NeoBundle 'Shougo/neosnippet'
@@ -42,7 +41,8 @@ NeoBundle 'gregsexton/gitv'
 NeoBundle 'tanabe/ToggleCase-vim'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'koron/minimap-vim'
+NeoBundle 'glidenote/newdayone.vim'
+NeoBundle 'tyru/coolgrep.vim'
 
 "基本設定
 filetype plugin indent on
@@ -120,9 +120,9 @@ set browsedir=buffer
 
 " 常にdiffをverticalに
 set diffopt=vertical
-	
+
 " 空白文字表示
-set listchars=eol:$,tab:>- 
+set listchars=eol:$,tab:>-
 
 "map系
 "カーソル位置の単語をyankする
@@ -147,8 +147,8 @@ nnoremap [ %
 nnoremap ] %
 
 "vimrc編集関連
-nnoremap <Space>.	:<C-u>edit $HOME/dotfiles/.vimrc<Return>
-nnoremap <Space>s	:<C-u>source $MYVIMRC<Return>
+nnoremap <Space>.  :<C-u>edit $HOME/dotfiles/.vimrc<Return>
+nnoremap <Space>s  :<C-u>source $MYVIMRC<Return>
 
 "論理行移動と表示行移動を入れ替え
 noremap j gj
@@ -168,18 +168,21 @@ autocmd WinLeave * setlocal nocursorline
 
 "filetype拡張子追加
 augroup filetypedetect
-autocmd! BufRead,BufNewFile *.thtml	 setfiletype php
-autocmd! BufRead,BufNewFile *.twig	 setfiletype html
-autocmd! BufRead,BufNewFile *.ftl	 setfiletype ftl
+autocmd! BufRead,BufNewFile *.thtml   setfiletype php
+autocmd! BufRead,BufNewFile *.twig   setfiletype html
+autocmd! BufRead,BufNewFile *.ftl   setfiletype ftl
 augroup END
 
 inoremap <C-e> <Esc>
 vnoremap <C-e> <Esc>
 cnoremap <C-e> <C-c>
 
+echo $filetype
 " 保存時に行末の空白を除去する
-" diff見るのに嫌われるため、現状削除
-"autocmd BufWritePre * :%s/\s\+$//ge
+"http://blog.sanojimaru.com/post/18643427334/vim
+autocmd BufWritePre * :%s/\s\+$//ge
+" 保存時にtabをスペースに変換する
+" autocmd BufWritePre * :%s/\t/  /ge
 
 "QuickRunを実行
 nnoremap <Space>x :QuickRun -into 0 <CR>
@@ -199,7 +202,7 @@ end
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 command! -nargs=* E VimFilerBufferDir
-command! -nargs=* EE VimFiler 
+command! -nargs=* EE VimFiler
 
 "外部grep設定
 set grepprg=grep\ -nH
@@ -252,10 +255,11 @@ command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent inde
 command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix
 "unite
 let g:unite_enable_start_insert=1
-nnoremap <Space>ut :Unite tab<Enter>
-nnoremap <Space>ub :Unite buffer<Enter>
-nnoremap <Space>uf :Unite file<Enter>
-nnoremap <Space>ur :Unite file_rec<Enter>
+nnoremap <silent> <Space>ut :Unite tab<Enter>
+nnoremap <silent> <Space>ub :Unite buffer<Enter>
+nnoremap <silent> <Space>uf :Unite file<Enter>
+nnoremap <silent> <Space>ur :Unite file_rec<Enter>
+nnoremap <silent> <Space>ug :Unite grep -buffer-name=grep <Enter>
 
 " zen-coding
 " zen-coding時のindentがtabstop,shiftwidthで変わらないので、4から変えたいときは定義
@@ -381,7 +385,7 @@ let g:Align_xstrlen=3
 
 " cd current directory
 command! -nargs=* CD cd %:p:h
- 
+
 
 " 連続コピペ時にバッファを上書きしない
 " http://qiita.com/items/bd97a9b963dae40b63f5
@@ -408,3 +412,9 @@ let g:quickrun_config.markdown = {
       \ }
 
 let howm_dir = '~/Dropbox/howm'
+
+" http://qiita.com/items/c8962f9325a5433dc50d
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'
+let g:unite_source_grep_recursive_opt = ''
+let g:unite_source_grep_max_candidates = 200

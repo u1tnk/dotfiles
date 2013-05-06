@@ -1,9 +1,9 @@
 ## Environment variable configuration
 #
-# gitのブランチ名と変更状況をプロンプトに表示する 
+# gitのブランチ名と変更状況をプロンプトに表示する
 autoload -Uz is-at-least
 if is-at-least 4.3.10; then
-    # バージョン管理システムとの連携を有効にする 
+    # バージョン管理システムとの連携を有効にする
     autoload -Uz vcs_info
     autoload -Uz add-zsh-hook
 
@@ -133,7 +133,6 @@ alias j="jobs -l"
 case "${OSTYPE}" in
 darwin*)
     alias ls="ls -G -w"
-    function git(){ hub "$@" }
     ;;
 linux*)
     alias ls="ls --color"

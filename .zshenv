@@ -1,7 +1,7 @@
 # LANG
 #
 export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8  
+export LC_ALL=ja_JP.UTF-8
 case ${UID} in
 0)
     LANG=C
@@ -115,6 +115,5 @@ done
 
 export GISTY_DIR=$HOME/Dropbox/snippets/gists
 
-#ruby rvm有効化
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
+#rbenv
+eval "$(rbenv init -)"

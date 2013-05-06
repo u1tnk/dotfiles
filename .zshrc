@@ -187,15 +187,15 @@ alias co="git checkout"
 alias add="git add"
 alias addp="git add -p"
 alias gs="git status"
-alias gd="git diff"
+alias gd="git diff --ignore-space-at-eol"
 alias gb="git branch"
 alias gsub="git submodule"
 alias gt="git tag"
 alias gtl="git tag -l -n1"
 
-#rails 
-alias r="bundle exec rails"
-alias rake="bundle exec rake"
+#rails
+alias r="spring rails"
+# alias r="bundle exec rails"
 alias be="bundle exec"
 
 ## terminal configuration
@@ -263,7 +263,7 @@ setopt magic_equal_subst
 #補完数が多い時に許可を聞く閾値
 LISTMAX=100
 
-# grep 
+# grep
 #
 ## GNU grepがあったら優先して使う。
 if type ggrep > /dev/null 2>&1; then
@@ -361,7 +361,7 @@ alias tac="tail -r"
 
 alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p194 -f=~/rtags'
 
-alias z="be zeus"
+alias s="spring"
 
 # mosh
 compdef mosh=ssh

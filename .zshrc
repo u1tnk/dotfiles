@@ -152,7 +152,27 @@ alias view="vim -R"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-tab-silent"
 
 #tmux
-alias ta="tmux attach || tmux new-session \; source-file ~/dotfiles/.tmux.session"
+
+# reattach-to-user-namespaceをmac/linux判定を.tmux.confでやろうとしたが難しかったので
+# http://yuroyoro.hatenablog.com/entry/20120211/1328930819
+# で紹介されていた
+# https://github.com/isseium/tmuxx
+# を$PATHにtmuxxで登録してみたけど、初期で分割するsessionファイルを指定したかったので改変した
+# .zshrcだけで管理した方がシンプルだし
+function ta(){
+    if [[ ( $OSTYPE == darwin* ) && ( -x $(which reattach-to-user-namespace 2>/dev/null) ) ]]; then
+        # on OS X force tmux's default command to spawn a shell in the user's namespace
+        # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
+        tweaked_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
+
+        tmux attach || tmux -f <(echo "$tweaked_config") new-session \; source-file ~/dotfiles/.tmux.session
+    else
+        tmux attach || tmux new-session \; source-file ~/dotfiles/.tmux.session
+    fi
+}
+
+# alias tmux="tmuxx"
+# alias ta="tmuxx attach || tmuxx new-session \; source-file ~/dotfiles/.tmux.session"
 
 #git shortcuts
 alias ci="git commit --interactive"

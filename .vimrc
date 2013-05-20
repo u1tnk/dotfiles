@@ -402,7 +402,13 @@ vnoremap q; :
 nnoremap : ;
 vnoremap : ;
 
+augroup RSpec
+  autocmd!
+  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
+augroup END
+
 let g:quickrun_config = {}
+let g:quickrun_config._ = {'runner' : 'vimproc'}
 let g:quickrun_config.markdown = {
       \ 'outputter/buffer/close_on_empty' : 1,
       \ 'command' : 'open',
@@ -411,10 +417,22 @@ let g:quickrun_config.markdown = {
       \ 'exec'    : '%c %o %a %s',
       \ }
 
-let howm_dir = '~/Dropbox/howm'
+" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': "-l {line('.')}"}
+" let g:quickrun_config['ruby.rspec'] = {'command': "spec -l {line('.')}"}
+
+" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '--format progress -I .', 'exec': ['bundle exec %c %o %s %a'], 'filetype': 'rspec-result'}
+
+let g:quickrun_config['ruby.rspec'] = {
+  \ 'type': 'rspec',
+  \ 'command': 'rspec',
+  \ 'cmdopt': "--format progress -I . -l %{line('.')}",
+  \ 'exec': 'bundle exec %c %o %s',
+  \ 'filetype': 'rspec-result'
+  \}
 
 " http://qiita.com/items/c8962f9325a5433dc50d
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'
 let g:unite_source_grep_recursive_opt = ''
 let g:unite_source_grep_max_candidates = 200
+

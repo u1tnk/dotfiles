@@ -261,6 +261,10 @@ nnoremap <silent> <Space>uf :Unite file<Enter>
 nnoremap <silent> <Space>ur :Unite file_rec<Enter>
 nnoremap <silent> <Space>ug :Unite grep -buffer-name=grep <Enter>
 
+
+" マクロ実行を手早く
+nnoremap <silent> <c-Q> @qq
+
 " zen-coding
 " zen-coding時のindentがtabstop,shiftwidthで変わらないので、4から変えたいときは定義
 "let g:user_zen_settings = {

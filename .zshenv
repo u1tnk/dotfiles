@@ -116,4 +116,4 @@ done
 export GISTY_DIR=$HOME/Dropbox/snippets/gists
 
 #rbenv
-eval "$(rbenv init -)"
+eval "$(rbenv init - zsh)"

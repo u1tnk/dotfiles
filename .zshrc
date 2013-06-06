@@ -177,7 +177,7 @@ function ta(){
 # alias ta="tmuxx attach || tmuxx new-session \; source-file ~/dotfiles/.tmux.session"
 
 #git shortcuts
-alias ci="git commit --interactive"
+alias g="git"
 alias cm="git commit -v"
 alias pull="git pull"
 alias push="git push"
@@ -191,9 +191,10 @@ alias addp="git add -p"
 alias gs="git status"
 alias gd="git diff --ignore-space-at-eol"
 alias gb="git branch"
-alias gsub="git submodule"
 alias gt="git tag"
 alias gtl="git tag -l -n1"
+alias gsta="git stash"
+alias gstaa="git stash apply"
 
 #rails
 alias r="spring rails"
@@ -367,3 +368,4 @@ alias s="spring"
 
 # mosh
 compdef mosh=ssh
+

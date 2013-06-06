@@ -4,5 +4,6 @@ endfunction
 
 compiler ruby
 augroup rbsyntaxcheck
-  autocmd! BufWritePost <buffer> call s:ExecuteMake()
+  autocmd! BufWritePost *.rb call s:ExecuteMake()
 augroup END
+

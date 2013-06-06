@@ -104,28 +104,30 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
-## Completion configuration
-#
-fpath=(${HOME}/dotfiles/.zsh/functions/Completion ${fpath})
-autoload -U compinit
-compinit -u
-
 ## zsh editor
 #
 autoload zed
 
+## Completion configuration
+#
+fpath=(${HOME}/dotfiles/.zsh/functions/Completion ${fpath})
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+# setopt complete_aliases     # aliased ls needs if file/dir completions work
+
+autoload -U compinit
+compinit -u
+
+
 
 ## Prediction configuration
 #
-#autoload predict-on
-#predict-off
+autoload predict-on
 
 
 ## Alias configuration
 #
 # expand aliases before completing
 #
-setopt complete_aliases     # aliased ls needs if file/dir completions work
 
 alias where="command -v"
 alias j="jobs -l"

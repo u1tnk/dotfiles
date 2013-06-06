@@ -421,11 +421,6 @@ let g:quickrun_config.markdown = {
       \ 'exec'    : '%c %o %a %s',
       \ }
 
-" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': "-l {line('.')}"}
-" let g:quickrun_config['ruby.rspec'] = {'command': "spec -l {line('.')}"}
-
-" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '--format progress -I .', 'exec': ['bundle exec %c %o %s %a'], 'filetype': 'rspec-result'}
-
 let g:quickrun_config['ruby.rspec'] = {
   \ 'type': 'rspec',
   \ 'command': 'rspec',

@@ -41,7 +41,6 @@ NeoBundle 'gregsexton/gitv'
 NeoBundle 'tanabe/ToggleCase-vim'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'glidenote/newdayone.vim'
 NeoBundle 'tyru/coolgrep.vim'
 
 "基本設定

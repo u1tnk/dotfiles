@@ -196,13 +196,12 @@ alias gtl="git tag -l -n1"
 alias gsta="git stash"
 alias gstaa="git stash apply"
 
-#rails
-alias r="spring rails"
-# alias r="bundle exec rails"
-alias be="bundle exec"
+# ruby
+alias r="rails"
+alias s="spring"
+alias b="bundle exec"
 
 ## terminal configuration
-#
 
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
@@ -363,8 +362,6 @@ esac
 alias tac="tail -r"
 
 alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p194 -f=~/rtags'
-
-alias s="spring"
 
 # mosh
 compdef mosh=ssh

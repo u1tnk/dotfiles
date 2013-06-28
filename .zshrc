@@ -161,16 +161,19 @@ alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-tab-silent"
 # https://github.com/isseium/tmuxx
 # を$PATHにtmuxxで登録してみたけど、初期で分割するsessionファイルを指定したかったので改変した
 # .zshrcだけで管理した方がシンプルだし
-function ta(){
+function tn(){
     if [[ ( $OSTYPE == darwin* ) && ( -x $(which reattach-to-user-namespace 2>/dev/null) ) ]]; then
         # on OS X force tmux's default command to spawn a shell in the user's namespace
         # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
         tweaked_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
 
-        tmux attach || tmux -f <(echo "$tweaked_config") new-session \; source-file ~/dotfiles/.tmux.session
+        tmux -f <(echo "$tweaked_config") new-session \; source-file ~/dotfiles/.tmux.session
     else
-        tmux attach || tmux new-session \; source-file ~/dotfiles/.tmux.session
+        tmux new-session \; source-file ~/dotfiles/.tmux.session
     fi
+}
+function ta(){
+  tmux attach || tn
 }
 
 # alias tmux="tmuxx"

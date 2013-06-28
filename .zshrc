@@ -195,6 +195,7 @@ alias gt="git tag"
 alias gtl="git tag -l -n1"
 alias gsta="git stash"
 alias gstaa="git stash apply"
+alias gf="git fetch"
 
 # ruby
 alias r="rails"

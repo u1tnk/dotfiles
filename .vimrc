@@ -427,7 +427,7 @@ let g:quickrun_config['ruby.rspec'] = {
   \ 'type': 'rspec',
   \ 'command': 'rspec',
   \ 'cmdopt': "--format progress -I . -l %{line('.')}",
-  \ 'exec': 'bundle exec %c %o %s',
+  \ 'exec': 'bundle exec spring rspec %o %s',
   \ 'filetype': 'rspec-result'
   \}
 

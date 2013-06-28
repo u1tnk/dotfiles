@@ -41,8 +41,9 @@
     #push only the current branch
     default = tracking
 [branch]
-    autosetuprebase = always
+#     autosetuprebase = always
 [merge]
     ff = false
 [pull]
-    rebase = true
+    ff = true
+#     rebase = true

@@ -1,3 +1,8 @@
+" release autogroup in MyAutoCmd
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
 set nocompatible
 filetype off
 "dotfiles以下にプラグインをインストール
@@ -12,29 +17,29 @@ if has('vim_starting')
     call neobundle#rc(expand('~/.bundle'))
 endif
 NeoBundle 'tsaleh/vim-align'
-NeoBundle 'neocomplcache'
-NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'neco-look'
 NeoBundle 'surround.vim'
-NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'taglist.vim'
 NeoBundle 'quickrun.vim'
 NeoBundle 'ref.vim'
 NeoBundle 'Shougo/vimproc', { 'build' : {'mac' : 'make -f make_mac.mak', 'unix' : 'make -f make_unix.mak'}, }
 NeoBundle 'ZenCoding.vim'
-NeoBundle 'Shougo/vimfiler.git'
+NeoBundle 'Shougo/vimfiler'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 't9md/vim-textmanip'
-NeoBundle 'kana/vim-altr.git'
-NeoBundle 'tyru/open-browser.vim.git'
-NeoBundle 'tyru/savemap.vim.git'
-NeoBundle 'tyru/vice.vim.git'
-NeoBundle 'h1mesuke/unite-outline.git'
-NeoBundle 'chaquotay/ftl-vim-syntax.git'
-NeoBundle 'kana/vim-textobj-user.git'
-NeoBundle 'h1mesuke/textobj-wiw.git'
-NeoBundle 'kana/vim-fakeclip.git'
-NeoBundle 'tyru/caw.vim.git'
+NeoBundle 'kana/vim-altr'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'tyru/savemap.vim'
+NeoBundle 'tyru/vice.vim'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'chaquotay/ftl-vim-syntax'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'h1mesuke/textobj-wiw'
+NeoBundle 'kana/vim-fakeclip'
+NeoBundle 'tyru/caw.vim'
 NeoBundle 'thinca/vim-singleton'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'gregsexton/gitv'
@@ -42,6 +47,8 @@ NeoBundle 'tanabe/ToggleCase-vim'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tyru/coolgrep.vim'
+
+NeoBundleCheck
 
 "基本設定
 filetype plugin indent on
@@ -70,7 +77,7 @@ set splitright
 set splitbelow
 
 "空白表示
-"set list
+set list
 
 "インクリメントサーチ
 set incsearch
@@ -78,11 +85,14 @@ set incsearch
 "ハイライト
 set hlsearch
 
-"バックアップを作らない
+"バックアップ/swapを作らない
 set nobackup
-
-"swpファイルの作成先変更
+set nowritebackup
 set noswapfile
+
+" 前時代的スクリーンベルを無効化
+set t_vb=
+set novisualbell
 
 "backspaceキー
 set backspace=eol,indent,start
@@ -91,6 +101,8 @@ set backspace=eol,indent,start
 set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
 set laststatus=2
 
+" カーソル下の単語を * で検索
+vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
 
 "Kコマンドをmanからhelpに変更
 set keywordprg=:help
@@ -122,6 +134,18 @@ set diffopt=vertical
 
 " 空白文字表示
 set listchars=eol:$,tab:>-
+
+" matchpairに<>を追加
+set matchpairs& matchpairs+=<:>
+
+" '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
+set shiftround
+
+" バッファを閉じる代わりに隠す（Undo履歴を残すため）
+set hidden
+
+" 新しく開く代わりにすでに開いてあるバッファを開く
+set switchbuf=useopen
 
 "map系
 "カーソル位置の単語をyankする
@@ -206,45 +230,7 @@ command! -nargs=* EE VimFiler
 "外部grep設定
 set grepprg=grep\ -nH
 
-" NeoComplCache設定
-let g:neocomplcache_enable_at_startup = 1
-" smart case
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:NeoComplCache_EnableCamelCaseCompletio = 1
-" Use underbar completion.
-let g:NeoComplCache_EnableUnderbarCompletion = 1
-" Print caching percent in statusline.
-let g:NeoComplCache_CachingPercentInStatusline = 1
-" シンタックスをキャッシュするときの最小文字長を3
-let g:neocomplcache_min_syntax_length = 3
-" snippetsファイルのディレクトリパス
-let g:neocomplcache_snippets_dir = '~/dotfiles/.vim/snippets'
-
-" phpmanual path for vim-ref
-let g:ref_phpmanual_path = $HOME. '/dotfiles/doc/php-chunked-xhtml/'
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-"<TAB>でスニペット補完
-if g:neocomplcache_enable_at_startup
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-n>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-n>"
-" スニペットで単語が選択されている場合でも <Tab> で次のプレースホルダへ移動する
-  vmap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-n>"
-endif
-
 " Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-" add edit snippets command a little short
-command! -nargs=* NecoEditSnippets NeoComplCacheEditSnippets
 
 " ターミナル上でコピペするとき全てのindent機能をオフにする
 " 戻すのはindentexprを保存しておくのがめんどくさいので非対応
@@ -345,16 +331,7 @@ vmap <Space>ob <Plug>(openbrowser-smart-search)
 " rsense
 " let g:rsenseHome = "$HOME/local/rsense"
 
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
 " let g:rsenseUseOmniFunc = 1
-if filereadable(expand('$HOME/local/rsense/bin/rsense'))
-  let g:rsenseHome = expand('$HOME/local/rsense')
-  " 暫定対処 Updateしたらcompleteで落ちるようになった…
-"   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-endif
-
 autocmd FileType html setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=;/
 
 " コメントアウトを切り替えるマッピング例
@@ -437,3 +414,92 @@ let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'
 let g:unite_source_grep_recursive_opt = ''
 let g:unite_source_grep_max_candidates = 200
 
+" QuickFixおよびHelpでは q でバッファを閉じる
+autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
+
+" w!! でスーパーユーザーとして保存（sudoが使える環境限定）
+cmap w!! w !sudo tee > /dev/null %
+
+" neocomplete
+"
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" For cursor moving in insert mode(Not recommended)
+inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+" neosnippet
+let g:neosnippet#snippets_directory = '~/dotfiles/.vim/snippets'
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif

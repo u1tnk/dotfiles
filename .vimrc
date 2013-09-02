@@ -244,9 +244,14 @@ let g:unite_enable_start_insert=1
 nnoremap <silent> <Space>ut :Unite tab<Enter>
 nnoremap <silent> <Space>ub :Unite buffer<Enter>
 nnoremap <silent> <Space>uf :Unite file<Enter>
-nnoremap <silent> <Space>ur :Unite file_rec<Enter>
+" nnoremap <silent> <Space>ur :Unite file_rec<Enter>
+nnoremap <Space>ur :<C-u>Unite -start-insert file_rec<CR>
 nnoremap <silent> <Space>ug :Unite grep -buffer-name=grep <Enter>
+let s:file_rec_ignore_pattern = (unite#sources#rec#define()[0]['ignore_pattern']) . '\|.*\.\(png\|jpg\|gif\)'
+call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern)
+call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)
 
+let g:unite_source_file_rec_max_cache_files = 9000
 
 " マクロ実行を手早く
 nnoremap <silent> <c-Q> @qq
@@ -447,8 +452,10 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
 
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"

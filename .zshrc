@@ -370,3 +370,8 @@ alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p19
 # mosh
 compdef mosh=ssh
 
+alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+
+# for python
+source /usr/local/bin/virtualenvwrapper.sh
+

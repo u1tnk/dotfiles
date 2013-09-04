@@ -29,7 +29,7 @@ NeoBundle 'ZenCoding.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'kana/vim-altr'
-NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'Shougo/unite-outline'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'h1mesuke/textobj-wiw'
 NeoBundle 'kana/vim-fakeclip'
@@ -250,6 +250,8 @@ call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern
 call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)
 
 let g:unite_source_file_rec_max_cache_files = 9000
+
+let g:unite_winwidth = 40
 
 " マクロ実行を手早く
 nnoremap <silent> <c-Q> @qq

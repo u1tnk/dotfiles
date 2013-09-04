@@ -41,6 +41,7 @@ NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tyru/coolgrep.vim'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'Yggdroot/indentLine'
 
 NeoBundleCheck
 
@@ -413,6 +414,9 @@ autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
 " w!! でスーパーユーザーとして保存（sudoが使える環境限定）
 cmap w!! w !sudo tee > /dev/null %
 
+" indentの表示文字カスタマイズ
+let g:indentLine_char = '|'
+
 " neocomplete
 "
 " Disable AutoComplPop.
@@ -528,3 +532,4 @@ function! s:check_back_space()"{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
 endfunction"}}
+

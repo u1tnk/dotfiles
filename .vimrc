@@ -35,6 +35,7 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tyru/savemap.vim'
 NeoBundle 'tyru/vice.vim'
 NeoBundle 'h1mesuke/unite-outline'
+
 NeoBundle 'chaquotay/ftl-vim-syntax'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'h1mesuke/textobj-wiw'
@@ -381,12 +382,10 @@ vnoremap <silent> <C-p> "0p<CR>
 nnoremap / q/a
 vnoremap / q/a
 
-nnoremap ; q:a
-vnoremap ; q:a
+nnoremap ; q:
+vnoremap ; q:
 nnoremap q; :
 vnoremap q; :
-nnoremap : ;
-vnoremap : ;
 
 augroup RSpec
   autocmd!
@@ -435,6 +434,9 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#min_keyword_length = 3
+let g:neocomplete#auto_completion_start_length = 3
+
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -463,8 +465,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-" Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+inoremap <expr><Space> pumvisible() ? neocomplete#smart_close_popup(). "\<Space>" : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
 inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
@@ -498,15 +499,33 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+" コマンドラインウィンドウでtab動作がおかしいのを指摘したら以下の設定指示された。わからんが動く。
+" https://github.com/Shougo/neocomplete.vim/issues/74
+autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
+autocmd MyAutoCmd CmdwinLeave * let g:neocomplete_enable_auto_select = 1
+
+function! s:init_cmdwin()
+  NeoBundleSource vim-altercmd
+
+  let g:neocomplete_enable_auto_select = 0
+  let b:neocomplete_sources_list = ['vim_complete']
+
+  nnoremap <buffer><silent> q :<C-u>quit<CR>
+  nnoremap <buffer><silent> <TAB> :<C-u>quit<CR>
+  inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
+  inoremap <buffer><expr><C-h> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+  inoremap <buffer><expr><BS> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+
+  " Completion.
+  inoremap <buffer><expr><TAB>  pumvisible() ?
+        \ "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>\<C-p>"
+
+  startinsert!
+endfunction"}}}

@@ -43,6 +43,8 @@ NeoBundle 'tyru/coolgrep.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'kevinw/pyflakes-vim'
 
 NeoBundleCheck
 
@@ -546,5 +548,10 @@ endfunction"}}}
 function! s:check_back_space()"{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
-endfunction"}}
+endfunction"}}}
 
+let g:syntastic_mode_map = {
+            \ 'mode': 'active',
+            \ 'active_filetypes': ['ruby', 'lua', 'sh', 'vim'],
+            \ 'passive_filetypes': ['html', 'python']
+            \}

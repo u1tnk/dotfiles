@@ -364,8 +364,10 @@ command! -nargs=* CD cd %:p:h
 vnoremap <silent> <C-p> "0p<CR>
 
 " コマンドウィンドウで開くかつ;と:の入れ替え
-nnoremap / q/a
-vnoremap / q/a
+nnoremap / q/
+vnoremap / q/
+nnoremap q/ /
+vnoremap q/ /
 
 nnoremap ; q:
 vnoremap ; q:

@@ -19,7 +19,6 @@ endif
 NeoBundle 'tsaleh/vim-align'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'neco-look'
 NeoBundle 'surround.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'taglist.vim'
@@ -29,21 +28,15 @@ NeoBundle 'Shougo/vimproc', { 'build' : {'mac' : 'make -f make_mac.mak', 'unix' 
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 't9md/vim-textmanip'
 NeoBundle 'kana/vim-altr'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'tyru/savemap.vim'
-NeoBundle 'tyru/vice.vim'
 NeoBundle 'h1mesuke/unite-outline'
 
-NeoBundle 'chaquotay/ftl-vim-syntax'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'h1mesuke/textobj-wiw'
 NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'tyru/caw.vim'
 NeoBundle 'thinca/vim-singleton'
 NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'gregsexton/gitv'
 NeoBundle 'tanabe/ToggleCase-vim'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
@@ -303,18 +296,6 @@ function! s:cmd_capture(q_args) "{{{
     setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
     call setline(1, split(output, '\n'))
 endfunction
-
-"vim-textmanip
-"http://vim-users.jp/2011/07/hack223/
-" 選択したテキストの移動
-vmap <C-j> <Plug>(Textmanip.move_selection_down)
-vmap <C-k> <Plug>(Textmanip.move_selection_up)
-vmap <C-h> <Plug>(Textmanip.move_selection_left)
-vmap <C-l> <Plug>(Textmanip.move_selection_right)
-
-" 行の複製
-vmap <C-y> <Plug>(Textmanip.duplicate_selection_v)
-nmap <C-y> <Plug>(Textmanip.duplicate_selection_n)
 
 " vim-altr
 

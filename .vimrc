@@ -42,6 +42,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tyru/coolgrep.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'davidhalter/jedi-vim'
 
 NeoBundleCheck
 
@@ -402,9 +403,10 @@ let g:quickrun_config['ruby.rspec'] = {
   \ 'filetype': 'rspec-result'
   \}
 
-let g:quickrun_config['python'] = {
-  \ 'command': 'python3',
-  \}
+" ２系がメインなので…
+" let g:quickrun_config['python'] = {
+"   \ 'command': 'python3',
+"   \}
 
 " http://qiita.com/items/c8962f9325a5433dc50d
 let g:unite_source_grep_command = 'ag'
@@ -485,6 +487,15 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+" http://kazy.hatenablog.com/entry/2013/07/18/131118
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 " neosnippet
 let g:neosnippet#snippets_directory = '~/dotfiles/.vim/snippets'

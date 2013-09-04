@@ -402,6 +402,10 @@ let g:quickrun_config['ruby.rspec'] = {
   \ 'filetype': 'rspec-result'
   \}
 
+let g:quickrun_config['python'] = {
+  \ 'command': 'python3',
+  \}
+
 " http://qiita.com/items/c8962f9325a5433dc50d
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'

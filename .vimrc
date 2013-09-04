@@ -452,7 +452,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-inoremap <expr><Space> pumvisible() ? neocomplete#smart_close_popup(). "\<Space>" : "\<Space>"
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup(). "\<Space>" : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
 inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"

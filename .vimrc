@@ -516,3 +516,8 @@ function! s:init_cmdwin()
 
   startinsert!
 endfunction"}}}
+
+function! s:check_back_space()"{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~ '\s'
+endfunction"}}

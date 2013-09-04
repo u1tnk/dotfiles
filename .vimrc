@@ -238,9 +238,13 @@ let g:unite_enable_start_insert=1
 nnoremap <silent> <Space>ut :Unite tab<Enter>
 nnoremap <silent> <Space>ub :Unite buffer<Enter>
 nnoremap <silent> <Space>uf :Unite file<Enter>
-" nnoremap <silent> <Space>ur :Unite file_rec<Enter>
-nnoremap <Space>ur :<C-u>Unite -start-insert file_rec<CR>
+nnoremap <silent> <Space>uo :<C-u>Unite -vertical -no-quit outline<CR>
+nnoremap <silent> <Space>ur :<C-u>Unite -start-insert file_rec<CR>
 nnoremap <silent> <Space>ug :Unite grep -buffer-name=grep <Enter>
+" UniteWithBufferDir だと、パス入力済みで検索しづらいので、Uniteにパス渡すようにした
+" nnoremap <silent> <Space>uc :UniteWithBufferDir -start-insert  -buffer-name=files file_rec<CR>
+nnoremap <silent> <Space>uc :Unite file_rec:<C-r>=expand('%:p:h:gs?[ :]?\\\0?')<CR><CR>
+
 let s:file_rec_ignore_pattern = (unite#sources#rec#define()[0]['ignore_pattern']) . '\|.*\.\(png\|jpg\|gif\)'
 call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern)
 call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)

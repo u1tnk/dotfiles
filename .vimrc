@@ -460,8 +460,7 @@ inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
 inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
 inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
 
-" AutoComplPop like behavior.
-let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_select = 0
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -494,7 +493,7 @@ endif
 " コマンドラインウィンドウでtab動作がおかしいのを指摘したら以下の設定指示された。わからんが動く。
 " https://github.com/Shougo/neocomplete.vim/issues/74
 autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
-autocmd MyAutoCmd CmdwinLeave * let g:neocomplete_enable_auto_select = 1
+autocmd MyAutoCmd CmdwinLeave * let g:neocomplete_enable_auto_select = 0
 
 function! s:init_cmdwin()
   NeoBundleSource vim-altercmd

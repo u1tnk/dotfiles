@@ -30,7 +30,6 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'kana/vim-altr'
 NeoBundle 'h1mesuke/unite-outline'
-
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'h1mesuke/textobj-wiw'
 NeoBundle 'kana/vim-fakeclip'
@@ -41,6 +40,7 @@ NeoBundle 'tanabe/ToggleCase-vim'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tyru/coolgrep.vim'
+NeoBundle 'rking/ag.vim'
 
 NeoBundleCheck
 

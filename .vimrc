@@ -19,7 +19,6 @@ endif
 NeoBundle 'tsaleh/vim-align'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'neco-look'
 NeoBundle 'surround.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'taglist.vim'
@@ -29,24 +28,19 @@ NeoBundle 'Shougo/vimproc', { 'build' : {'mac' : 'make -f make_mac.mak', 'unix' 
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 't9md/vim-textmanip'
 NeoBundle 'kana/vim-altr'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'tyru/savemap.vim'
-NeoBundle 'tyru/vice.vim'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'chaquotay/ftl-vim-syntax'
+NeoBundle 'Shougo/unite-outline'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'h1mesuke/textobj-wiw'
 NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'tyru/caw.vim'
 NeoBundle 'thinca/vim-singleton'
 NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'gregsexton/gitv'
 NeoBundle 'tanabe/ToggleCase-vim'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tyru/coolgrep.vim'
+NeoBundle 'rking/ag.vim'
 
 NeoBundleCheck
 
@@ -244,14 +238,20 @@ let g:unite_enable_start_insert=1
 nnoremap <silent> <Space>ut :Unite tab<Enter>
 nnoremap <silent> <Space>ub :Unite buffer<Enter>
 nnoremap <silent> <Space>uf :Unite file<Enter>
-" nnoremap <silent> <Space>ur :Unite file_rec<Enter>
-nnoremap <Space>ur :<C-u>Unite -start-insert file_rec<CR>
+nnoremap <silent> <Space>uo :<C-u>Unite -vertical -no-quit outline<CR>
+nnoremap <silent> <Space>ur :<C-u>Unite -start-insert file_rec<CR>
 nnoremap <silent> <Space>ug :Unite grep -buffer-name=grep <Enter>
+" UniteWithBufferDir だと、パス入力済みで検索しづらいので、Uniteにパス渡すようにした
+" nnoremap <silent> <Space>uc :UniteWithBufferDir -start-insert  -buffer-name=files file_rec<CR>
+nnoremap <silent> <Space>uc :Unite file_rec:<C-r>=expand('%:p:h:gs?[ :]?\\\0?')<CR><CR>
+
 let s:file_rec_ignore_pattern = (unite#sources#rec#define()[0]['ignore_pattern']) . '\|.*\.\(png\|jpg\|gif\)'
 call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern)
 call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)
 
 let g:unite_source_file_rec_max_cache_files = 9000
+
+let g:unite_winwidth = 40
 
 " マクロ実行を手早く
 nnoremap <silent> <c-Q> @qq
@@ -302,18 +302,6 @@ function! s:cmd_capture(q_args) "{{{
     setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
     call setline(1, split(output, '\n'))
 endfunction
-
-"vim-textmanip
-"http://vim-users.jp/2011/07/hack223/
-" 選択したテキストの移動
-vmap <C-j> <Plug>(Textmanip.move_selection_down)
-vmap <C-k> <Plug>(Textmanip.move_selection_up)
-vmap <C-h> <Plug>(Textmanip.move_selection_left)
-vmap <C-l> <Plug>(Textmanip.move_selection_right)
-
-" 行の複製
-vmap <C-y> <Plug>(Textmanip.duplicate_selection_v)
-nmap <C-y> <Plug>(Textmanip.duplicate_selection_n)
 
 " vim-altr
 
@@ -378,15 +366,15 @@ command! -nargs=* CD cd %:p:h
 vnoremap <silent> <C-p> "0p<CR>
 
 " コマンドウィンドウで開くかつ;と:の入れ替え
-nnoremap / q/a
-vnoremap / q/a
+nnoremap / q/
+vnoremap / q/
+nnoremap q/ /
+vnoremap q/ /
 
-nnoremap ; q:a
-vnoremap ; q:a
+nnoremap ; q:
+vnoremap ; q:
 nnoremap q; :
 vnoremap q; :
-nnoremap : ;
-vnoremap : ;
 
 augroup RSpec
   autocmd!
@@ -435,6 +423,9 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#min_keyword_length = 3
+let g:neocomplete#auto_completion_start_length = 3
+
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -452,10 +443,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+inoremap <silent><expr><CR> pumvisible() ? neocomplete#close_popup(). "\<CR>" : "\<CR>"
 
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
@@ -463,8 +451,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-" Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup(). "\<Space>" : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
 inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
@@ -472,8 +459,7 @@ inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
 inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
 inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
 
-" AutoComplPop like behavior.
-let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_select = 0
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -498,6 +484,12 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -506,7 +498,33 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+" コマンドラインウィンドウでtab動作がおかしいのを指摘したら以下の設定指示された。わからんが動く。
+" https://github.com/Shougo/neocomplete.vim/issues/74
+autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
+autocmd MyAutoCmd CmdwinLeave * let g:neocomplete_enable_auto_select = 0
+
+function! s:init_cmdwin()
+  NeoBundleSource vim-altercmd
+
+  let g:neocomplete_enable_auto_select = 0
+  let b:neocomplete_sources_list = ['vim_complete']
+
+  nnoremap <buffer><silent> q :<C-u>quit<CR>
+  nnoremap <buffer><silent> <TAB> :<C-u>quit<CR>
+  inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
+  inoremap <buffer><expr><C-h> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+  inoremap <buffer><expr><BS> col('.') == 1 ?
+        \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
+
+  " Completion.
+  inoremap <buffer><expr><TAB>  pumvisible() ?
+        \ "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>\<C-p>"
+
+  startinsert!
+endfunction"}}}
+
+function! s:check_back_space()"{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~ '\s'
+endfunction"}}

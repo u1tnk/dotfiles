@@ -490,6 +490,15 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
 " コマンドラインウィンドウでtab動作がおかしいのを指摘したら以下の設定指示された。わからんが動く。
 " https://github.com/Shougo/neocomplete.vim/issues/74
 autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()

@@ -555,3 +555,8 @@ let g:syntastic_mode_map = {
             \ 'active_filetypes': ['ruby', 'lua', 'sh', 'vim'],
             \ 'passive_filetypes': ['html', 'python']
             \}
+
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+let g:unite_source_grep_recursive_opt = ''
+let g:unite_source_grep_max_candidates = 200

@@ -135,6 +135,7 @@ alias j="jobs -l"
 case "${OSTYPE}" in
 darwin*)
     alias ls="ls -G -w"
+    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     ;;
 linux*)
     alias ls="ls --color"
@@ -370,8 +371,7 @@ alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p19
 # mosh
 compdef mosh=ssh
 
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-
-# for python
-source /usr/local/bin/virtualenvwrapper.sh
-
+if test -e /usr/local/bin/virtualenvwrapper.sh; then
+    # for python
+    source /usr/local/bin/virtualenvwrapper.sh
+fi

@@ -246,9 +246,9 @@ let g:unite_enable_start_insert=1
 nnoremap <silent> <Space>ut :Unite tab<Enter>
 nnoremap <silent> <Space>ub :Unite buffer<Enter>
 nnoremap <silent> <Space>uf :Unite file<Enter>
-nnoremap <silent> <Space>uo :<C-u>Unite -vertical -no-quit outline<CR>
-nnoremap <silent> <Space>ur :<C-u>Unite -start-insert file_rec<CR>
-nnoremap <silent> <Space>ug :Unite grep -buffer-name=grep <Enter>
+nnoremap <silent> <Space>uo :<C-u>Unite -vertical -no-quit -no-start-insert -buffer-name=outline outline<CR>
+nnoremap <silent> <Space>ur :<C-u>Unite -start-insert -buffer-name=file_rec file_rec<CR>
+nnoremap <silent> <Space>ug :Unite grep -no-quit  -no-start-insert -buffer-name=grep <Enter>
 " UniteWithBufferDir だと、パス入力済みで検索しづらいので、Uniteにパス渡すようにした
 " nnoremap <silent> <Space>uc :UniteWithBufferDir -start-insert  -buffer-name=files file_rec<CR>
 nnoremap <silent> <Space>uc :Unite file_rec:<C-r>=expand('%:p:h:gs?[ :]?\\\0?')<CR><CR>

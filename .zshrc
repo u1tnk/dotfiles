@@ -362,8 +362,6 @@ xterm|xterm-color|kterm|kterm-color)
 esac
 alias tac="tail -r"
 
-alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p194 -f=~/rtags'
-
 # mosh
 compdef mosh=ssh
 

@@ -27,8 +27,8 @@ path=(# システム用
       $HOME/scripts(N-/)
       $HOME/.rvm/bin(N-/)
       $HOME/.cabal/bin(N-/)
-      /Applications/Day\ One.app/Contents/MacOS/(N-/)
       # システム用
+      /usr/local/mysql/bin(N-/)
       /usr/local/bin(N-/)
       /sbin(N-/)
       /usr/sbin(N-/)

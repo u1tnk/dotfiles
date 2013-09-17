@@ -289,10 +289,6 @@ if grep --help 2>&1 | grep -q -- --exclude-dir; then
     GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
     GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
 fi
-### 可能なら色を付ける。
-if grep --help 2>&1 | grep -q -- --color; then
-    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
-fi
 ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
 GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 

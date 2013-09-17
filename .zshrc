@@ -365,7 +365,11 @@ alias tac="tail -r"
 # mosh
 compdef mosh=ssh
 
-if test -e /usr/local/bin/virtualenvwrapper.sh; then
-    # for python
-    source /usr/local/bin/virtualenvwrapper.sh
+# for python
+if test -e $HOME/.pythonz/etc; then
+    [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
+    DEFAULT_PYTHON_PATH=$HOME/.pythonz/pythons/CPython-2.7.3
+    export PATH=$DEFAULT_PYTHON_PATH/bin:$PATH
+    source $DEFAULT_PYTHON_PATH/bin/virtualenvwrapper.sh
 fi
+

@@ -200,6 +200,7 @@ alias gtl="git tag -l -n1"
 alias gsta="git stash"
 alias gstaa="git stash apply"
 alias gf="git fetch"
+alias gbd="git branch -d"
 
 # ruby
 alias r="rails"

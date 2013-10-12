@@ -258,7 +258,7 @@ let s:file_rec_ignore_pattern = (unite#sources#rec#define()[0]['ignore_pattern']
 call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern)
 call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)
 
-let g:unite_source_file_rec_max_cache_files = 9000
+let g:unite_source_file_rec_max_cache_files = 20000
 
 let g:unite_winwidth = 40
 

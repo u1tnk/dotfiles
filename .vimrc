@@ -196,6 +196,7 @@ augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml   setfiletype php
 autocmd! BufRead,BufNewFile *.twig   setfiletype html
 autocmd! BufRead,BufNewFile *.ftl   setfiletype ftl
+autocmd! BufRead,BufNewFile *.md   setfiletype markdown
 augroup END
 
 inoremap <C-e> <Esc>

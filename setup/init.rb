@@ -17,6 +17,7 @@ File.symlink "dotfiles/.vrapperrc", ".vrapperrc" unless FileTest.exist? ".vrappe
 File.symlink "dotfiles/.my.cnf", ".my.cnf" unless FileTest.exist? ".my.cnf"
 File.symlink "dotfiles/.slate", ".slate" unless FileTest.exist? ".slate"
 File.symlink "dotfiles/.slate.js", ".slate.js" unless FileTest.exist? ".slate.js"
+File.symlink "Dropbox/dotfiles/.amazonrc", ".amazonrc" unless FileTest.exist? ".amazonrc"
 
 FileUtils.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
 FileUtils.copy "dotfiles/setup/template/.zshenv", ".zshenv" unless FileTest.exist? ".zshenv"

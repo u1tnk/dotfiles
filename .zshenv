@@ -25,7 +25,7 @@ path=(# システム用
       $HOME/local/bin(N-/)
       $HOME/local/rsense/bin(N-/)
       $HOME/scripts(N-/)
-      $HOME/.rvm/bin(N-/)
+      $HOME/.rbenv/bin(N-/)
       $HOME/.cabal/bin(N-/)
       # システム用
       /usr/local/mysql/bin(N-/)

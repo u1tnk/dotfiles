@@ -196,6 +196,7 @@ augroup filetypedetect
 autocmd! BufRead,BufNewFile *.thtml   setfiletype php
 autocmd! BufRead,BufNewFile *.twig   setfiletype html
 autocmd! BufRead,BufNewFile *.ftl   setfiletype ftl
+autocmd! BufRead,BufNewFile *.md   setfiletype markdown
 augroup END
 
 inoremap <C-e> <Esc>
@@ -205,7 +206,7 @@ cnoremap <C-e> <C-c>
 echo $filetype
 " 保存時に行末の空白を除去する
 "http://blog.sanojimaru.com/post/18643427334/vim
-autocmd BufWritePre * :%s/\s\+$//ge
+" autocmd BufWritePre * :%s/\s\+$//ge
 " 保存時にtabをスペースに変換する
 " autocmd BufWritePre * :%s/\t/  /ge
 
@@ -257,7 +258,7 @@ let s:file_rec_ignore_pattern = (unite#sources#rec#define()[0]['ignore_pattern']
 call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern)
 call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)
 
-let g:unite_source_file_rec_max_cache_files = 9000
+let g:unite_source_file_rec_max_cache_files = 20000
 
 let g:unite_winwidth = 40
 
@@ -565,6 +566,6 @@ let g:syntastic_mode_map = {
             \}
 
 let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'
 let g:unite_source_grep_recursive_opt = ''
 let g:unite_source_grep_max_candidates = 200

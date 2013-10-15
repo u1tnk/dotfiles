@@ -200,6 +200,7 @@ alias gtl="git tag -l -n1"
 alias gsta="git stash"
 alias gstaa="git stash apply"
 alias gf="git fetch"
+alias gbd="git branch -d"
 
 # ruby
 alias r="rails"
@@ -289,10 +290,6 @@ if grep --help 2>&1 | grep -q -- --exclude-dir; then
     GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
     GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
 fi
-### 可能なら色を付ける。
-if grep --help 2>&1 | grep -q -- --color; then
-    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
-fi
 ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
 GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 
@@ -366,12 +363,14 @@ xterm|xterm-color|kterm|kterm-color)
 esac
 alias tac="tail -r"
 
-alias rtags='ctags -R --langmap=RUBY:.rb --sort=yes ~/.rvm/rubies/ruby-1.9.3-p194 -f=~/rtags'
-
 # mosh
 compdef mosh=ssh
 
-if test -e /usr/local/bin/virtualenvwrapper.sh; then
-    # for python
-    source /usr/local/bin/virtualenvwrapper.sh
+# for python
+if test -e $HOME/.pythonz/etc; then
+    [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
+    DEFAULT_PYTHON_PATH=$HOME/.pythonz/pythons/CPython-2.7.3
+    export PATH=$DEFAULT_PYTHON_PATH/bin:$PATH
+    source $DEFAULT_PYTHON_PATH/bin/virtualenvwrapper.sh
 fi
+

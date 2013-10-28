@@ -30,6 +30,7 @@ path=(# システム用
       # システム用
       /usr/local/mysql/bin(N-/)
       /usr/local/bin(N-/)
+      /usr/local/sbin(N-/)
       /sbin(N-/)
       /usr/sbin(N-/)
       /usr/bin(N-/))

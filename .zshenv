@@ -91,7 +91,9 @@ fi
 
 case "${OSTYPE}" in
 darwin*)
-    export LD_LIBRARY_PATH=/usr/local/lib
+    # dyld: DYLD_ environment variabl.....とかいう警告を出さないように
+    # 問題起きないかわからないので監視
+    # export LD_LIBRARY_PATH=/usr/local/lib
     export CC=gcc-4.2
     ;;
 linux*)

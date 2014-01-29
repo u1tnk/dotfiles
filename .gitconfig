@@ -42,8 +42,3 @@
     default = tracking
 [branch]
 #     autosetuprebase = always
-[merge]
-    ff = false
-[pull]
-    ff = true
-#     rebase = true

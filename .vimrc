@@ -46,7 +46,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tyru/coolgrep.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'davidhalter/jedi-vim'
+" NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kevinw/pyflakes-vim'
 
@@ -497,13 +497,9 @@ if has('lua')
     let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
     " http://kazy.hatenablog.com/entry/2013/07/18/131118
-    autocmd FileType python setlocal omnifunc=jedi#completions
-    let g:jedi#auto_vim_configuration = 0
-
-    if !exists('g:neocomplete#force_omni_input_patterns')
-            let g:neocomplete#force_omni_input_patterns = {}
-    endif
-    let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+"     autocmd FileType python setlocal omnifunc=jedi#completions
+"     let g:jedi#auto_vim_configuration = 0
+"     let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
 
     " コマンドラインウィンドウでtab動作がおかしいのを指摘したら以下の設定指示された。わからんが動く。
     " https://github.com/Shougo/neocomplete.vim/issues/74

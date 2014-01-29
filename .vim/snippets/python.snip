@@ -87,6 +87,7 @@ prev_word   '^'
 snippet     magic
 abbr        add magic comment
     # -*- coding: utf-8 -*-
+    from __future__ import absolute_import, division, print_function
 
 snippet     pdb
 abbr        pdb breakepoint
@@ -95,3 +96,11 @@ abbr        pdb breakepoint
 snippet     pp
 abbr        pprint
     from pprint import pprint;pprint(${1:var})
+
+
+snippet     todatetime
+abbr        unixtime to datetime
+    datetime.datetime.fromtimestamp(${1})
+
+snippet     tounix
+    int(time.mktime(${1}.timetuple()))

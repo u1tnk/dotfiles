@@ -372,3 +372,6 @@ if test -e $HOME/.pythonz/etc; then
     source $DEFAULT_PYTHON_PATH/bin/virtualenvwrapper.sh
 fi
 
+# http://qiita.com/kei_s/items/96ee6929013f587b5878
+source ~/dotfiles/zsh-notify/notify.plugin.zsh
+export NOTIFY_COMMAND_COMPLETE_TIMEOUT=30

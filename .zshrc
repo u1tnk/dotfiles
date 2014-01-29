@@ -365,11 +365,11 @@ alias tac="tail -r"
 compdef mosh=ssh
 
 # for python
+# pytonzでinstallしたlpythonはmavericksでinteractive shellが動かない
 if test -e $HOME/.pythonz/etc; then
     [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-    DEFAULT_PYTHON_PATH=$HOME/.pythonz/pythons/CPython-2.7.3
-    export PATH=$DEFAULT_PYTHON_PATH/bin:$PATH
-    source $DEFAULT_PYTHON_PATH/bin/virtualenvwrapper.sh
+    # DEFAULT_PYTHON_PATH=$HOME/.pythonz/pythons/CPython-2.7.3
+    source /usr/local/share/python/virtualenvwrapper.sh
 fi
 
 # http://qiita.com/kei_s/items/96ee6929013f587b5878

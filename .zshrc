@@ -372,6 +372,14 @@ if test -e $HOME/.pythonz/etc; then
     source /usr/local/share/python/virtualenvwrapper.sh
 fi
 
+DEFAULT_PYTHON_PATH=/usr/local
+export PATH=$DEFAULT_PYTHON_PATH/bin:$PATH
+export PATH=$PATH:/usr/local/share/python
+
+export AWS_DEFAULT_REGION=ap-northeast-1
+
 # http://qiita.com/kei_s/items/96ee6929013f587b5878
 source ~/dotfiles/zsh-notify/notify.plugin.zsh
 export NOTIFY_COMMAND_COMPLETE_TIMEOUT=30
+
+eval "$(rbenv init -)"

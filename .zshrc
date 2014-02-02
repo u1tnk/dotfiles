@@ -372,6 +372,9 @@ compdef mosh=ssh
 if test -e $HOME/.pythonz/etc; then
     [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
     # DEFAULT_PYTHON_PATH=$HOME/.pythonz/pythons/CPython-2.7.3
+fi
+
+if test -e /usr/local/share/python/virtualenvwrapper.sh; then
     source /usr/local/share/python/virtualenvwrapper.sh
 fi
 

@@ -19,7 +19,11 @@ File.symlink "dotfiles/.slate", ".slate" unless FileTest.exist? ".slate"
 File.symlink "dotfiles/.slate.js", ".slate.js" unless FileTest.exist? ".slate.js"
 File.symlink "Dropbox/dotfiles/.amazonrc", ".amazonrc" unless FileTest.exist? ".amazonrc"
 
-FileUtils.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
+if FileTest.exist? ".zshrc" 
+  `cat dotfiles/setup/template/.zshrc >> .zshrc` if `grep dotfiles .zshrc` == ""
+else
+  FileUtils.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
+end
 FileUtils.copy "dotfiles/setup/template/.zshenv", ".zshenv" unless FileTest.exist? ".zshenv"
 FileUtils.copy "dotfiles/setup/template/.vimrc", ".vimrc" unless FileTest.exist? ".vimrc"
 

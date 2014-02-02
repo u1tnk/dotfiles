@@ -111,7 +111,10 @@ autoload zed
 ## Completion configuration
 #
 fpath=(${HOME}/dotfiles/.zsh/functions/Completion ${fpath})
-fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+
+if not [[ "${OSTYPE}" =~ darwin.* ]]; then
+    fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+fi
 # setopt complete_aliases     # aliased ls needs if file/dir completions work
 
 autoload -U compinit

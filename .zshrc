@@ -112,7 +112,7 @@ autoload zed
 #
 fpath=(${HOME}/dotfiles/.zsh/functions/Completion ${fpath})
 
-if ! [[ "${OSTYPE}" =~ darwin.* ]]; then
+if [[ "${OSTYPE}" =~ darwin.* ]]; then
     fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 # setopt complete_aliases     # aliased ls needs if file/dir completions work
@@ -384,8 +384,11 @@ export PATH=$PATH:/usr/local/share/python
 
 export AWS_DEFAULT_REGION=ap-northeast-1
 
-# http://qiita.com/kei_s/items/96ee6929013f587b5878
-source ~/dotfiles/zsh-notify/notify.plugin.zsh
-export NOTIFY_COMMAND_COMPLETE_TIMEOUT=30
+
+if [[ "${OSTYPE}" == darwin.* ]]; then
+    # http://qiita.com/kei_s/items/96ee6929013f587b5878
+    source ~/dotfiles/zsh-notify/notify.plugin.zsh
+    export NOTIFY_COMMAND_COMPLETE_TIMEOUT=30
+fi
 
 eval "$(rbenv init -)"

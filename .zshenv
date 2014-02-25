@@ -119,3 +119,8 @@ export GISTY_DIR=$HOME/Dropbox/snippets/gists
 
 #rbenv
 eval "$(rbenv init - zsh)"
+
+# http://hiroki.jp/docker-on-osx
+if [[ "${OSTYPE}" =~ darwin.* ]]; then
+    export DOCKER_HOST=tcp://
+fi

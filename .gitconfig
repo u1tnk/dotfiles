@@ -6,6 +6,7 @@
     quotepath = false
     autocrlf = input
     excludesfile = /Users/yuichi/.gitignore_global
+    pager = less -r
 [diff]
     color = auto
     rename = copy

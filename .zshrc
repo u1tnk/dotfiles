@@ -369,16 +369,16 @@ compdef mosh=ssh
 
 # for python
 # pytonzでinstallしたlpythonはmavericksでinteractive shellが動かない
+DEFAULT_PYTHON_PATH=/usr/local
 if test -e $HOME/.pythonz/etc; then
     [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-    # DEFAULT_PYTHON_PATH=$HOME/.pythonz/pythons/CPython-2.7.3
+    DEFAULT_PYTHON_PATH=$HOME/.pythonz/pythons/CPython-2.7.3
 fi
 
 if test -e /usr/local/share/python/virtualenvwrapper.sh; then
     source /usr/local/share/python/virtualenvwrapper.sh
 fi
 
-DEFAULT_PYTHON_PATH=/usr/local
 export PATH=$DEFAULT_PYTHON_PATH/bin:$PATH
 export PATH=$PATH:/usr/local/share/python
 

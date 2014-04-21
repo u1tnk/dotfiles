@@ -392,3 +392,7 @@ if [[ "${OSTYPE}" == darwin.* ]]; then
 fi
 
 eval "$(rbenv init -)"
+
+function _ssh {
+  compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
+}

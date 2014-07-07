@@ -203,10 +203,9 @@ inoremap <C-e> <Esc>
 vnoremap <C-e> <Esc>
 cnoremap <C-e> <C-c>
 
-echo $filetype
 " 保存時に行末の空白を除去する
 "http://blog.sanojimaru.com/post/18643427334/vim
-" autocmd BufWritePre * :%s/\s\+$//ge
+autocmd BufWritePre * :%s/\s\+$//ge
 " 保存時にtabをスペースに変換する
 " autocmd BufWritePre * :%s/\t/  /ge
 

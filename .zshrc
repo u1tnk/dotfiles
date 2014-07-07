@@ -396,3 +396,8 @@ eval "$(rbenv init -)"
 function _ssh {
   compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
 }
+
+AWS_CLI_COMPLETER_PATH=/usr/local/share/python/aws_zsh_completer.sh
+if test -e $AWS_CLI_COMPLETER_PATH; then
+    source $AWS_CLI_COMPLETER_PATH
+fi

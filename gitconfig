@@ -7,6 +7,7 @@
     autocrlf = input
     excludesfile = /Users/yuichi/.gitignore_global
     pager = less -r
+    editor = vim
 [diff]
     color = auto
     rename = copy

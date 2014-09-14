@@ -1,4 +1,4 @@
-if [ -f $HOME/dotfiles/.zshrc ]; then
-      source $HOME/dotfiles/.zshrc
+if [[ -s "${ZDOTDIR:-$HOME}/dotfiles/prezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/dotfiles/prezto/init.zsh"
 fi
 

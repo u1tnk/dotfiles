@@ -13,8 +13,8 @@ gem_group :test, :development do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'guard-rspec'
-  gem 'rails-erd'
   gem 'rspec-rails'
+  gem 'spring-commands-rspec'
   gem 'factory_girl_rails'
   gem 'awesome_print'
   gem 'tapp'
@@ -36,20 +36,26 @@ gem_group :development do
   gem 'binding_of_caller'
   gem 'xray-rails'
 
-  gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano3-unicorn', require: false
+
+  gem 'rails-erd'
 end
 
 gem 'rails_config'
 uncomment_lines 'Gemfile', "gem 'unicorn'"
+comment_lines 'Gemfile', "gem 'sqlite3'"
 gem 'execjs'
 uncomment_lines 'Gemfile', "gem 'therubyracer'"
+uncomment_lines 'Gemfile', "gem 'capistrano-rails'"
+uncomment_lines 'Gemfile', "gem 'bcrypt'"
 
 if yes?('use carrierwave ?')
   gem 'carrierwave'
+end
+
+if yes?('use rmagick ?')
   gem 'rmagick', :require => false
 end
 
@@ -64,14 +70,11 @@ end
 
 if yes?('use sass/compass?')
   gem 'compass-rails'
-  gem 'sass-rails'
 end
 
 gem 'kaminari'
 gem 'logger-ltsv'
 gem 'mysql2'
-gem 'rails_admin'
-
 
 run 'bundle install -j5 --path=vendor/bundle'
 

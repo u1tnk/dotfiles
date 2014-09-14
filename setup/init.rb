@@ -5,27 +5,40 @@ require "fileutils"
 home = ENV['HOME']
 FileUtils.cd home
 
-Dir.mkdir "local" unless FileTest.exist? "local"
-Dir.mkdir "temp" unless FileTest.exist? "temp"
-Dir.mkdir "apps" unless FileTest.exist? "apps"
-
-File.symlink "dotfiles/.gemrc", ".gemrc" unless FileTest.exist? ".gemrc"
-File.symlink "dotfiles/.gitconfig", ".gitconfig" unless FileTest.exist? ".gitconfig"
-File.symlink "dotfiles/.tmux.conf", ".tmux.conf" unless FileTest.exist? ".tmux.conf"
-File.symlink "dotfiles/.gvimrc", ".gvimrc" unless FileTest.exist? ".gvimrc"
-File.symlink "dotfiles/.vrapperrc", ".vrapperrc" unless FileTest.exist? ".vrapperrc"
-File.symlink "dotfiles/.my.cnf", ".my.cnf" unless FileTest.exist? ".my.cnf"
-File.symlink "dotfiles/.slate", ".slate" unless FileTest.exist? ".slate"
-File.symlink "dotfiles/.slate.js", ".slate.js" unless FileTest.exist? ".slate.js"
-File.symlink "Dropbox/dotfiles/.amazonrc", ".amazonrc" unless FileTest.exist? ".amazonrc"
-
-if FileTest.exist? ".zshrc" 
-  `cat dotfiles/setup/template/.zshrc >> .zshrc` if `grep dotfiles .zshrc` == ""
-else
-  FileUtils.copy "dotfiles/setup/template/.zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
+%w(local temp apps).each do |x|
+  Dir.mkdir x unless FileTest.exist? x
 end
-FileUtils.copy "dotfiles/setup/template/.zshenv", ".zshenv" unless FileTest.exist? ".zshenv"
-FileUtils.copy "dotfiles/setup/template/.vimrc", ".vimrc" unless FileTest.exist? ".vimrc"
+
+[
+  {dest: ".zprezto", src: "dotfiles/prezto"},
+  {dest: ".gemrc", src: "dotfiles/gemrc"},
+  {dest: ".gitconfig", src: "dotfiles/gitconfig"},
+  {dest: ".tmux.conf", src: "dotfiles/tmux.conf"},
+  {dest: ".gvimrc", src: "dotfiles/gvimrc"},
+  {dest: ".my.cnf", src: "dotfiles/my.cnf"},
+  {dest: ".amazonrc", src: "Dropbox/dotfiles/.amazonrc"},
+  {dest: ".zlogin", src: "dotfiles/prezto/runcoms/zlogin"},
+  {dest: ".zlogout", src: "dotfiles/prezto/runcoms/zlogout"},
+  {dest: ".zprofile", src: "dotfiles/prezto/runcoms/zprofile"},
+].each do |x|
+  File.symlink x[:src], x[:dest] unless FileTest.symlink? x[:dest]
+end
+
+# .zhistoryはファイルが勝手にできるので
+if FileTest.file? ".zhistory"
+  FileUtils.rm ".zhistory"
+  File.symlink "Dropbox/dotfiles/.zhistory", ".zhistory"
+end
+
+if FileTest.exist? ".zshrc"
+  `cat dotfiles/setup/template/zshrc >> .zshrc` if `grep dotfiles .zshrc` == ""
+else
+  FileUtils.copy "dotfiles/setup/template/zshrc", ".zshrc" unless FileTest.exist? ".zshrc"
+end
+
+%w(zshenv vimrc zpreztorc).each do |x|
+  FileUtils.copy "dotfiles/setup/template/#{x}", ".zshenv" unless FileTest.exist? ".#{x}"
+end
 
 print `sh dotfiles/setup/git_submodule.sh`
 

@@ -364,6 +364,9 @@ xterm|xterm-color|kterm|kterm-color)
 esac
 alias tac="tail -r"
 
+alias rt="RAILS_ENV=test"
+alias dbreset="bin/rake db:migrate:reset && bin/rake db:seed_fu && RAILS_ENV=test bin/rake db:migrate:reset"
+
 # mosh
 compdef mosh=ssh
 

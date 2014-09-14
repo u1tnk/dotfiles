@@ -37,7 +37,7 @@ else
 end
 
 %w(zshenv vimrc zpreztorc).each do |x|
-  FileUtils.copy "dotfiles/setup/template/#{x}", ".zshenv" unless FileTest.exist? ".#{x}"
+  FileUtils.copy "dotfiles/setup/template/#{x}", ".#{x}" unless FileTest.file? ".#{x}"
 end
 
 print `sh dotfiles/setup/git_submodule.sh`

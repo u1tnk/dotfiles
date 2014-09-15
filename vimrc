@@ -25,13 +25,11 @@ endif
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'taglist.vim'
 NeoBundle 'quickrun.vim'
 NeoBundle 'ref.vim'
 NeoBundle 'Shougo/vimproc', { 'build' : {'mac' : 'make -f make_mac.mak', 'unix' : 'make -f make_unix.mak'}, }
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'Shougo/vimfiler'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'kana/vim-altr'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'kana/vim-textobj-user'
@@ -43,7 +41,6 @@ NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'tanabe/ToggleCase-vim'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'tyru/coolgrep.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'Yggdroot/indentLine'
 " NeoBundle 'davidhalter/jedi-vim'
@@ -172,7 +169,7 @@ nnoremap [ %
 nnoremap ] %
 
 "vimrc編集関連
-nnoremap <Space>.  :<C-u>edit $HOME/dotfiles/.vimrc<Return>
+nnoremap <Space>.  :<C-u>edit $HOME/dotfiles/vimrc<Return>
 nnoremap <Space>s  :<C-u>source $MYVIMRC<Return>
 
 "論理行移動と表示行移動を入れ替え
@@ -253,9 +250,10 @@ nnoremap <silent> <Space>ug :Unite grep -no-quit  -no-start-insert -buffer-name=
 " nnoremap <silent> <Space>uc :UniteWithBufferDir -start-insert  -buffer-name=files file_rec<CR>
 nnoremap <silent> <Space>uc :Unite file_rec:<C-r>=expand('%:p:h:gs?[ :]?\\\0?')<CR><CR>
 
-let s:file_rec_ignore_pattern = (unite#sources#rec#define()[0]['ignore_pattern']) . '\|.*\.\(png\|jpg\|gif\)'
-call unite#custom#source('file_rec', 'ignore_pattern', s:file_rec_ignore_pattern)
-call unite#custom#source('grep', 'ignore_pattern', s:file_rec_ignore_pattern)
+let s:file_rec_ignore_globs = unite#sources#rec#define()[0]['ignore_globs']
+call add(s:file_rec_ignore_globs, '.*\.\(png\|jpg\|gif\)')
+call unite#custom#source('file_rec', 'ignore_globs', s:file_rec_ignore_globs)
+call unite#custom#source('grep', 'ignore_globs', s:file_rec_ignore_globs)
 
 let g:unite_source_file_rec_max_cache_files = 20000
 
@@ -269,8 +267,6 @@ nnoremap <silent> <c-Q> @qq
 "let g:user_zen_settings = {
 "            \'indentation' : '  ',
 "            \}
-" toggle taglist view
-nnoremap <Space>tl :TlistToggle<Enter>
 
 " http://vim-users.jp/2011/02/hack202/
 " 警告しつつ、保存時にディレクトリを作成する
@@ -440,9 +436,9 @@ if has('lua')
     " Use smartcase.
     let g:neocomplete#enable_smart_case = 1
     " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#min_keyword_length = 3
-    let g:neocomplete#auto_completion_start_length = 3
+    let g:neocomplete#sources#syntax#min_keyword_length = 4
+    let g:neocomplete#min_keyword_length = 4
+    let g:neocomplete#auto_completion_start_length = 4
 
 
     " Define dictionary.

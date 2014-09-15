@@ -56,6 +56,7 @@ function ta(){
 alias ga="git add --patch"
 alias gs="git status --short"
 alias gst="git stash"
+alias gl="git log --pretty=format:\"%C(green)%h %C(blue)%ad %C(red)|%C(reset) %s%d [%an]\" --graph --date=short"
 
 # ruby
 alias b="bundle exec"

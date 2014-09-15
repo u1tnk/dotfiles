@@ -99,4 +99,25 @@ if test -e $AWS_CLI_COMPLETER_PATH; then
     source $AWS_CLI_COMPLETER_PATH
 fi
 
+# zshenvでやってたらprezto化後nanoに変わるようになったのでここで設定
 export EDITOR=vim
+
+# pecoで履歴検索
+# http://blog.kenjiskywalker.org/blog/2014/06/12/peco/
+# tacはこのファイルで別途定義してるので削除した
+function peco-select-history() {
+    BUFFER=$(history -n 1 | \
+        eval tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+function peco-select-apps() {
+    eval cd ~/apps/$(ffind -d ~/apps --depth 1 --type d | peco)
+    zle clear-screen
+}
+zle -N peco-select-apps
+bindkey "^@^a" peco-select-apps

@@ -5,6 +5,8 @@ brew tap peco/peco
 
 brew install zsh
 brew install peco
+# findに type d つけると遅くなるので代替
+brew install ffind
 
 brew install caskroom/cask/brew-cask
 

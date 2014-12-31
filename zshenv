@@ -23,11 +23,13 @@ path=(# システム用
       /bin(N-/)
       # 自分用
       $HOME/local/bin(N-/)
+      $HOME/go/bin(N-/)
       $HOME/local/rsense/bin(N-/)
       $HOME/scripts(N-/)
       $HOME/.rbenv/bin(N-/)
       $HOME/.cabal/bin(N-/)
       # システム用
+      /opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
       /usr/local/mysql/bin(N-/)
       /usr/local/bin(N-/)
       /usr/local/sbin(N-/)
@@ -76,3 +78,5 @@ sudo_path=({,/usr/pkg,/usr/local,/usr}/sbin(N-/))
 if [[ "${OSTYPE}" =~ darwin.* ]]; then
     export DOCKER_HOST=tcp://
 fi
+
+export GOPATH=~/go

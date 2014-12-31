@@ -324,7 +324,7 @@ call altr#define('%.rb', 'spec/%_spec.rb')
 
 " For rails tdd
 call altr#define('app/models/%.rb', 'spec/models/%_spec.rb', 'spec/factories/%s.rb')
-call altr#define('app/controllers/%.rb', 'spec/controllers/%_spec.rb')
+call altr#define('app/controllers/%.rb', 'spec/requests/%_spec.rb')
 call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
 
 

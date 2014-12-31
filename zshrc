@@ -106,19 +106,21 @@ export EDITOR=vim
 # pecoで履歴検索
 # http://blog.kenjiskywalker.org/blog/2014/06/12/peco/
 # tacはこのファイルで別途定義してるので削除した
+# clear-screenがある状態でalias使うと warningが出るので削除
+
 function peco-select-history() {
     BUFFER=$(history -n 1 | \
         eval tac | \
         peco --query "$LBUFFER")
     CURSOR=$#BUFFER
-    zle clear-screen
 }
 zle -N peco-select-history
+
 bindkey '^r' peco-select-history
+alias h=peco-select-history
 
 function peco-select-apps() {
     eval cd ~/apps/$(ffind -d ~/apps --depth 1 --type d | peco)
-    zle clear-screen
 }
 zle -N peco-select-apps
-bindkey "^@^a" peco-select-apps
+alias j='peco-select-apps'

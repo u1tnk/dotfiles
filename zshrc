@@ -79,9 +79,9 @@ alias tac="tail -r"
 alias rt="RAILS_ENV=test"
 alias dbreset="bin/rake db:migrate:reset && bin/rake db:seed_fu && RAILS_ENV=test bin/rake db:migrate:reset"
 
-if test -e /usr/local/share/python/virtualenvwrapper.sh; then
-    source /usr/local/share/python/virtualenvwrapper.sh
-fi
+# if test -e /usr/local/share/python/virtualenvwrapper.sh; then
+#     source /usr/local/share/python/virtualenvwrapper.sh
+# fi
 
 export PATH=$PATH:/usr/local/share/python
 

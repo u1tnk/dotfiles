@@ -124,3 +124,5 @@ function peco-select-apps() {
 }
 zle -N peco-select-apps
 alias j='peco-select-apps'
+
+eval "$(direnv hook zsh)"

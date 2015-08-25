@@ -1,5 +1,4 @@
 set lines=40 columns=150
-" set guifont=Inconsolata:h18
 set guifont=Ricty:h18
 colorscheme railscasts
 

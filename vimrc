@@ -22,66 +22,45 @@ if has('vim_starting')
         set nocompatible               " Be iMproved
     endif
 
-    set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after,~/dotfiles/.vim/bundle/neobundle.vim/
+    set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 endif
-call neobundle#begin(expand('~/.vim/bundle/'))
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-"filetype off
-"dotfiles以下にプラグインをインストール
-
-"pathogen
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
-
-NeoBundle 'tsaleh/vim-align'
-if has('lua')
-    NeoBundle 'Shougo/neocomplete.vim'
-else
-    NeoBundle 'Shougo/neocomplcache'
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'surround.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'quickrun.vim'
-NeoBundle 'ref.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-NeoBundle 'ZenCoding.vim'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'kana/vim-altr'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'h1mesuke/textobj-wiw'
-NeoBundle 'kana/vim-fakeclip'
-NeoBundle 'tyru/caw.vim'
-NeoBundle 'thinca/vim-singleton'
-NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'tanabe/ToggleCase-vim'
-NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'todesking/ruby_hl_lvar.vim'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'kana/vim-textobj-user' " 依存で必要
-NeoBundle 'rhysd/vim-textobj-ruby'
 
-call neobundle#end()
+" 設定開始
+call dein#begin(s:dein_dir)
+
+" プラグインリストを収めた TOML ファイル
+let s:toml      = '~/dotfiles/vim_plugins.toml'
+let s:lazy_toml = '~/dotfiles/vim_lazy_plugins.toml'
+
+" TOML を読み込み、キャッシュしておく
+if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
+  call dein#load_toml(s:toml,      {'lazy': 0})
+"   call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#save_cache()
+endif
+
+" 設定終了
+call dein#end()
+
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
 
 filetype plugin indent on
-
-NeoBundleCheck
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
@@ -560,7 +539,6 @@ if has('lua')
     autocmd MyAutoCmd CmdwinLeave * let g:neocomplete_enable_auto_select = 0
 
     function! s:init_cmdwin()
-    NeoBundleSource vim-altercmd
 
     let g:neocomplete_enable_auto_select = 0
     let b:neocomplete_sources_list = ['vim_complete']

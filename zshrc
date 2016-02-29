@@ -5,6 +5,7 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
+
 case "${OSTYPE}" in
 darwin*)
     alias ls="ls -G -w"
@@ -93,7 +94,6 @@ if [[ "${OSTYPE}" == darwin.* ]]; then
     export NOTIFY_COMMAND_COMPLETE_TIMEOUT=30
 fi
 
-eval "$(rbenv init -)"
 
 AWS_CLI_COMPLETER_PATH=/usr/local/share/python/aws_zsh_completer.sh
 if test -e $AWS_CLI_COMPLETER_PATH; then
@@ -102,6 +102,7 @@ fi
 
 # zshenvでやってたらprezto化後nanoに変わるようになったのでここで設定
 export EDITOR=vim
+export VISUAL=vim
 
 # pecoで履歴検索
 # http://blog.kenjiskywalker.org/blog/2014/06/12/peco/
@@ -126,3 +127,5 @@ zle -N peco-select-apps
 alias j='peco-select-apps'
 
 eval "$(direnv hook zsh)"
+
+eval "$(rbenv init --no-rehash -)"

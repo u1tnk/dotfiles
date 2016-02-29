@@ -28,6 +28,8 @@ path=(# システム用
       $HOME/scripts(N-/)
       $HOME/.rbenv/bin(N-/)
       $HOME/.cabal/bin(N-/)
+      $HOME/.nodebrew/current/bin(N-/)
+      $HOME/node_modules/.bin(N-/)
       # システム用
       /opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
       /usr/local/mysql/bin(N-/)
@@ -80,3 +82,6 @@ if [[ "${OSTYPE}" =~ darwin.* ]]; then
 fi
 
 export GOPATH=~/go
+
+eval "$(rbenv init --no-rehash -)"
+

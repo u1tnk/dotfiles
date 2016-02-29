@@ -1,21 +1,40 @@
-" release autogroup in MyAutoCmd
-augroup MyAutoCmd
-  autocmd!
-augroup END
+" noload defalt plugin
+let g:loaded_gzip              = 1
+let g:loaded_tar               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_zip               = 1
+let g:loaded_zipPlugin         = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_vimball           = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_getscript         = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_netrwFileHandlers = 1
 
-set nocompatible
-filetype off
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+if has('vim_starting')
+    if &compatible
+        set nocompatible               " Be iMproved
+    endif
+
+    set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after,~/dotfiles/.vim/bundle/neobundle.vim/
+endif
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+"filetype off
 "dotfiles以下にプラグインをインストール
-set runtimepath+=~/dotfiles/.vim,~/dotfiles/.vim/after
 
 "pathogen
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
 
-"NeoBundle
-if has('vim_starting')
-    call neobundle#rc(expand('~/.bundle'))
-endif
 NeoBundle 'tsaleh/vim-align'
 if has('lua')
     NeoBundle 'Shougo/neocomplete.vim'
@@ -23,11 +42,20 @@ else
     NeoBundle 'Shougo/neocomplcache'
 endif
 NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'surround.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'quickrun.vim'
 NeoBundle 'ref.vim'
-NeoBundle 'Shougo/vimproc', { 'build' : {'mac' : 'make -f make_mac.mak', 'unix' : 'make -f make_unix.mak'}, }
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'kana/vim-altr'
@@ -43,14 +71,24 @@ NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'Yggdroot/indentLine'
-" NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'kevinw/pyflakes-vim'
+NeoBundle 'todesking/ruby_hl_lvar.vim'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'kana/vim-textobj-user' " 依存で必要
+NeoBundle 'rhysd/vim-textobj-ruby'
+
+call neobundle#end()
+
+filetype plugin indent on
 
 NeoBundleCheck
 
+" release autogroup in MyAutoCmd
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
 "基本設定
-filetype plugin indent on
 syntax enable
 
 "machit
@@ -86,6 +124,7 @@ set hlsearch
 
 "バックアップ/swapを作らない
 set nobackup
+set noundofile
 set nowritebackup
 set noswapfile
 
@@ -113,7 +152,7 @@ set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,
 "tab表示
 set showtabline=2
 set tabpagemax=20
-noremap <Space>tn :tabnew<CR>
+noremap <Leader>tn :tabnew<CR>
 noremap GT :tabprevious<CR>
 
 "補完候補の表示
@@ -169,14 +208,21 @@ nnoremap [ %
 nnoremap ] %
 
 "vimrc編集関連
-nnoremap <Space>.  :<C-u>edit $HOME/dotfiles/vimrc<Return>
-nnoremap <Space>s  :<C-u>source $MYVIMRC<Return>
+nnoremap <leader>.  :<C-u>edit $HOME/dotfiles/vimrc<Return>
+nnoremap <leader>s  :<C-u>source $MYVIMRC<Return>
 
 "論理行移動と表示行移動を入れ替え
 noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
+
+" 入力モード中はemacs的なカーソル移動 http://lambdalisue.hatenablog.com/entry/2015/12/25/000046
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
+inoremap <C-f> <C-o>w
+inoremap <C-b> <C-o>b
+inoremap <C-d> <C-o>x
 
 " Ctrl-iでヘルプ
 nnoremap <C-i>  :<C-u>help<Space>
@@ -196,19 +242,18 @@ autocmd! BufRead,BufNewFile *.ftl   setfiletype ftl
 autocmd! BufRead,BufNewFile *.md   setfiletype markdown
 augroup END
 
-inoremap <C-e> <Esc>
-vnoremap <C-e> <Esc>
-cnoremap <C-e> <C-c>
-
 " 保存時に行末の空白を除去する
 "http://blog.sanojimaru.com/post/18643427334/vim
 autocmd BufWritePre * :%s/\s\+$//ge
 " 保存時にtabをスペースに変換する
 " autocmd BufWritePre * :%s/\t/  /ge
 
+" rubyのとき?も単語に含める
+autocmd FileType ruby setl iskeyword+=?
+
 "QuickRunを実行
-nnoremap <Space>x :QuickRun -into 0 <CR>
-vnoremap <Space>x :QuickRun -into 0 <CR>
+nnoremap <leader>x :QuickRun -into 0 <CR>
+vnoremap <leader>x :QuickRun -into 0 <CR>
 
 "先祖tagsファイルを参照
 if has('path_extra')
@@ -224,6 +269,10 @@ end
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_ignore_pattern = '^\.\|\.pyc$'
+let g:vimfiler_execute_file_list = {}
+let g:vimfiler_execute_file_list["_"]="vim"
+" let g:vimfiler_edit_action="vsplit"
+
 command! -nargs=* E VimFilerBufferDir
 command! -nargs=* EE VimFiler
 
@@ -241,15 +290,15 @@ command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent inde
 command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix
 "unite
 let g:unite_enable_start_insert=1
-nnoremap <silent> <Space>ut :Unite tab<Enter>
-nnoremap <silent> <Space>ub :Unite buffer<Enter>
-nnoremap <silent> <Space>uf :Unite file<Enter>
-nnoremap <silent> <Space>uo :<C-u>Unite -vertical -no-quit -no-start-insert -buffer-name=outline outline<CR>
-nnoremap <silent> <Space>ur :<C-u>Unite -start-insert -buffer-name=file_rec file_rec<CR>
-nnoremap <silent> <Space>ug :Unite grep -no-quit  -no-start-insert -buffer-name=grep <Enter>
+nnoremap <silent> <leader>ut :Unite tab<Enter>
+nnoremap <silent> <leader>ub :Unite buffer<Enter>
+nnoremap <silent> <leader>uf :Unite file<Enter>
+nnoremap <silent> <leader>uo :<C-u>Unite -vertical -no-quit -no-start-insert -buffer-name=outline outline<CR>
+nnoremap <silent> <leader>ur :<C-u>Unite -start-insert -buffer-name=file_rec file_rec<CR>
+nnoremap <silent> <leader>ug :Unite grep -no-quit  -no-start-insert -buffer-name=grep <Enter>
 " UniteWithBufferDir だと、パス入力済みで検索しづらいので、Uniteにパス渡すようにした
 " nnoremap <silent> <Space>uc :UniteWithBufferDir -start-insert  -buffer-name=files file_rec<CR>
-nnoremap <silent> <Space>uc :Unite file_rec:<C-r>=expand('%:p:h:gs?[ :]?\\\0?')<CR><CR>
+nnoremap <silent> <leader>uc :Unite file_rec:<C-r>=expand('%:p:h:gs?[ :]?\\\0?')<CR><CR>
 
 let s:file_rec_ignore_globs = unite#sources#rec#define()[0]['ignore_globs']
 
@@ -317,21 +366,22 @@ endfunction
 
 " vim-altr
 
-nmap <Space>a  <Plug>(altr-forward)
+nmap <leader>a  <Plug>(altr-forward)
 
 " For ruby tdd
 call altr#define('%.rb', 'spec/%_spec.rb')
 
 " For rails tdd
-call altr#define('app/models/%.rb', 'spec/models/%_spec.rb', 'spec/factories/%s.rb')
+call altr#define('app/models/%.rb', 'spec/models/%_spec.rb')
 call altr#define('app/controllers/%.rb', 'spec/requests/%_spec.rb')
 call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
-
+call altr#define('app/services/%.rb', 'spec/services/%_spec.rb')
+call altr#define('app/jobs/%.rb', 'spec/jobs/%_spec.rb')
 
 " open-browser
 "let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap <Space>ob <Plug>(openbrowser-smart-search)
-vmap <Space>ob <Plug>(openbrowser-smart-search)
+nmap <leader>ob <Plug>(openbrowser-smart-search)
+vmap <leader>ob <Plug>(openbrowser-smart-search)
 
 " rsense
 " let g:rsenseHome = "$HOME/local/rsense"
@@ -471,7 +521,6 @@ if has('lua')
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplete#close_popup()
-    inoremap <expr><C-e>  neocomplete#cancel_popup()
 
     inoremap <expr><Space> pumvisible() ? neocomplete#close_popup(). "\<Space>" : "\<Space>"
 
@@ -560,10 +609,12 @@ function! s:check_back_space()"{{{
 endfunction"}}}
 
 let g:syntastic_mode_map = {
-            \ 'mode': 'active',
+            \ 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'lua', 'sh', 'vim'],
             \ 'passive_filetypes': ['html', 'python']
             \}
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+" let g:syntastic_ruby_rubocop_exec = '/Users/yuichi/.rbenv/shims/ruby /Users/yuichi/apps/dividual/synchroapp-backend/bin/bundle exec rubocop'
 
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'

@@ -45,10 +45,11 @@ call dein#begin(s:dein_dir)
 let s:toml      = '~/dotfiles/vim_plugins.toml'
 let s:lazy_toml = '~/dotfiles/vim_lazy_plugins.toml'
 
+call dein#clear_cache()
 " TOML を読み込み、キャッシュしておく
 if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
   call dein#load_toml(s:toml,      {'lazy': 0})
-"   call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
   call dein#save_cache()
 endif
 

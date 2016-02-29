@@ -18,17 +18,13 @@ repo = 'Shougo/vimproc.vim'
   cygwin = 'make -f make_cygwin.mak'
   mac = 'make'
   unix = 'make'
-  linux = 'make'
+  linux = 'gmake'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
 
-
 [[plugins]]
 repo = 'quickrun.vim'
-
-[[plugins]]
-repo = 'ref.vim'
 
 [[plugins]]
 repo = 'tsaleh/vim-align'
@@ -38,9 +34,6 @@ repo = 'Shougo/neocomplete.vim'
 
 [[plugins]]
 repo = 'surround.vim'
-
-[[plugins]]
-repo = 'ZenCoding.vim'
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
@@ -64,9 +57,6 @@ repo = 'kana/vim-fakeclip'
 repo = 'tyru/caw.vim'
 
 [[plugins]]
-repo = 'thinca/vim-singleton'
-
-[[plugins]]
 repo = 'thinca/vim-qfreplace'
 
 [[plugins]]
@@ -74,9 +64,6 @@ repo = 'tanabe/ToggleCase-vim'
 
 [[plugins]]
 repo = 'jpo/vim-railscasts-theme'
-
-[[plugins]]
-repo = 'kchmck/vim-coffee-script'
 
 [[plugins]]
 repo = 'rking/ag.vim'
@@ -88,14 +75,4 @@ repo = 'Yggdroot/indentLine'
 repo = 'scrooloose/syntastic'
 
 [[plugins]]
-repo = 'todesking/ruby_hl_lvar.vim'
-
-[[plugins]]
-repo = 'vim-ruby/vim-ruby'
-
-[[plugins]]
 repo = 'kana/vim-textobj-user'
-
-[[plugins]]
-repo = 'rhysd/vim-textobj-ruby'
-

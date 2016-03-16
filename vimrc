@@ -1,3 +1,4 @@
+filetype off
 " noload defalt plugin
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
@@ -61,8 +62,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-filetype plugin indent on
-
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
   autocmd!
@@ -118,6 +117,8 @@ set backspace=eol,indent,start
 "statusLIne
 set statusline=%F%m%r%h%w\ (%Y\ %{&fileencoding}\ %{&ff})%=[x=%v,y=%l/%L]
 set laststatus=2
+filetype plugin indent on
+
 
 " カーソル下の単語を * で検索
 vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>

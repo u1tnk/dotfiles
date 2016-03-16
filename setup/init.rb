@@ -9,6 +9,9 @@ FileUtils.cd home
   Dir.mkdir x unless FileTest.exist? x
 end
 
+NEOVIM_DIR = '.neovim'
+Dir.mkdir NEOVIM_DIR unless FileTest.exist? NEOVIM_DIR
+
 [
   {dest: ".zprezto", src: "dotfiles/prezto"},
   {dest: ".gemrc", src: "dotfiles/gemrc"},
@@ -20,6 +23,8 @@ end
   {dest: ".zlogin", src: "dotfiles/prezto/runcoms/zlogin"},
   {dest: ".zlogout", src: "dotfiles/prezto/runcoms/zlogout"},
   {dest: ".zprofile", src: "dotfiles/prezto/runcoms/zprofile"},
+  {dest: ".neovim/nvim", src: "dotfiles/.vim"},
+  {dest: "dotfiles/.vim/init.vim", src: "dotfiles/vimrc"},
 ].each do |x|
   File.symlink x[:src], x[:dest] unless FileTest.symlink? x[:dest]
 end

@@ -103,6 +103,7 @@ fi
 # zshenvでやってたらprezto化後nanoに変わるようになったのでここで設定
 export EDITOR=vim
 export VISUAL=vim
+export XDG_CONFIG_HOME=$HOME/.neovim
 
 # pecoで履歴検索
 # http://blog.kenjiskywalker.org/blog/2014/06/12/peco/

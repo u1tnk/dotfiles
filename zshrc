@@ -9,7 +9,8 @@ bindkey "^N" history-beginning-search-forward-end
 case "${OSTYPE}" in
 darwin*)
     alias ls="ls -G -w"
-    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+#     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+    alias vim='nvim'
     ;;
 linux*)
     alias ls="ls --color"
@@ -103,7 +104,7 @@ fi
 # zshenvでやってたらprezto化後nanoに変わるようになったのでここで設定
 export EDITOR=vim
 export VISUAL=vim
-export XDG_CONFIG_HOME=$HOME/.neovim
+export XDG_CONFIG_HOME=$HOME/dotfiles
 
 # pecoで履歴検索
 # http://blog.kenjiskywalker.org/blog/2014/06/12/peco/
@@ -130,3 +131,5 @@ alias j='peco-select-apps'
 eval "$(direnv hook zsh)"
 
 eval "$(rbenv init --no-rehash -)"
+
+alias drubo="git diff  --name-only --diff-filter=AM | grep '.rb$' | xargs bundle exec rubocop -RDa"

@@ -1,0 +1,20 @@
+[[plugins]]
+repo = 'thinca/vim-singleton'
+gui    = 1
+
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+on_ft = ['coffee']
+
+[[plugins]]
+repo = 'todesking/ruby_hl_lvar.vim'
+on_ft = ['ruby']
+
+# [[plugins]]
+# repo = 'vim-ruby/vim-ruby'
+# on_ft = ['ruby']
+
+[[plugins]]
+repo = 'rhysd/vim-textobj-ruby'
+on_ft = ['ruby']
+

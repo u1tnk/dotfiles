@@ -285,7 +285,7 @@ let s:file_rec_ignore_globs = unite#sources#rec#define()[0]['ignore_globs']
 
 if !exists('g:dual_guard_ignore_settings')
     let g:dual_guard_ignore_settings = ""
-    call add(s:file_rec_ignore_globs, '.*\.\(png\|jpg\|gif\|log)')
+    call add(s:file_rec_ignore_globs, '.*\.\(png\|jpg\|gif\|log\)')
     call add(s:file_rec_ignore_globs, 'vendor/bundle/**') " vendor/bundle対策
     call add(s:file_rec_ignore_globs, 'log/**') " vendor/bundle対策
 endif

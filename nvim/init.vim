@@ -62,6 +62,8 @@ if dein#check_install()
   call dein#install()
 endif
 
+colorscheme railscasts
+
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
   autocmd!

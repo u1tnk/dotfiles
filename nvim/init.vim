@@ -411,13 +411,13 @@ vnoremap <silent> <C-p> "0p<CR>
 " コマンドウィンドウで開くかつ;と:の入れ替え、iは即時INSERTモード
 nnoremap / q/i
 vnoremap / q/i
-nnoremap q/ /i
-vnoremap q/ /i
+nnoremap q/ /
+vnoremap q/ /
 
 nnoremap ; q:i
 vnoremap ; q:i
-nnoremap q; :i
-vnoremap q; :i
+nnoremap q; :
+vnoremap q; :
 
 augroup RSpec
   autocmd!
@@ -465,101 +465,50 @@ cmap w!! w !sudo tee > /dev/null %
 " indentの表示文字カスタマイズ
 let g:indentLine_char = '|'
 
-if has('lua')
-    " neocomplete
-    "
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 4
-    let g:neocomplete#min_keyword_length = 4
-    let g:neocomplete#auto_completion_start_length = 4
+if has('python3')
 
+    " deoplete
+    let g:deoplete#enable_at_startup = 1
 
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-            \ }
-
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-    inoremap <silent><expr><CR> pumvisible() ? neocomplete#close_popup(). "\<CR>" : "\<CR>"
-
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><C-y>  neocomplete#close_popup()
-
-    inoremap <expr><Space> pumvisible() ? neocomplete#close_popup(). "\<Space>" : "\<Space>"
-
-    " For cursor moving in insert mode(Not recommended)
-    inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-    inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-    inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-    inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-
-    let g:neocomplete#enable_auto_select = 0
-
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-"     let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-    " http://kazy.hatenablog.com/entry/2013/07/18/131118
-"     autocmd FileType python setlocal omnifunc=jedi#completions
-"     let g:jedi#auto_vim_configuration = 0
-"     let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
-
-    " コマンドラインウィンドウでtab動作がおかしいのを指摘したら以下の設定指示された。わからんが動く。
-    " https://github.com/Shougo/neocomplete.vim/issues/74
-"    autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
-"    autocmd MyAutoCmd CmdwinLeave * let g:neocomplete_enable_auto_select = 0
-
-"    function! s:init_cmdwin()
-
-    let g:neocomplete_enable_auto_select = 0
-    let b:neocomplete_sources_list = ['vim_complete']
-
-    nnoremap <buffer><silent> q :<C-u>quit<CR>
-    nnoremap <buffer><silent> <TAB> :<C-u>quit<CR>
-    inoremap <buffer><expr><CR> neocomplete#close_popup()."\<CR>"
-    inoremap <buffer><expr><C-h> col('.') == 1 ?
-            \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
-    inoremap <buffer><expr><BS> col('.') == 1 ?
-            \ "\<ESC>:quit\<CR>" : neocomplete#cancel_popup()."\<C-h>"
-
-    " Completion.
-    inoremap <buffer><expr><TAB>  pumvisible() ?
-            \ "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>\<C-p>"
-
-    startinsert!
+    set completeopt+=noinsert
+"     <TAB>: completion.
+    imap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ deoplete#mappings#manual_complete()
+    function! s:check_back_space() abort "{{{
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
     endfunction"}}}
 
+    " <S-TAB>: completion back.
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    " <C-h>, <BS>: close popup and delete backword char.
+"     inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
+"     inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+
+    inoremap <expr><C-g> deoplete#mappings#undo_completion()
+    " <C-l>: redraw candidates
+    inoremap <expr><C-l>       deoplete#mappings#refresh()
+
+    " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function() abort
+        return deoplete#mappings#close_popup() . "\<CR>"
+    endfunction
+
+    inoremap <expr> '  pumvisible() ? deoplete#mappings#close_popup() : "'"
+
+    let g:deoplete#keyword_patterns = {}
+    let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+    let g:deoplete#keyword_patterns.tex = '[^\w|\s][a-zA-Z_]\w*'
+
+    let g:deoplete#omni#input_patterns = {}
+    let g:deoplete#omni#input_patterns.python = ''
+
+    let g:deoplete#enable_refresh_always = 1
+    let g:deoplete#enable_camel_case = 1
 endif
 
 

@@ -528,7 +528,7 @@ if has('lua')
     " For perlomni.vim setting.
     " https://github.com/c9s/perlomni.vim
     let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-    let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"     let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
     " http://kazy.hatenablog.com/entry/2013/07/18/131118
 "     autocmd FileType python setlocal omnifunc=jedi#completions

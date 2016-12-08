@@ -3,3 +3,5 @@
 *.swap
 .vim/bundle/vimdoc_ja
 .DS_Store
+nvim/repos/**
+direnv/**

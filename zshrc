@@ -28,6 +28,10 @@ alias su="su -l"
 alias vi="vim"
 alias view="vim -R"
 
+alias d="docker"
+alias dc="docker-compose"
+alias dm="docker-machine"
+
 #tmux
 
 # reattach-to-user-namespaceをmac/linux判定を.tmux.confでやろうとしたが難しかったので
@@ -61,7 +65,9 @@ alias gst="git stash"
 alias gl="git log --pretty=format:\"%C(green)%h %C(blue)%ad %C(red)|%C(reset) %s%d [%an]\" --graph --date=short"
 
 # ruby
-alias b="bundle exec"
+alias be="bundle exec"
+alias rs="bundle exec spring rspec"
+alias r="bundle exec spring rails"
 
 ## 実行したプロセスの消費時間が3秒以上かかったら
 ## 自動的に消費時間の統計情報を表示する。
@@ -79,7 +85,7 @@ alias -g G='| grep -i'
 alias tac="tail -r"
 
 alias rt="RAILS_ENV=test"
-alias dbreset="bin/rake db:migrate:reset && bin/rake db:seed_fu && RAILS_ENV=test bin/rake db:migrate:reset"
+alias dbreset="bin/rake db:migrate:reset && bin/rake db:seed_fu"
 
 # if test -e /usr/local/share/python/virtualenvwrapper.sh; then
 #     source /usr/local/share/python/virtualenvwrapper.sh

@@ -76,3 +76,7 @@ repo = 'scrooloose/syntastic'
 
 [[plugins]]
 repo = 'kana/vim-textobj-user'
+
+[[plugins]]
+repo = 'cakebaker/scss-syntax.vim'
+

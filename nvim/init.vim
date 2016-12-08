@@ -478,6 +478,8 @@ if has('python3')
 
     " deoplete
     let g:deoplete#enable_at_startup = 1
+    " 落ちることがあるので回避
+    let g:deoplete#_context = {}
 
     set completeopt+=noinsert
 "     <TAB>: completion.
@@ -569,3 +571,4 @@ set matchtime=1
 
 command! -nargs=* Spon cd $HOME/apps/gram30/spon-server | edit $HOME/apps/gram30/spon-server
 command! -nargs=* Sync cd $HOME/apps/dividual/synchroapp-backend | edit $HOME/apps/dividual/synchroapp-backend
+command! -nargs=* Pet cd $HOME/apps/u1tnk/petit-ballon | edit $HOME/apps/u1tnk/petit-ballon

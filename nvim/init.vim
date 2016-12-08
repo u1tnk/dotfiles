@@ -291,6 +291,7 @@ if !exists('g:dual_guard_ignore_settings')
     call add(s:file_rec_ignore_globs, '.*\.\(png\|jpg\|gif\|log\)')
     call add(s:file_rec_ignore_globs, 'vendor/bundle/**') " vendor/bundle対策
     call add(s:file_rec_ignore_globs, 'log/**') " vendor/bundle対策
+    call add(s:file_rec_ignore_globs, 'lambda/**') " lambdaソース保存対策
 endif
 
 call unite#custom#source('file_rec', 'ignore_globs', s:file_rec_ignore_globs)

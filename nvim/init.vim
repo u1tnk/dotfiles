@@ -428,6 +428,11 @@ augroup RSpec
   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
 augroup END
 
+augroup slim
+  autocmd!
+  autocmd BufWinEnter,BufNewFile *.slim set filetype=slim
+augroup END
+
 au BufNewFile,BufRead Guardfile setfiletype ruby
 au BufNewFile,BufRead *.jbuilder setfiletype ruby
 

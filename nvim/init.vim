@@ -142,6 +142,9 @@ set wildmenu
 "Escの2回押しでハイライト消去
 nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
+" karabiner/sierra問題でjjをESCに
+inoremap jj <ESC>
+
 "yankとclipboardを共用（gvimのみ）
 set clipboard=unnamed
 

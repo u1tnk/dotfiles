@@ -16,10 +16,10 @@ local function remapKey(modifiers, key, keyCode)
 end
 
 -- カーソル移動
-remapKey({'alt'}, 'h', keyCode('left'))
-remapKey({'alt'}, 'j', keyCode('down'))
-remapKey({'alt'}, 'k', keyCode('up'))
-remapKey({'alt'}, 'l', keyCode('right'))
+for k, v in pairs({h='left', j='down', k='up', l='right'}) do
+  remapKey({'alt'}, k, keyCode(v))
+  remapKey({'alt', 'shift'}, k, keyCode(v, {'shift'}))
+end
 
 string.format("volume down: %s", hs.audiodevice.defaultOutputDevice():outputVolume())
 -- Volume調整
@@ -45,7 +45,6 @@ for _, v in pairs(hs.screen.allScreens()) do
 end
 logger:i(builtin_screen)
 logger:i(builtin_screen:getBrightness())
-
 
 local function getCurrentBrightness()
   return math.ceil(builtin_screen:getBrightness() * 10) / 10

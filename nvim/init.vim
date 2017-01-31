@@ -478,8 +478,6 @@ if has('python3')
 
     " deoplete
     let g:deoplete#enable_at_startup = 1
-    " 落ちることがあるので回避
-    let g:deoplete#_context = {}
 
     set completeopt+=noinsert
 "     <TAB>: completion.

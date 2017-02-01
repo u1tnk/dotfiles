@@ -418,10 +418,15 @@ vnoremap / q/i
 nnoremap q/ /
 vnoremap q/ /
 
-nnoremap ; q:i
-vnoremap ; q:i
-nnoremap q; :
-vnoremap q; :
+
+ nnoremap ; :
+ vnoremap ; :
+ nnoremap ; :
+ vnoremap ; :
+" nnoremap ; q:i
+" vnoremap ; q:i
+" nnoremap q; :
+" vnoremap q; :
 
 augroup RSpec
   autocmd!

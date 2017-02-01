@@ -41,7 +41,7 @@ repo = 'Shougo/deoplete.nvim'
 repo = 'surround.vim'
 
 [[plugins]]
-repo = 'Shougo/vimfiler'
+repo = 'cocopon/vaffle.vim'
 
 [[plugins]]
 repo = 'kana/vim-altr'

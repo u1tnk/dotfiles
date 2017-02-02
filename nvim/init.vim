@@ -142,10 +142,7 @@ set wildmenu
 "Escの2回押しでハイライト消去
 nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
-" karabiner/sierra問題でjjをESCに
-inoremap jj <ESC>
-
-"yankとclipboardを共用（gvimのみ）
+"yankとclipboardを共用
 set clipboard=unnamed
 
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
@@ -208,11 +205,6 @@ inoremap <C-f> <C-o>w
 inoremap <C-b> <C-o>b
 inoremap <C-d> <C-o>x
 
-" Ctrl-iでヘルプ
-nnoremap <C-i>  :<C-u>help<Space>
-" " カーソル下のキーワードをヘルプでひく
-nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
-
 "カレントウィンドウのカーソル行をハイライトする
 set cursorline
 autocmd WinEnter * setlocal cursorline
@@ -249,7 +241,6 @@ if filereadable(expand('~/rtags'))
     au FileType ruby,eruby setl tags+=~/rtags
 end
 
-
 command! -nargs=* E Vaffle
 
 "外部grep設定
@@ -261,8 +252,6 @@ set grepprg=grep\ -nH
 " 戻すのはindentexprを保存しておくのがめんどくさいので非対応
 command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent indentexpr=
 
-
-"command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix  bomb
 command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix
 "unite
 let g:unite_enable_start_insert=1
@@ -293,53 +282,12 @@ let g:unite_source_file_rec_max_cache_files = 20000
 
 let g:unite_winwidth = 40
 
-" マクロ実行を手早く
-nnoremap <silent> <c-Q> @qq
-
-" zen-coding
-" zen-coding時のindentがtabstop,shiftwidthで変わらないので、4から変えたいときは定義
-"let g:user_zen_settings = {
-"            \'indentation' : '  ',
-"            \}
-
-" http://vim-users.jp/2011/02/hack202/
-" 警告しつつ、保存時にディレクトリを作成する
-augroup vimrc-auto-mkdir  " {{{
-  autocmd!
-  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
-  function! s:auto_mkdir(dir, force)  " {{{
-    if !isdirectory(a:dir) && (a:force ||
-    \    input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-    endif
-  endfunction  " }}}
-augroup END  " }}}
-
 " from http://vim-users.jp/2011/02/hack203/
 " 今のキーマッピングを表示 ex:AllMaps
 command!
 \   -nargs=* -complete=mapping
 \   AllMaps
 \   map <args> | map! <args> | lmap <args>
-
-" 出力をバッファにキャプチャする  ex:Capture AllMaps
-command!
-\   -nargs=+ -complete=command
-\   Capture
-\   call s:cmd_capture(<q-args>)
-
-function! s:cmd_capture(q_args) "{{{
-    redir => output
-    silent execute a:q_args
-    redir END
-    let output = substitute(output, '^\n\+', '', '')
-
-    belowright new
-
-    silent file `=printf('[Capture: %s]', a:q_args)`
-    setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
-    call setline(1, split(output, '\n'))
-endfunction
 
 " vim-altr
 
@@ -354,17 +302,7 @@ call altr#define('app/controllers/%.rb', 'spec/requests/%_spec.rb')
 call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
 call altr#define('app/services/%.rb', 'spec/services/%_spec.rb')
 call altr#define('app/jobs/%.rb', 'spec/jobs/%_spec.rb')
-
-" open-browser
-"let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap <leader>ob <Plug>(openbrowser-smart-search)
-vmap <leader>ob <Plug>(openbrowser-smart-search)
-
-" rsense
-" let g:rsenseHome = "$HOME/local/rsense"
-
-" let g:rsenseUseOmniFunc = 1
-autocmd FileType html setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=;/
+call altr#define('lib/%.rb', 'spec/lib/%_spec.rb')
 
 " コメントアウトを切り替えるマッピング例
 nmap <Leader>c <Plug>(caw:I:toggle)
@@ -372,9 +310,6 @@ vmap <Leader>c <Plug>(caw:I:toggle)
 
 " snippet
 command! -nargs=* Snippet cd $HOME/Dropbox/snippets | edit $HOME/Dropbox/snippets/
-
-" for gitv
-autocmd FileType git :setlocal foldlevel=99
 
 " Center words for search
 nmap n nzz
@@ -451,10 +386,9 @@ let g:quickrun_config['ruby.rspec'] = {
   \ 'filetype': 'rspec-result'
   \}
 
-" ２系がメインなので…
-" let g:quickrun_config['python'] = {
-"   \ 'command': 'python3',
-"   \}
+let g:quickrun_config['python'] = {
+  \ 'command': 'python3',
+  \}
 
 " http://qiita.com/items/c8962f9325a5433dc50d
 let g:unite_source_grep_command = 'ag'

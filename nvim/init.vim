@@ -242,6 +242,7 @@ if filereadable(expand('~/rtags'))
 end
 
 command! -nargs=* E Vaffle
+nnoremap <leader>cd :cd %:h<CR>
 
 "外部grep設定
 set grepprg=grep\ -nH

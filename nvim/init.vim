@@ -253,34 +253,84 @@ set grepprg=grep\ -nH
 command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent indentexpr=
 
 command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix
-"unite
-let g:unite_enable_start_insert=1
-nnoremap <silent> <leader>ut :Unite tab<Enter>
-nnoremap <silent> <leader>ub :Unite buffer<Enter>
-nnoremap <silent> <leader>uf :Unite file<Enter>
-nnoremap <silent> <leader>uo :<C-u>Unite -vertical -no-quit -no-start-insert -buffer-name=outline outline<CR>
-nnoremap <silent> <leader>ur :<C-u>Unite -start-insert -buffer-name=file_rec file_rec<CR>
-nnoremap <silent> <leader>ug :Unite grep -no-quit  -no-start-insert -buffer-name=grep <Enter>
-" UniteWithBufferDir だと、パス入力済みで検索しづらいので、Uniteにパス渡すようにした
-" nnoremap <silent> <Space>uc :UniteWithBufferDir -start-insert  -buffer-name=files file_rec<CR>
-nnoremap <silent> <leader>uc :Unite file_rec:<C-r>=expand('%:p:h:gs?[ :]?\\\0?')<CR><CR>
 
-let s:file_rec_ignore_globs = unite#sources#rec#define()[0]['ignore_globs']
+" denite
+nnoremap <silent> <C-u><C-m> :Denite menu<CR>
+nnoremap <silent> <C-u><C-b> :Denite buffer<CR>
+nnoremap <silent> <C-u><C-f> :Denite file_rec<CR>
+nnoremap <silent> <C-u><C-r> :Denite file_mru<CR>
+nnoremap <silent> <C-u><C-g> :Denite grep<CR>
+nnoremap <silent> <C-u><C-l> :Denite line<CR>
+nnoremap <silent> <C-u><C-u> :Denite -resume<CR>
+nnoremap <silent> <C-u><C-y> :Denite neoyank<CR>
 
-if !exists('g:dual_guard_ignore_settings')
-    let g:dual_guard_ignore_settings = ""
-    call add(s:file_rec_ignore_globs, '.*\.\(png\|jpg\|gif\|log\)')
-    call add(s:file_rec_ignore_globs, 'vendor/bundle/**') " vendor/bundle対策
-    call add(s:file_rec_ignore_globs, 'log/**') " vendor/bundle対策
-    call add(s:file_rec_ignore_globs, 'lambda/**') " lambdaソース保存対策
-endif
+" Change file_rec command.
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
-call unite#custom#source('file_rec', 'ignore_globs', s:file_rec_ignore_globs)
-call unite#custom#source('grep', 'ignore_globs', s:file_rec_ignore_globs)
+" Change mappings.
+call denite#custom#map(
+        \ 'insert',
+        \ '<C-j>',
+        \ '<denite:move_to_next_line>',
+        \ 'noremap'
+        \)
+call denite#custom#map(
+        \ 'insert',
+        \ '<C-k>',
+        \ '<denite:move_to_previous_line>',
+        \ 'noremap'
+        \)
 
-let g:unite_source_file_rec_max_cache_files = 20000
+" Change matchers.
+call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
+call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 
-let g:unite_winwidth = 40
+" Change sorters.
+call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
+
+" Add custom menus
+let s:menus = {}
+
+let s:menus.zsh = {
+    \ 'description': 'zsh configs'
+    \ }
+let s:menus.zsh.file_candidates = [
+    \ ['dotfiles', 'Vaffle ~/dotfiles/'],
+    \ ['init.vim', '~/dotfiles/nvim/init.vim'],
+    \ ['zshrc', '~/dotfiles/zshrc'],
+    \ ['zshenv', '~/dotfiles/zshrc'],
+    \ ]
+
+let s:menus.vim = {
+    \ 'description': 'vim configs'
+    \ }
+let s:menus.vim.file_candidates = [
+    \ ['init.vim', '~/dotfiles/nvim/init.vim'],
+    \ ['plugin', '~/dotfiles/nvim/vim_plugins.toml'],
+    \ ['lazy plugin', '~/dotfiles/nvim/vim_lazy_plugins.toml'],
+    \ ]
+
+call denite#custom#var('menu', 'menus', s:menus)
+
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [''])
+call denite#custom#var('grep', 'separator', [])
+call denite#custom#var('grep', 'default_opts', ['--nocolor', '--nogroup'])
+
+" Define alias
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+call denite#custom#source('file_mru', 'converters', ['converter_relative_word'])
+" Change default prompt
+call denite#custom#option('default', 'prompt', '>')
+
+" Change ignore_globs
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+        \ [ '.git/', '.ropeproject/', '__pycache__/',
+        \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+
 
 " from http://vim-users.jp/2011/02/hack203/
 " 今のキーマッピングを表示 ex:AllMaps
@@ -390,12 +440,6 @@ let g:quickrun_config['python'] = {
   \ 'command': 'python3',
   \}
 
-" http://qiita.com/items/c8962f9325a5433dc50d
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'
-let g:unite_source_grep_recursive_opt = ''
-let g:unite_source_grep_max_candidates = 200
-
 " QuickFixおよびHelpでは q でバッファを閉じる
 autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
 
@@ -485,10 +529,6 @@ let g:syntastic_mode_map = {
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 " let g:syntastic_ruby_rubocop_exec = '/Users/yuichi/.rbenv/shims/ruby /Users/yuichi/apps/dividual/synchroapp-backend/bin/bundle exec rubocop'
 
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts = '--nocolor --nogroup -i'
-let g:unite_source_grep_recursive_opt = ''
-let g:unite_source_grep_max_candidates = 200
 
 
 " http://itchyny.hatenablog.com/entry/2014/12/25/090000

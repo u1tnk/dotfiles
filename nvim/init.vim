@@ -60,7 +60,7 @@ if dein#check_install()
   call dein#install()
 endif
 
-colorscheme railscasts
+colorscheme moonshine
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
@@ -173,8 +173,6 @@ nnoremap <Space>p viwp
 
 "最後に変更されたテキストを選択する
 nnoremap gc  `[v`]
-vnoremap gc ;<C-u>normal gc<Enter>
-onoremap gc ;<C-u>normal gc<Enter>
 
 "  Insert mode中で単語単位/行単位の削除をアンドゥ可能にする
 inoremap <C-u>  <C-g>u<C-u>
@@ -241,8 +239,8 @@ if filereadable(expand('~/rtags'))
     au FileType ruby,eruby setl tags+=~/rtags
 end
 
-command! -nargs=* E Vaffle
-nnoremap <leader>cd :cd %:h<CR>
+nnoremap <leader>e :Vaffle<CR>
+nnoremap <leader>ee :Vaffle %:h<CR>
 
 "外部grep設定
 set grepprg=grep\ -nH
@@ -256,14 +254,16 @@ command! -nargs=* NoAllIndent setlocal noautoindent nocindent nosmartindent inde
 command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix
 
 " denite
-nnoremap <silent> <C-u><C-m> :Denite menu<CR>
-nnoremap <silent> <C-u><C-b> :Denite buffer<CR>
-nnoremap <silent> <C-u><C-f> :Denite file_rec<CR>
-nnoremap <silent> <C-u><C-r> :Denite file_mru<CR>
-nnoremap <silent> <C-u><C-g> :Denite grep<CR>
-nnoremap <silent> <C-u><C-l> :Denite line<CR>
-nnoremap <silent> <C-u><C-u> :Denite -resume<CR>
-nnoremap <silent> <C-u><C-y> :Denite neoyank<CR>
+nnoremap <silent> <C-k><C-m> :Denite menu<CR>
+nnoremap <silent> <C-k><C-b> :Denite buffer<CR>
+nnoremap <silent> <C-k><C-f> :Denite file_rec<CR>
+nnoremap <silent> <C-k><C-r> :Denite file_mru<CR>
+nnoremap <silent> <C-k><C-g> :Denite -no-empty grep<CR>
+nnoremap <silent> <C-k><C-l> :Denite line<CR>
+nnoremap <silent> <C-k><C-u> :Denite -resume<CR>
+nnoremap <silent> <C-k><C-n> :Denite -resume -immediately -select=+1<CR>
+nnoremap <silent> <C-k><C-p> :Denite -resume -immediately -select=-1<CR>
+nnoremap <silent> <C-k><C-y> :Denite neoyank<CR>
 
 " Change file_rec command.
 call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
@@ -296,7 +296,6 @@ let s:menus.zsh = {
     \ 'description': 'zsh configs'
     \ }
 let s:menus.zsh.file_candidates = [
-    \ ['dotfiles', 'Vaffle ~/dotfiles/'],
     \ ['init.vim', '~/dotfiles/nvim/init.vim'],
     \ ['zshrc', '~/dotfiles/zshrc'],
     \ ['zshenv', '~/dotfiles/zshrc'],
@@ -316,7 +315,7 @@ call denite#custom#var('menu', 'menus', s:menus)
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [''])
+call denite#custom#var('grep', 'pattern_opt', ['--match'])
 call denite#custom#var('grep', 'separator', [])
 call denite#custom#var('grep', 'default_opts', ['--nocolor', '--nogroup'])
 
@@ -504,9 +503,9 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+" if has('conceal')
+"   set conceallevel= concealcursor=i
+" endif
 
 
 " SuperTab like snippets behavior.

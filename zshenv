@@ -76,11 +76,6 @@ typeset -U sudo_path
 ##            /: ディレクトリのみ残す。
 sudo_path=({,/usr/pkg,/usr/local,/usr}/sbin(N-/))
 
-# http://hiroki.jp/docker-on-osx
-if [[ "${OSTYPE}" =~ darwin.* ]]; then
-    export DOCKER_HOST=tcp://
-fi
-
 export GOPATH=~/go
 
 eval "$(rbenv init --no-rehash -)"

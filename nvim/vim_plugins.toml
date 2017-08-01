@@ -71,7 +71,7 @@ repo = 'thinca/vim-qfreplace'
 repo = 'tanabe/ToggleCase-vim'
 
 [[plugins]]
-repo = 'KKPMW/moonshine-vim'
+repo = 'Haron-Prime/Antares'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'

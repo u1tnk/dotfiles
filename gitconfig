@@ -23,6 +23,7 @@
     in=!sh -c 'git log ..origin/${1:-master}'
     out=!sh -c 'git log origin/${1:-master}..' -
     diff = diff --ignore-space-at-eol
+	wip = commit --allow-empty --no-verify
 [pager]
     color = true
 [status]

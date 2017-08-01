@@ -60,7 +60,7 @@ if dein#check_install()
   call dein#install()
 endif
 
-colorscheme moonshine
+colorscheme Antares
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
@@ -347,11 +347,7 @@ nmap <leader>a  <Plug>(altr-forward)
 call altr#define('%.rb', 'spec/%_spec.rb')
 
 " For rails tdd
-call altr#define('app/models/%.rb', 'spec/models/%_spec.rb')
-call altr#define('app/controllers/%.rb', 'spec/requests/%_spec.rb')
-call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
-call altr#define('app/services/%.rb', 'spec/services/%_spec.rb')
-call altr#define('app/jobs/%.rb', 'spec/jobs/%_spec.rb')
+call altr#define('app/%.rb', 'spec/%_spec.rb')
 call altr#define('lib/%.rb', 'spec/lib/%_spec.rb')
 
 " コメントアウトを切り替えるマッピング例

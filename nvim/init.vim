@@ -60,7 +60,7 @@ if dein#check_install()
   call dein#install()
 endif
 
-colorscheme Antares
+colorscheme antares
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd

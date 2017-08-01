@@ -11,9 +11,11 @@ darwin*)
     alias ls="ls -G -w"
 #     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias vim='nvim'
+    alias tac="tail -r"
     ;;
 linux*)
     alias ls="ls --color"
+    alias vim='nvim'
     umask 002
     ;;
 esac
@@ -82,8 +84,6 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias -g G='| grep -i'
 
-alias tac="tail -r"
-
 alias rt="RAILS_ENV=test"
 alias dbreset="bin/rake db:migrate:reset && bin/rake db:seed_fu"
 
@@ -129,7 +129,7 @@ bindkey '^r' peco-select-history
 alias h=peco-select-history
 
 function peco-select-apps() {
-    eval cd ~/apps/$(ffind -d ~/apps --depth 1 --type d | peco)
+    eval cd $(find $HOME/apps -mindepth 1 -maxdepth 2 -type d | peco)
 }
 zle -N peco-select-apps
 alias j='peco-select-apps'

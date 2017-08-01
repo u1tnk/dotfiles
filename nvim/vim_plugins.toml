@@ -35,7 +35,7 @@ repo = 'Shougo/neomru.vim'
 repo = 'Shougo/neoyank.vim'
 
 [[plugins]]
-repo = 'quickrun.vim'
+repo = 'vim-scripts/quickrun.vim'
 
 [[plugins]]
 repo = 'tsaleh/vim-align'
@@ -44,7 +44,7 @@ repo = 'tsaleh/vim-align'
 repo = 'Shougo/deoplete.nvim'
 
 [[plugins]]
-repo = 'surround.vim'
+repo = 'vim-scripts/surround.vim'
 
 [[plugins]]
 repo = 'cocopon/vaffle.vim'

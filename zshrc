@@ -16,6 +16,7 @@ darwin*)
 linux*)
     alias ls="ls --color"
     alias vim='nvim'
+    EDITOR='nvim'
     umask 002
     ;;
 esac

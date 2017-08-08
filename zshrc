@@ -56,6 +56,7 @@ function tn(){
 function ta(){
   tmux attach || tn
 }
+export TMUX_TMPDIR=/tmp
 
 # alias tmux="tmuxx"
 # alias ta="tmuxx attach || tmuxx new-session \; source-file ~/dotfiles/.tmux.session"

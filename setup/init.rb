@@ -5,8 +5,8 @@ require "fileutils"
 home = ENV['HOME']
 FileUtils.cd home
 
-%w(local temp apps).each do |x|
-  Dir.mkdir x unless FileTest.exist? x
+%w(local temp apps .config/termit).each do |x|
+  FileUtils.mkdir_p x unless FileTest.exist? x
 end
 
 [
@@ -20,6 +20,7 @@ end
   {dest: ".zlogin", src: "dotfiles/prezto/runcoms/zlogin"},
   {dest: ".zlogout", src: "dotfiles/prezto/runcoms/zlogout"},
   {dest: ".zprofile", src: "dotfiles/prezto/runcoms/zprofile"},
+  {dest: ".config/termit/rc.lua", src: "#{home}/dotfiles/termit/rc.lua"},
 ].each do |x|
   File.symlink x[:src], x[:dest] unless FileTest.symlink? x[:dest]
 end
@@ -41,11 +42,6 @@ end
 end
 
 print `sh dotfiles/setup/git_submodule.sh`
-
-#vimdoc_ja
-unless  FileTest.exist? "dotfiles/.vim/bundle/vimdoc_ja"
-  print `svn checkout http://vimdoc-ja.googlecode.com/svn/trunk/runtime dotfiles/.vim/bundle/vimdoc_ja` unless FileTest.exist? ".vim/bundle/vimdoc_ja"
-end
 
 #rsense
 unless  FileTest.exist? "local/rsense"

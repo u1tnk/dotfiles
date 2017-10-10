@@ -51,11 +51,11 @@ function tn(){
 
         tmux -f <(echo "$tweaked_config") new-session \; source-file ~/dotfiles/.tmux.session
     else
-        tmux new-session \; source-file ~/dotfiles/.tmux.session
+        tmux -2 new-session \; source-file ~/dotfiles/.tmux.session
     fi
 }
 function ta(){
-  tmux attach || tn
+  tmux -2 attach || tn
 }
 export TMUX_TMPDIR=/tmp
 

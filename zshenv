@@ -23,6 +23,7 @@ path=(# システム用
       /bin(N-/)
       # 自分用
       $HOME/local/bin(N-/)
+      $HOME/.local/bin(N-/)
       $HOME/go/bin(N-/)
       $HOME/local/rsense/bin(N-/)
       $HOME/scripts(N-/)

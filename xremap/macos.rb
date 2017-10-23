@@ -1,7 +1,5 @@
-%w[a z x c v w t r Return].each do |key|
-  remap "Alt-#{key}", to: "C-#{key}"
-end
-
+%w[a z x c v w t r p Return].each do |key|
+  remap "Alt-#{key}", to: "C-#{key}" end
 remap "Shift-Alt-bracketright", to: "Ctrl-Page_Down"
 remap "Shift-Alt-bracketleft", to: "Ctrl-Page_Up"
 
@@ -19,4 +17,8 @@ window class_only: 'termit' do
   remap "Shift-Alt-bracketright", to: "Alt-Right"
   remap "Shift-Alt-bracketleft", to: "Alt-Left"
   remap "Alt-w", to: "Shift-Ctrl-w"
+end
+
+window class_only: 'slack' do
+  remap "Alt-Up", to: "Ctrl-Up"
 end

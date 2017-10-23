@@ -328,8 +328,17 @@ call denite#custom#option('default', 'prompt', '>')
 
 " Change ignore_globs
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-        \ [ '.git/', '.ropeproject/', '__pycache__/',
-        \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+        \ [
+        \   '.git/',
+        \   '.ropeproject/',
+        \   '__pycache__/',
+        \   'venv/',
+        \   'images/',
+        \   '*.min.*',
+        \   'img/',
+        \   'node_modules/',
+        \   'fonts/'
+        \ ])
 
 
 " from http://vim-users.jp/2011/02/hack203/

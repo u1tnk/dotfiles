@@ -60,7 +60,6 @@ setKbPolicy('keycode')
 userMenu = {}
 table.insert(userMenu, {name='Close tab', action=closeTab})
 
-table.insert(userMenu, {name='Reconfigure', action=reconfigure, accel='Ctrl-r'})
 table.insert(userMenu, {name='findNext', action=findNext, accel='Alt-n'})
 table.insert(userMenu, {name='findPrev', action=findPrev, accel='Alt-p'})
 table.insert(userMenu, {name='toggle menubar', action=function () toggleMenubar() end})

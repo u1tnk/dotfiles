@@ -21,6 +21,7 @@ end
   {dest: ".zlogout", src: "dotfiles/prezto/runcoms/zlogout"},
   {dest: ".zprofile", src: "dotfiles/prezto/runcoms/zprofile"},
   {dest: ".config/termit/rc.lua", src: "#{home}/dotfiles/termit/rc.lua"},
+  {dest: ".Xdefaults", src: "dotfiles/Xdefaults"},
 ].each do |x|
   File.symlink x[:src], x[:dest] unless FileTest.symlink? x[:dest]
 end

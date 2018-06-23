@@ -19,6 +19,11 @@ window class_only: 'termit' do
   remap "Alt-w", to: "Shift-Ctrl-w"
 end
 
+window class_only: 'urxvt' do
+  remap "Alt-c", to: "Ctrl-Alt-c"
+  remap "Alt-v", to: "Ctrl-Alt-v"
+end
+
 window class_only: 'slack' do
   remap "Alt-Up", to: "Ctrl-Up"
 end

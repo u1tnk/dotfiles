@@ -12,7 +12,7 @@ defaults.hideTitlebarWhenMaximized = true
 defaults.tabName = 'term'
 defaults.encoding = 'UTF-8'
 defaults.wordCharExceptions = '- .,_/'
-defaults.font = 'Ricty 12'
+defaults.font = 'Ricty 14'
 --defaults.foregroundColor = 'gray'
 --defaults.backgroundColor = 'black'
 defaults.showScrollbar = true
@@ -22,7 +22,7 @@ defaults.showBorder = true
 defaults.hideMenubar = false
 defaults.fillTabbar = true
 defaults.scrollbackLines = 8192
-defaults.geometry = '120x36'
+defaults.geometry = '100x24'
 defaults.allowChangingTitle = false
 --defaults.backspaceBinding = 'AsciiBksp'
 --defaults.deleteBinding = 'AsciiDel'
@@ -36,7 +36,27 @@ defaults.setStatusbar = function (tabInd)
     end
     return ''
 end
--- defaults.colormap = termit.colormaps.delicate
+-- copy from tango
+defaults.colormap = {
+--   '#2e2e34343636', backgroundcolor
+  '#111111111111',
+  '#cccc00000000',
+  '#4e4e9a9a0606',
+  '#c4c4a0a00000',
+  '#34346565a4a4',
+  '#757550507b7b',
+  '#060698209a9a',
+--   '#d3d3d7d7cfcf', foregroundcolor
+  '#0900ea001800',
+  '#555557575353',
+  '#efef29292929',
+  '#8a8ae2e23434',
+  '#fcfce9e94f4f',
+  '#72729f9fcfcf',
+  '#adad7f7fa8a8',
+  '#3434e2e2e2e2',
+  '#eeeeeeeeecec'
+}
 defaults.matches = {['http[^ ]+'] = function (url) print('Matching url: '..url) end}
 defaults.transparency = 0.5
 setOptions(defaults)

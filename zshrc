@@ -145,3 +145,5 @@ alias drubo="git diff  --name-only --diff-filter=AM | grep '.rb$' | xargs bundle
 
 alias tenki='curl wttr.in/yokohama\?lang=ja'
 export PATH="$HOME/.embulk/bin:$PATH"
+
+setterm -blength 0

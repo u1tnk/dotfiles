@@ -31,6 +31,7 @@ path=(# システム用
       $HOME/.cabal/bin(N-/)
       $HOME/.nodebrew/current/bin(N-/)
       $HOME/node_modules/.bin(N-/)
+      $HOME/.embulk/bin
       # システム用
       /opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
       /usr/local/mysql/bin(N-/)

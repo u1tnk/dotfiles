@@ -8,7 +8,21 @@ define_modmap({
     Key.CAPSLOCK: Key.LEFT_CTRL,
 })
 
-# mac os like
+# 先勝ちなのでアプリ固有設定を先にする
+define_keymap(re.compile("Slack"), {
+    K("M-Up"): K("Ctrl-Up"),
+    K("M-k"): K("Ctrl-Up"),
+}, "Slack")
+
+define_keymap(re.compile("Google-chrome"), {
+    K("M-Shift-t"): K("C-Shift-t"),
+}, "Chrome")
+
+define_keymap(re.compile("URxvt"), {
+    K("M-c"): K("C-M-c"),
+    K("M-v"): K("C-M-v"),
+}, "URxvt")
+
 define_keymap(lambda wm_class: wm_class not in ("URxvt"), {
     K("M-a"): K("C-a"),
     K("M-z"): K("C-z"),
@@ -25,23 +39,9 @@ define_keymap(lambda wm_class: wm_class not in ("URxvt"), {
     K("M-Shift-Left_Brace"): K("C-Page_Up")
 }, "macos-like keys")
 
-# vim like
 define_keymap(lambda wm_class: wm_class not in (), {
     K("M-j"): K("Down"),
     K("M-k"): K("Up"),
     K("M-h"): K("Left"),
     K("M-l"): K("Right"),
 }, "vim-like keys")
-
-define_keymap(re.compile("Google-chrome"), {
-    K("M-Shift-t"): K("C-Shift-t"),
-}, "Chrome")
-
-define_keymap(re.compile("URxvt"), {
-    K("M-c"): K("C-M-c"),
-    K("M-v"): K("C-M-v"),
-}, "URxvt")
-
-define_keymap(re.compile("slack"), {
-    K("M-Up"): K("Ctrl-Up"),
-}, "urxvt")

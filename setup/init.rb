@@ -29,7 +29,7 @@ end
 # .zhistoryはファイルが勝手にできるので
 if FileTest.file? ".zhistory"
   FileUtils.rm ".zhistory"
-  File.symlink "Dropbox (Personal)/dotfiles/.zhistory", ".zhistory"
+  File.symlink "Dropbox/dotfiles/.zhistory", ".zhistory"
 end
 
 if FileTest.exist? ".zshrc"

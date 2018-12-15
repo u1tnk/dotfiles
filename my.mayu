@@ -1,0 +1,46 @@
+# このファイルをyamyディレクトリにコピーして読ませる
+
+# Keyboard settings
+include "dot.mayu"
+
+# Mouse event activation
+def option mouse-event = true
+
+keymap Global
+
+# vim like arrow {{{
+  key A-h = Left
+  key A-j = Down
+  key A-k = Up
+  key A-l = Right
+  key A-S-h = C-S-Left
+  key A-S-j = C-S-Down
+  key A-S-k = C-S-Up
+  key A-S-l = C-S-Right
+# }}}
+
+# mac like {{{
+  key A-r = C-r
+  key A-c = C-c
+  key A-v = C-v
+  key A-t = C-t
+  key A-x = C-x
+  key A-w = C-w
+  key A-a = C-a
+  key A-f = C-f
+  key A-p = C-p
+  key A-Enter = C-Enter
+  key A-S-RightSquareBracket = C-Tab
+  # なぜか逆にすると一回右に行ってから左に行ってしまう
+  key A-S-LeftSquareBracket = C-S-Tab
+  key A-S-t = C-S-t
+# }}}
+#
+
+# RLoginでコピー履歴利用
+window RLoginKeyMap /RLogin/ :Global
+  key A-S-v = A-v
+
+# Slackの直前編集
+window SlackKeyMap /Slack/ :Global
+  key A-k = C-Up

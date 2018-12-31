@@ -4,7 +4,7 @@
 include "dot.mayu"
 
 # Mouse event activation
-def option mouse-event = true
+def option mouse-event = false
 
 keymap Global
 

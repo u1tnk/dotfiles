@@ -1,7 +1,7 @@
 # このファイルをyamyディレクトリにコピーして読ませる
 
 # Keyboard settings
-include "dot.mayu"
+include "dot.nodoka"
 
 # Mouse event activation
 def option mouse-event = false
@@ -35,7 +35,6 @@ keymap Global
   key A-S-LeftSquareBracket = C-S-Tab
   key A-S-t = C-S-t
 # }}}
-#
 
 # RLoginでコピー履歴利用
 window RLoginKeyMap /RLogin/ :Global
@@ -45,3 +44,4 @@ window RLoginKeyMap /RLogin/ :Global
 # Slackの直前編集
 window SlackKeyMap /Slack/ :Global
   key A-k = C-Up
+  mod alt = !!LeftAlt # Altが入るとSlackでメニューが出てしまう問題解消

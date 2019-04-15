@@ -8,6 +8,7 @@
     excludesfile = /Users/yuichi/.gitignore_global
     pager = less -r
 	editor = nvim
+	symlinks = true
 [diff]
     color = auto
     rename = copy

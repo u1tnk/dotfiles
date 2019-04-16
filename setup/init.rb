@@ -16,7 +16,7 @@ end
   {dest: ".tmux.conf", src: "dotfiles/tmux.conf"},
   {dest: ".gvimrc", src: "dotfiles/gvimrc"},
   {dest: ".my.cnf", src: "dotfiles/my.cnf"},
-  {dest: ".amazonrc", src: "Dropbox (Personal)/dotfiles/.amazonrc"},
+  {dest: ".amazonrc", src: "settings/.amazonrc"},
   {dest: ".zlogin", src: "dotfiles/prezto/runcoms/zlogin"},
   {dest: ".zlogout", src: "dotfiles/prezto/runcoms/zlogout"},
   {dest: ".zprofile", src: "dotfiles/prezto/runcoms/zprofile"},
@@ -29,7 +29,7 @@ end
 # .zhistoryはファイルが勝手にできるので
 if FileTest.file? ".zhistory"
   FileUtils.rm ".zhistory"
-  File.symlink "Dropbox/dotfiles/.zhistory", ".zhistory"
+  File.symlink "settings/.zhistory", ".zhistory"
 end
 
 if FileTest.exist? ".zshrc"

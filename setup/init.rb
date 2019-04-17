@@ -5,7 +5,7 @@ require "fileutils"
 home = ENV['HOME']
 FileUtils.cd home
 
-%w(local temp apps .config/termit).each do |x|
+%w(local temp apps .config/termit .hammerspoon).each do |x|
   FileUtils.mkdir_p x unless FileTest.exist? x
 end
 
@@ -22,6 +22,7 @@ end
   {dest: ".zprofile", src: "dotfiles/prezto/runcoms/zprofile"},
   {dest: ".config/termit/rc.lua", src: "#{home}/dotfiles/termit/rc.lua"},
   {dest: ".Xdefaults", src: "dotfiles/Xdefaults"},
+  {dest: ".hammerspoon/init.lua", src: "#{home}/dotfiles/hammerspoon_init.lua"},
 ].each do |x|
   File.symlink x[:src], x[:dest] unless FileTest.symlink? x[:dest]
 end

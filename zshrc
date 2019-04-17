@@ -18,6 +18,7 @@ linux*)
     alias vim='nvim'
     EDITOR='nvim'
     umask 002
+    setterm -blength 0
     ;;
 esac
 

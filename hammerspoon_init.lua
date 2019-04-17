@@ -11,8 +11,8 @@ local function keyCode(key, modifiers)
    end
 end
 
-local function remapKey(modifiers, key, keyCode)
-   hs.hotkey.bind(modifiers, key, keyCode, nil, keyCode)
+local function remapKey(modifiers, key, code)
+   hs.hotkey.bind(modifiers, key, code, nil, code)
 end
 
 -- カーソル移動
@@ -63,6 +63,7 @@ hs.hotkey.bind({'command'}, '2', function()
 end)
 
 
+-- iTer2内のctrl+jが改行になってしまう問題
 local function handleGlobalAppEvent(name, event, app)
   if event == hs.application.watcher.activated then
     if name == 'iTerm2' then

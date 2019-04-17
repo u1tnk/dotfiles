@@ -62,6 +62,8 @@ hs.hotkey.bind({'command'}, '2', function()
   builtin_screen:setBrightness(new_brightness)
 end)
 
+-- esc対策
+remapKey({'control'}, ";", keyCode("escape"))
 
 -- iTer2内のctrl+jが改行になってしまう問題
 local function handleGlobalAppEvent(name, event, app)

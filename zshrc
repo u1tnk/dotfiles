@@ -71,8 +71,8 @@ alias gl="git log --pretty=format:\"%C(green)%h %C(blue)%ad %C(red)|%C(reset) %s
 
 # ruby
 alias be="bundle exec"
-alias rs="bundle exec spring rspec"
-alias r="bundle exec spring rails"
+alias rs="bundle exec rails s"
+alias r="bundle exec rails"
 alias ss="bundle exec spring stop"
 
 ## 実行したプロセスの消費時間が3秒以上かかったら
@@ -142,9 +142,12 @@ eval "$(direnv hook zsh)"
 
 eval "$(rbenv init --no-rehash -)"
 
+eval "$(nodenv init -)"
+
+eval "$(pyenv init -)"
+
 alias drubo="git diff  --name-only --diff-filter=AM | grep '.rb$' | xargs bundle exec rubocop -RDa"
 
 alias tenki='curl wttr.in/yokohama\?lang=ja'
 export PATH="$HOME/.embulk/bin:$PATH"
-
-setterm -blength 0
+export PATH="$HOME/.nodenv/bin:$PATH"

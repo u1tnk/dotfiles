@@ -203,6 +203,9 @@ inoremap <C-f> <C-o>w
 inoremap <C-b> <C-o>b
 inoremap <C-d> <C-o>x
 
+" おさわりバー対策
+inoremap jj <Esc>
+
 "カレントウィンドウのカーソル行をハイライトする
 set cursorline
 autocmd WinEnter * setlocal cursorline

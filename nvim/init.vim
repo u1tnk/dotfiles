@@ -546,3 +546,23 @@ set matchtime=1
 command! -nargs=* Spon cd $HOME/apps/gram30/spon-server | edit $HOME/apps/gram30/spon-server
 command! -nargs=* Sync cd $HOME/apps/dividual/synchroapp-backend | edit $HOME/apps/dividual/synchroapp-backend
 command! -nargs=* Pet cd $HOME/apps/u1tnk/petit-ballon | edit $HOME/apps/u1tnk/petit-ballon
+
+  if dein#tap('denite.nvim') && dein#tap('vim-qfreplace')
+    function! MyDeniteReplace(context)
+      let qflist = []
+      for target in a:context['targets']
+        if !has_key(target, 'action__path') | continue | endif
+        if !has_key(target, 'action__line') | continue | endif
+        if !has_key(target, 'action__text') | continue | endif
+
+        call add(qflist, {
+              \ 'filename': target['action__path'],
+              \ 'lnum': target['action__line'],
+              \ 'text': target['action__text']
+              \ })
+      endfor
+      call setqflist(qflist)
+      call qfreplace#start('')
+    endfunction
+    call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
+  endif

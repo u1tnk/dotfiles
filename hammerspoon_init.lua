@@ -75,6 +75,11 @@ local function handleGlobalAppEvent(name, event, app)
     else
         hs.hotkey.disableAll("ctrl", "j")
     end
+    if name == 'Slack' then
+      remapKey({'command'}, "k", keyCode("Up", {"command"}))
+    else
+      remapKey({'command'}, "k", keyCode("Up"))
+    end
   end
 end
 appsWatcher = hs.application.watcher.new(handleGlobalAppEvent)

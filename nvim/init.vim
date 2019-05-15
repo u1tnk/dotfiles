@@ -259,7 +259,7 @@ command! -nargs=* NormalFormat setlocal fileencoding=utf8 fileformat=unix
 " denite
 nnoremap <silent> <C-k><C-m> :Denite menu<CR>
 nnoremap <silent> <C-k><C-b> :Denite buffer<CR>
-nnoremap <silent> <C-k><C-f> :Denite file_rec<CR>
+nnoremap <silent> <C-k><C-f> :Denite file/rec<CR>
 nnoremap <silent> <C-k><C-r> :Denite file_mru<CR>
 nnoremap <silent> <C-k><C-g> :Denite -no-empty grep<CR>
 nnoremap <silent> <C-k><C-l> :Denite line<CR>
@@ -269,7 +269,7 @@ nnoremap <silent> <C-k><C-p> :Denite -resume -immediately -select=-1<CR>
 nnoremap <silent> <C-k><C-y> :Denite neoyank<CR>
 
 " Change file_rec command.
-call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
 " Change mappings.
 call denite#custom#map(
@@ -287,10 +287,10 @@ call denite#custom#map(
 
 " Change matchers.
 call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
-call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
+call denite#custom#source('file/rec', 'matchers', ['matcher_cpsm'])
 
 " Change sorters.
-call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
+call denite#custom#source('file/rec', 'sorters', ['sorter_sublime'])
 
 " Add custom menus
 let s:menus = {}
@@ -323,8 +323,8 @@ call denite#custom#var('grep', 'separator', [])
 call denite#custom#var('grep', 'default_opts', ['--nocolor', '--nogroup'])
 
 " Define alias
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
 call denite#custom#source('file_mru', 'converters', ['converter_relative_word'])
 " Change default prompt
 call denite#custom#option('default', 'prompt', '>')

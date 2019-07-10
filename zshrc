@@ -71,8 +71,10 @@ alias gl="git log --pretty=format:\"%C(green)%h %C(blue)%ad %C(red)|%C(reset) %s
 
 # ruby
 alias be="bundle exec"
-alias rs="bundle exec rails s --port=3000 --binding=0.0.0.0"
-alias r="bundle exec rails"
+alias rs="bundle exec spring rails s --port=3000 --binding=0.0.0.0"
+alias rsp="bundle exec spring rspec"
+alias r="bundle exec spring rails"
+alias ra="bundle exec spring rake"
 alias ss="bundle exec spring stop"
 
 ## 実行したプロセスの消費時間が3秒以上かかったら

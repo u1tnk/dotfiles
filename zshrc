@@ -151,5 +151,3 @@ eval "$(pyenv init -)"
 alias drubo="git diff  --name-only --diff-filter=AM | grep '.rb$' | xargs bundle exec rubocop -RDa"
 
 alias tenki='curl wttr.in/yokohama\?lang=ja'
-export PATH="$HOME/.embulk/bin:$PATH"
-export PATH="$HOME/.nodenv/bin:$PATH"

@@ -143,7 +143,8 @@ set wildmenu
 nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
 "yankとclipboardを共用
-set clipboard=unnamedplus
+set clipboard&
+set clipboard^=unnamedplus
 
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
 set browsedir=buffer

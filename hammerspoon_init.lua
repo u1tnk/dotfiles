@@ -23,17 +23,17 @@ end
 
 string.format("volume down: %s", hs.audiodevice.defaultOutputDevice():outputVolume())
 -- Volume調整
-hs.hotkey.bind({'command'}, '-', function()
-  local new_volume = math.max(0, math.ceil(hs.audiodevice.current().volume - 5))
-  hs.alert.show(string.format("volume down: %s", new_volume), 0.5)
-  hs.audiodevice.defaultOutputDevice():setVolume(new_volume)
-end)
+-- hs.hotkey.bind({'command'}, '-', function()
+--   local new_volume = math.max(0, math.ceil(hs.audiodevice.current().volume - 5))
+--   hs.alert.show(string.format("volume down: %s", new_volume), 0.5)
+--   hs.audiodevice.defaultOutputDevice():setVolume(new_volume)
+-- end)
 
-hs.hotkey.bind({'command'}, '=', function()
-  local new_volume = math.min(100, math.ceil(hs.audiodevice.current().volume + 5))
-  hs.alert.show(string.format("volume up: %s", new_volume), 0.5)
-  hs.audiodevice.defaultOutputDevice():setVolume(new_volume)
-end)
+-- hs.hotkey.bind({'command'}, '=', function()
+--   local new_volume = math.min(100, math.ceil(hs.audiodevice.current().volume + 5))
+--   hs.alert.show(string.format("volume up: %s", new_volume), 0.5)
+--   hs.audiodevice.defaultOutputDevice():setVolume(new_volume)
+-- end)
 
 -- 明るさ調整
 local builtin_screen = nil
@@ -44,7 +44,8 @@ for _, v in pairs(hs.screen.allScreens()) do
   end
 end
 logger:i(builtin_screen)
-logger:i(builtin_screen:getBrightness())
+-- hammerspoonのバージョンが上がって動かなくなった
+-- logger:i(builtin_screen:getBrightness())
 
 local function getCurrentBrightness()
   return math.ceil(builtin_screen:getBrightness() * 10) / 10

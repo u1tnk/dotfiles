@@ -34,6 +34,7 @@ path=(# システム用
       $HOME/.embulk/bin
       $HOME/.nodenv/bin
       $HOME/.composer/vendor/bin
+      $HOME/go/bin
       # システム用
       /snap/bin
       /opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin

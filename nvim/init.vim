@@ -477,10 +477,6 @@ if has('python3')
     " <S-TAB>: completion back.
     inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
-    " <C-h>, <BS>: close popup and delete backword char.
-"     inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
-"     inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
-
     inoremap <expr><C-g> deoplete#mappings#undo_completion()
     " <C-l>: redraw candidates
     inoremap <expr><C-l>       deoplete#mappings#refresh()
@@ -488,10 +484,10 @@ if has('python3')
     " <CR>: close popup and save indent.
     inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
     function! s:my_cr_function() abort
-        return deoplete#mappings#close_popup() . "\<CR>"
+        return deoplete#close_popup() . "\<CR>"
     endfunction
 
-    inoremap <expr> '  pumvisible() ? deoplete#mappings#close_popup() : "'"
+    inoremap <expr> '  pumvisible() ? deoplete#close_popup() : "'"
 
     let g:deoplete#keyword_patterns = {}
     let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'

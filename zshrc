@@ -151,3 +151,13 @@ eval "$(pyenv init -)"
 alias drubo="git diff  --name-only --diff-filter=AM | grep '.rb$' | xargs bundle exec rubocop -RDa"
 
 alias tenki='curl wttr.in/yokohama\?lang=ja'
+
+# ssh_agent起動の自動化
+SSH_AGENT_FILE=$HOME/.ssh-agent
+test -f $SSH_AGENT_FILE && source $SSH_AGENT_FILE
+if ! ssh-add -l > /dev/null 2>&1; then
+  rm -f $SSH_AGENT_FILE
+  ssh-agent > $SSH_AGENT_FILE
+  source $SSH_AGENT_FILE
+  ssh-add $HOME/.ssh/id
+fi

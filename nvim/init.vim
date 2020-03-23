@@ -368,7 +368,7 @@ nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
 
 " snippet
-command! -nargs=* Snippet cd $HOME/Dropbox/snippets | edit $HOME/Dropbox/snippets/
+command! -nargs=* Snippet cd $HOME/settings/snippets | edit $HOME/settings/snippets/
 
 " Center words for search
 nmap n nzz

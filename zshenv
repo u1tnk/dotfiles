@@ -44,7 +44,10 @@ path=(# システム用
       /usr/local/sbin(N-/)
       /sbin(N-/)
       /usr/sbin(N-/)
-      /usr/bin(N-/))
+      /usr/bin(N-/)
+      "/mnt/c/Program Files/Docker/Docker/resources/bin"
+      "/mnt/c/ProgramData/DockerDesktop/version-bin"
+)
 
 fpath=(
       $fpath

@@ -492,15 +492,16 @@ if has('python3')
 
     inoremap <expr> '  pumvisible() ? deoplete#close_popup() : "'"
 
-    let g:deoplete#keyword_patterns = {}
-    let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
-    let g:deoplete#keyword_patterns.tex = '[^\w|\s][a-zA-Z_]\w*'
+    let g:deoplete#custom#var = {}
+    let g:deoplete#custom#var.python = ''
 
-    let g:deoplete#omni#input_patterns = {}
-    let g:deoplete#omni#input_patterns.python = ''
-
-    let g:deoplete#enable_refresh_always = 1
-    let g:deoplete#enable_camel_case = 1
+    call deoplete#custom#option('refresh_always', true)
+    call deoplete#custom#option('camel_case', true)
+    call deoplete#custom#option('keyword_patterns', {
+            \ '_': '[a-zA-Z_]\k*',
+            \ 'tex': '\\?[a-zA-Z_]\w*',
+            \ 'ruby': '[a-zA-Z_]\w*[!?]?',
+            \})
 endif
 
 

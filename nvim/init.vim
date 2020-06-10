@@ -569,3 +569,6 @@ command! -nargs=* Pet cd $HOME/apps/u1tnk/petit-ballon | edit $HOME/apps/u1tnk/p
     endfunction
     call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
   endif
+
+" terraform 保存時にfmt
+let g:terraform_fmt_on_save=1

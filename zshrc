@@ -72,8 +72,13 @@ alias gl="git log --pretty=format:\"%C(green)%h %C(blue)%ad %C(red)|%C(reset) %s
 # ruby
 alias be="bundle exec"
 alias rs="bundle exec spring rails s --port=3000 --binding=0.0.0.0"
-alias rsp="bundle exec spring rspec"
-alias r="bundle exec spring rails"
+# alias r="bundle exec spring rails"
+alias r="bundle exec rails"
+alias ss="bundle exec spring stop"
+
+## 実行したプロセスの消費時間が3秒以上かかったら
+## 自動的に消費時間の統計情報を表示する。
+REPORTTIME=3
 alias ra="bundle exec spring rake"
 alias ss="bundle exec spring stop"
 
@@ -161,3 +166,5 @@ if ! ssh-add -l > /dev/null 2>&1; then
   source $SSH_AGENT_FILE
   ssh-add $HOME/.ssh/id
 fi
+
+alias sssh="grep -w Host ~/.ssh/config | peco | awk '{print \$2}' | xargs -o -n 1 ssh"

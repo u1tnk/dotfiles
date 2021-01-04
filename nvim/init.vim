@@ -495,8 +495,8 @@ if has('python3')
     let g:deoplete#custom#var = {}
     let g:deoplete#custom#var.python = ''
 
-    call deoplete#custom#option('refresh_always', true)
-    call deoplete#custom#option('camel_case', true)
+"     call deoplete#custom#option('refresh_always', true)
+"     call deoplete#custom#option('camel_case', true)
     call deoplete#custom#option('keyword_patterns', {
             \ '_': '[a-zA-Z_]\k*',
             \ 'tex': '\\?[a-zA-Z_]\w*',
